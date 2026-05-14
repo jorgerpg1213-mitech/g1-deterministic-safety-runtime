@@ -8,8 +8,21 @@ install(
     launch
     config
     maps
-    rviz
   DESTINATION share/${PROJECT_NAME}
 )
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+
+  ament_add_pytest_test(test_watchdog test/test_watchdog.py
+    TIMEOUT 30
+    ENV ROS_DOMAIN_ID=99
+  )
+
+  ament_add_pytest_test(test_recovery_manager test/test_recovery_manager.py
+    TIMEOUT 30
+    ENV ROS_DOMAIN_ID=99
+  )
+endif()
 
 ament_package()
