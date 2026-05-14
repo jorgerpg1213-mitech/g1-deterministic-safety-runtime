@@ -1,0 +1,13 @@
+FROM pipeline-runtime
+
+SHELL ["/bin/bash", "-c"]
+
+WORKDIR /root/pipeline_ws
+
+ENV USE_SIM_TIME=true
+ENV ROS_DOMAIN_ID=0
+
+RUN echo "export USE_SIM_TIME=true" >> /root/.bashrc
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]

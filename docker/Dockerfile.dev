@@ -1,0 +1,13 @@
+FROM pipeline-base
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-humble-rviz2 \
+    ros-humble-rqt \
+    ros-humble-rqt-graph \
+    nano \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo "source /root/pipeline_ws/install/setup.bash" >> /root/.bashrc
+
+CMD ["/bin/bash"]
