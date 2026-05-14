@@ -15,7 +15,7 @@ def generate_launch_description():
             name='robot_state_publisher',
             output='screen',
             parameters=[{
-                'robot_description': Command(['xacro ', xacro_file]),
+                'robot_description': Command(['xacro', ' ', xacro_file]),
                 # Phase 4B: set use_sim_time=true when connecting Isaac
                 'use_sim_time': False,
             }]
