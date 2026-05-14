@@ -1,0 +1,93 @@
+services:
+
+  # ── DEV — workspace montado, con RViz, build incremental ──
+  pipeline-dev:
+    profiles: [dev]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    image: pipeline-dev:latest
+    container_name: g1_pipeline_dev
+    network_mode: host
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+    volumes:
+      - ./src:/root/pipeline_ws/src
+      - ./g1_share:/mnt/g1_share
+      - ./logs:/root/pipeline_ws/log
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    working_dir: /root/pipeline_ws
+    healthcheck:
+      test: ["CMD", "bash", "-c", "source /opt/ros/humble/setup.bash && ros2 node list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
+
+  # ── PROD — imagen baked, entregable MIT ──
+  pipeline-runtime:
+    profiles: [prod]
+    image: pipeline-runtime:latest
+    container_name: g1_pipeline_runtime
+    network_mode: host
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+    volumes:
+      - ./g1_share:/mnt/g1_share
+      - ./logs:/root/pipeline_ws/log
+    working_dir: /root/pipeline_ws
+    healthcheck:
+      test: ["CMD", "bash", "-c", "source /opt/ros/humble/setup.bash && ros2 node list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
+
+  # ── SIM — Isaac Sim via ROS bridge ──
+  pipeline-sim:
+    profiles: [sim]
+    image: pipeline-sim:latest
+    container_name: g1_pipeline_sim
+    network_mode: host
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+      - USE_SIM_TIME=true
+    volumes:
+      - ./g1_share:/mnt/g1_share
+      - ./logs:/root/pipeline_ws/log
+    working_dir: /root/pipeline_ws
+    healthcheck:
+      test: ["CMD", "bash", "-c", "source /opt/ros/humble/setup.bash && ros2 node list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
+
+volumes:
+  g1_share:
+    driver: local
+  logs:
+    driver: local
