@@ -1,0 +1,78 @@
+name: CI Audit
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  audit:
+    runs-on: ubuntu-22.04
+    container:
+      image: ros:humble-ros-base
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends \
+            ros-humble-slam-toolbox \
+            ros-humble-navigation2 \
+            ros-humble-nav2-bringup \
+            ros-humble-robot-localization \
+            ros-humble-robot-state-publisher \
+            ros-humble-joint-state-publisher \
+            python3-colcon-common-extensions \
+            python3-rosdep \
+            python3-pip \
+            && rm -rf /var/lib/apt/lists/*
+
+      - name: rosdep update
+        run: rosdep update || true
+
+      - name: rosdep install
+        run: |
+          source /opt/ros/humble/setup.bash
+          rosdep install --from-paths src --ignore-src -r -y
+        shell: bash
+
+      - name: Build all packages
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build --symlink-install
+        shell: bash
+
+      - name: Run all tests
+        run: |
+          source /opt/ros/humble/setup.bash
+          source install/setup.bash
+          colcon test
+          colcon test-result --verbose
+        shell: bash
+        env:
+          ROS_DOMAIN_ID: 99
+
+      - name: Generate audit report
+        run: |
+          echo "# Audit Report" > audit_report.md
+          echo "**Date:** $(date -u)" >> audit_report.md
+          echo "**Commit:** ${{ github.sha }}" >> audit_report.md
+          echo "**Tag:** ${{ github.ref_name }}" >> audit_report.md
+          echo "" >> audit_report.md
+          echo "## Test Results" >> audit_report.md
+          colcon test-result --verbose >> audit_report.md 2>&1 || true
+          source /opt/ros/humble/setup.bash
+          source install/setup.bash
+          echo "" >> audit_report.md
+          echo "## Packages Built" >> audit_report.md
+          colcon list >> audit_report.md
+        shell: bash
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-report-${{ github.ref_name }}
+          path: audit_report.md
