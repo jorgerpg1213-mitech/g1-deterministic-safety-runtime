@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  G1 Description — Phase 4A PROVISIONAL SKELETON
+  ================================================
+  ULTRACONSERVATIVE — infrastructure only.
+  NO masses, NO inertias, NO kinematics, NO offsets.
+  Joints and frames are FIXED placeholders.
+  ALL physical values pending Phase 4B against official USD:
+  huggingface.co/datasets/unitreerobotics/unitree_sim_isaaclab_usds
+  DO NOT build Nav2/Isaac/control logic on top of this.
+-->
+<robot name="g1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- TODO Phase 4B: replace all with USD-derived values -->
+
+  <link name="base_link"/>
+
+  <link name="base_footprint"/>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <!-- TODO Phase 4B: z offset from official G1 USD -->
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <!-- TODO Phase 4B: IMU position from official G1 USD -->
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="laser"/>
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <!-- TODO Phase 4B: LiDAR mount position — hardware config TBD -->
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
