@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.bak
+*.bak_*
+build/
+install/
+log/
+agv_share/
+g1_share/
