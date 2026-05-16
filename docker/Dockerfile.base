@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-robot-localization \
     ros-humble-robot-state-publisher \
     ros-humble-joint-state-publisher \
+    ros-humble-xacro \
     python3-colcon-common-extensions \
     python3-rosdep \
     python3-pip \
