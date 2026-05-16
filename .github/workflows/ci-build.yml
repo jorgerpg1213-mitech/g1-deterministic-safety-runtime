@@ -1,5 +1,23 @@
 name: CI Build
 
+# Level 1 — Build Validation
+# Level 2 — Smoke Validation
+#
+# SCOPE EXPLÍCITO:
+#   - Buildea pipeline-base y pipeline-runtime desde los Dockerfiles del proyecto
+#   - Dockerfile.runtime ejecuta colcon build internamente — install/ queda en la imagen
+#   - Smoke tests corren dentro de pipeline-runtime:ci sobre install/ ya compilado
+#
+# PRECONDICIÓN EXPLÍCITA:
+#   Dockerfile.runtime hace colcon build y preserva install/ en la imagen.
+#   Si eso cambia, este workflow requiere agregar colcon build en el step de tests.
+#
+# NO VALIDA TODAVÍA:
+#   - Integration testing ROS2 real (launch_testing — siguiente paso Capa 2)
+#   - Resiliencia real de watchdog/recovery
+#   - Runtime humanoid G1
+#   - Hardware físico o Isaac Sim
+
 on:
   push:
     branches: [main]
@@ -8,49 +26,47 @@ on:
 
 jobs:
   build-and-test:
+    name: Build pipeline-runtime + Smoke Tests
     runs-on: ubuntu-22.04
-    container:
-      image: ros:humble-ros-base
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Build pipeline-base
         run: |
-          apt-get update && apt-get install -y --no-install-recommends \
-            ros-humble-slam-toolbox \
-            ros-humble-navigation2 \
-            ros-humble-nav2-bringup \
-            ros-humble-robot-localization \
-            ros-humble-robot-state-publisher \
-            ros-humble-joint-state-publisher \
-            python3-colcon-common-extensions \
-            python3-rosdep \
-            python3-pip \
-            && rm -rf /var/lib/apt/lists/*
+          set -eo pipefail
+          docker build \
+            -f docker/Dockerfile.base \
+            -t pipeline-base:ci \
+            .
 
-      - name: rosdep update
-        run: rosdep update || true
-
-      - name: rosdep install
+      - name: Build pipeline-runtime
         run: |
-          source /opt/ros/humble/setup.bash
-          rosdep install --from-paths src --ignore-src -r -y
-        shell: bash
+          set -eo pipefail
+          docker build \
+            -f docker/Dockerfile.runtime \
+            -t pipeline-runtime:ci \
+            .
 
-      - name: Build
+      - name: Verify install/ exists inside pipeline-runtime
         run: |
-          source /opt/ros/humble/setup.bash
-          colcon build --symlink-install
-        shell: bash
+          set -eo pipefail
+          docker run --rm pipeline-runtime:ci \
+            bash -c "test -f /root/pipeline_ws/install/setup.bash && echo 'INSTALL OK' || (echo 'INSTALL MISSING — Dockerfile.runtime must run colcon build' && exit 1)"
 
-      - name: Test
+      - name: Run smoke tests inside pipeline-runtime
         run: |
-          source /opt/ros/humble/setup.bash
-          source install/setup.bash
-          colcon test --packages-select agv_bringup
-          colcon test-result --verbose
-        shell: bash
-        env:
-          ROS_DOMAIN_ID: 99
+          set -eo pipefail
+          docker run --rm \
+            -e ROS_DOMAIN_ID=99 \
+            -e PIPELINE_WS=/root/pipeline_ws \
+            -e PIPELINE_SHARE=/mnt/g1_share \
+            pipeline-runtime:ci \
+            bash -c "
+              set -eo pipefail
+              source /opt/ros/humble/setup.bash
+              source /root/pipeline_ws/install/setup.bash
+              colcon test --packages-select agv_bringup g1_msgs g1_description
+              colcon test-result --verbose --all
+            "
