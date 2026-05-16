@@ -1,3 +1,7 @@
+# [LEGACY AGV BASELINE] — DO NOT USE IN G1 CONTEXT
+# This file is preserved as AGV terrestrial reference (v1.0-audit-x86).
+# G1 canonical runtime: system_g1.launch.py
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
