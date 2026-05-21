@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>cross_consistency_observer</name>
+  <version>0.1.0</version>
+  <description>
+    Cross-consistency observer for G1 ROS2 Pipeline.
+    Detects incoherence between PRIMARY authority sources.
+    Publishes SafetyEvent to /safety_events.
+    Publishes heartbeat to /diagnostics.
+    Defined by ADR-003 + SAFETY_MODEL_G1.md Sección 7.
+    Thresholds TBD — pending SDK G1.
+    Does NOT modify /system_state. Does NOT execute transitions.
+  </description>
+  <maintainer email="todo@todo.com">pipeline-team</maintainer>
+  <license>BSD-3-Clause</license>
+  <depend>rclpy</depend>
+  <depend>g1_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>builtin_interfaces</depend>
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

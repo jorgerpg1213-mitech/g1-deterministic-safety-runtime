@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>recovery_g1</name>
+  <version>0.1.0</version>
+  <description>
+    Recovery node for G1 ROS2 Pipeline.
+    Consumes SafetyEvents and SystemState to evaluate RecoveryActions.
+    Publishes RecoveryEvent to /recovery_events.
+    Publishes heartbeat to /diagnostics.
+    Defined by RECOVERY_MODEL_G1.md + RESILIENCE_MODEL_G1.md.
+    Recovery logic TBD — pending SDK G1.
+    Does NOT modify /system_state. Does NOT execute transitions.
+    Does NOT perform real node restarts in this skeleton.
+  </description>
+  <maintainer email="todo@todo.com">pipeline-team</maintainer>
+  <license>BSD-3-Clause</license>
+  <depend>rclpy</depend>
+  <depend>g1_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>builtin_interfaces</depend>
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

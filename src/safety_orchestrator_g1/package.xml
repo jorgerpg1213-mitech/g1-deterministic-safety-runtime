@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>safety_orchestrator_g1</name>
+  <version>0.1.0</version>
+  <description>
+    Safety orchestrator for G1 ROS2 Pipeline.
+    Owns compound state (Risk Level, Restriction Level).
+    Evaluates SafetyEvents and executes transitions.
+    Publishes /system_state, /safety_events, /safety_actions, /diagnostics.
+    Defined by ADR-002 + SAFETY_MODEL_G1.md.
+    Transition logic TBD — pending Capa 4 completion.
+    Threading: callbacks ingest-only, evaluation loop dedicated thread.
+  </description>
+  <maintainer email="todo@todo.com">pipeline-team</maintainer>
+  <license>BSD-3-Clause</license>
+  <depend>rclpy</depend>
+  <depend>g1_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>builtin_interfaces</depend>
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
