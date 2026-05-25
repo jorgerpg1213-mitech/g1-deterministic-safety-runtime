@@ -199,7 +199,7 @@ g1-ros2-pipeline/
     │       ├── agv_watchdog_node.py       # [LEGACY AGV]
     │       └── agv_recovery_manager.py    # [LEGACY AGV]
     ├── safety_policy_node/          # ⚠️ LEGACY — reemplazado semánticamente por safety_orchestrator_g1
-    ├── agv_msgs/                    # 🔄 TRANSICIONAL — dependencia viva de nodos legacy
+    ├── agv_msgs/                    # 🔄 LEGACY — usado SOLO por nodos AGV legacy, NO parte del safety layer G1
     ├── perception_node/             # 🔲 BLOQUEADO — Gemini API Phase 10
     └── rplidar_ros/                 # 🔄 LEGACY — LiDAR AGV, condicional
 ```
