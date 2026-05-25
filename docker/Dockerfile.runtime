@@ -1,4 +1,4 @@
-FROM pipeline-base
+FROM pipeline-base:ci
 
 SHELL ["/bin/bash", "-c"]
 
