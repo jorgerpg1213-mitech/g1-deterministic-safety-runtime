@@ -11,7 +11,7 @@
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Platform](https://img.shields.io/badge/Platform-x86__64-lightgrey)
-![Status](https://img.shields.io/badge/Etapa-3C%20Cerrada-green)
+![Status](https://img.shields.io/badge/Etapa-3C%20En%20Progreso-orange)
 
 </div>
 
@@ -27,7 +27,7 @@
 
 The pipeline derives from a battle-tested AGV baseline (`agv-pipeline-lab @ v1.0-audit-x86`) and has been formally audited before migration to the G1 humanoid context.
 
-Current focus: **Etapa 3 — Safety Runtime Architecture**. The semantic models, ADRs, skeleton runtime nodes, and Level 4 integration tests are complete. Etapa 3C cerrada: transition logic real, scheduler con priority buckets, T8 arbitration DRAFT, recovery runtime con subprocess isolation, y 60 unit tests Level 4 validados.
+Current focus: **Etapa 3 — Safety Runtime Architecture**. The semantic models, ADRs, skeleton runtime nodes, and Level 4 integration tests are complete. Transition to full runtime logic is in progress.
 
 ---
 
@@ -194,7 +194,7 @@ g1-ros2-pipeline/
 | Level 4 | Safety Layer Runtime | `test_g1_safety_layer` | 15 | ✅ PASS |
 | Level 5 | Certification | Hardware G1 + Isaac Sim | — | ⏳ Blocked — SDK/VM |
 
-**Total: 86 tests, 0 failures.**
+**Total: 26 tests, 0 failures.**
 
 > **Level 4 scope:** valida que los 4 nodos del safety layer levantan, publican heartbeat en `/diagnostics`, exponen `/system_state` con QoS Transient Local, y producen eventos observables en `/safety_events` y `/recovery_events`. No valida safety físico, thresholds reales, ni hardware G1.
 
@@ -237,7 +237,7 @@ g1-ros2-pipeline/
 | Etapa 2 | Disciplina Operacional — anti-patterns, observabilidad, reproducibilidad | ✅ Cerrada |
 | Etapa 3A | Modelos Semánticos + ADRs — SAFETY/RESILIENCE/RECOVERY MODEL, ADR-002/003 | ✅ Cerrada |
 | Etapa 3B | Skeleton Runtime ROS2 — 4 nodos + g1_msgs + threading architecture | ✅ Cerrada |
-| Etapa 3C | Transition Logic Real — TransitionEvaluator, PriorityScheduler, T8Arbitrator, recovery runtime, 60 unit tests | ✅ Cerrada |
+| Etapa 3C | Level 4 Runtime Validation + Integration — transition logic, scheduler, T8 | 🔄 En progreso |
 | Etapa 4 | Simulación e Integración — Isaac Lab, SDK G1, thresholds reales | ⏳ Futura |
 | Etapa 5 | Integración VLA/GR00T/LeRobot — policy layers, embodied AI | ⏳ Futura |
 | Etapa 6 | Behaviors Embodied Reales — locomoción, manipulation, navigation | ⏳ Futura |
@@ -260,7 +260,7 @@ g1-ros2-pipeline/
 The following claims are **NOT valid** for this repository in its current state:
 
 - ❌ Safety is validated on hardware — skeleton runtime only, no physical validation
-- ✅ Recovery runtime implementado con subprocess isolation — sin SDK, sin hardware
+- ❌ Recovery logic is implemented — mock events only, no real RecoveryActions
 - ❌ Thresholds are defined — all `TBD` pending SDK G1 characterization
 - ❌ SDK G1 is integrated — `g1_adapter_node` blocked, no real `/imu` or `/odom`
 - ❌ Isaac Lab is ready — `pipeline-sim` image exists, integration blocked pending MIT VM
@@ -281,4 +281,4 @@ The AGV baseline remains frozen as an audited reference. The G1 pipeline inherit
 ---
 
 *G1 ROS2 Pipeline — github.com/jorgerpg1213-mitech/g1-ros2-pipeline*
-*Etapa 3A ✅ | Etapa 3B ✅ | Etapa 3C ✅ | Commit: 1beb633*
+*Etapa 3A ✅ | Etapa 3B ✅ | Etapa 3C 🔄 | Commit: 26833ac*
