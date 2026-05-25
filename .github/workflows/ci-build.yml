@@ -5,22 +5,25 @@ name: CI Build
 #
 # SCOPE EXPLÍCITO:
 #   - Buildea pipeline-base y pipeline-runtime desde los Dockerfiles del proyecto
-#   - Dockerfile.runtime ejecuta colcon build internamente — install/ queda en la imagen
-#   - Smoke tests corren dentro de pipeline-runtime:ci sobre install/ ya compilado
+#   - Ejecuta colcon build explícitamente dentro del container CI
+#   - Ejecuta smoke tests reproducibles sobre workspace compilado
 #
-# PRECONDICIÓN EXPLÍCITA:
-#   Dockerfile.runtime hace colcon build y preserva install/ en la imagen.
-#   Si eso cambia, este workflow requiere agregar colcon build en el step de tests.
+# RATIONALE POST-3C:
+#   Docker layer cache no garantiza metadata válida para colcon test
+#   en GitHub Actions runners. El build explícito elimina dependencia
+#   implícita de install/ precalculado dentro de Dockerfile.runtime.
 #
 # NO VALIDA TODAVÍA:
-#   - Integration testing ROS2 real (launch_testing — siguiente paso Capa 2)
-#   - Resiliencia real de watchdog/recovery
-#   - Runtime humanoid G1
-#   - Hardware físico o Isaac Sim
+#   - Integration testing ROS2 real (launch_testing)
+#   - Runtime humanoid G1 real
+#   - Isaac Sim
+#   - Hardware físico
+#   - DDS timing characterization
 
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
 
@@ -36,6 +39,7 @@ jobs:
       - name: Build pipeline-base
         run: |
           set -eo pipefail
+
           docker build \
             -f docker/Dockerfile.base \
             -t pipeline-base:ci \
@@ -44,20 +48,16 @@ jobs:
       - name: Build pipeline-runtime
         run: |
           set -eo pipefail
+
           docker build \
             -f docker/Dockerfile.runtime \
             -t pipeline-runtime:ci \
             .
 
-      - name: Verify install/ exists inside pipeline-runtime
+      - name: Run reproducible smoke tests inside pipeline-runtime
         run: |
           set -eo pipefail
-          docker run --rm pipeline-runtime:ci \
-            bash -c "test -f /root/pipeline_ws/install/setup.bash && echo 'INSTALL OK' || (echo 'INSTALL MISSING — Dockerfile.runtime must run colcon build' && exit 1)"
 
-      - name: Run smoke tests inside pipeline-runtime
-        run: |
-          set -eo pipefail
           docker run --rm \
             -e ROS_DOMAIN_ID=99 \
             -e PIPELINE_WS=/root/pipeline_ws \
@@ -65,8 +65,20 @@ jobs:
             pipeline-runtime:ci \
             bash -c "
               set -eo pipefail
+
+              cd /root/pipeline_ws
+
               source /opt/ros/humble/setup.bash
-              source /root/pipeline_ws/install/setup.bash
-              colcon test --packages-select agv_bringup g1_msgs g1_description
+
+              colcon build --symlink-install
+
+              source install/setup.bash
+
+              colcon test \
+                --packages-select \
+                agv_bringup \
+                g1_msgs \
+                g1_description
+
               colcon test-result --verbose --all
             "
