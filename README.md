@@ -11,7 +11,7 @@
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Platform](https://img.shields.io/badge/Platform-x86__64-lightgrey)
-![Status](https://img.shields.io/badge/Etapa-3C%20Cerrada-green)
+![Status](https://img.shields.io/badge/Etapa-4A%20Cerrada-green)
 
 </div>
 
@@ -150,6 +150,38 @@ docker run --rm \
 
 ---
 
+## Target Evaluation Environment (MIT VM)
+
+The Stage 4A infrastructure baseline was characterized and validated under the following host constraints:
+
+- **OS:** Ubuntu 22.04.5 LTS (Kernel 5.15.0-179)
+- **Compute:** NVIDIA Tesla T4 (16GB VRAM)
+- **Execution Mode:** Headless-first runtime validation
+- **Storage Constraint:** 38GB available out of 58GB total
+- **Container Runtime:** Docker 29.1.3 + NVIDIA Container Toolkit
+- **Active RMW Middleware:** FastDDS via `rmw_fastrtps_cpp` (wrapper package version 6.2.10)
+
+### Stage 4A Characterization Scope
+
+Validated:
+- ROS2 Humble bootstrap from OSRF sources
+- Docker-first ROS2 runtime baseline
+- `colcon` build toolchain
+- Intra-container DDS communication
+- Host-network ROS2 orchestration baseline
+- Deterministic cleanup behavior
+
+Partially characterized:
+- Cross-container DDS observability under VM orchestration
+
+Not yet characterized:
+- CycloneDDS integration
+- Isaac Sim runtime
+- Unitree SDK2 integration
+- Multi-host DDS topologies
+
+---
+
 ## Repository Structure
 
 ```
@@ -282,17 +314,18 @@ Par `(Risk Level, Restriction Level)` — unidad de estado del sistema. Propieda
 
 ## Development Roadmap
 
-| Etapa | Descripción | Estado |
-|-------|-------------|--------|
-| Etapa 1 | Infraestructura Base — ROS2, Docker, CI, runtime discipline | ✅ Cerrada |
-| Etapa 2 | Disciplina Operacional — anti-patterns, observabilidad, reproducibilidad | ✅ Cerrada |
-| Etapa 3A | Modelos Semánticos + ADRs — SAFETY/RESILIENCE/RECOVERY MODEL, ADR-002/003 | ✅ Cerrada |
-| Etapa 3B | Skeleton Runtime ROS2 — 4 nodos + g1_msgs + threading architecture | ✅ Cerrada |
-| Etapa 3C | Transition Logic Real — TransitionEvaluator, Scheduler, T8, recovery runtime, 86 tests | ✅ Cerrada |
-| Etapa 4 | SDK Integration — SDK G1, thresholds reales, locomotion semantics, ActionExecutor | ⏳ Bloqueado — SDK |
-| Etapa 5 | Isaac Sim Integration — MIT VM, Phase 4B URDF real, pipeline-sim validation | ⏳ Bloqueado — MIT VM |
-| Etapa 6 | Perception Layer — Gemini Robotics API, gemini_perception_node, Phase 10 | ⏳ Bloqueado — API |
-| Etapa 7 | Certification — hardware validation, thresholds reales, safety audit | ⏳ Post-SDK |
+| Etapa | Descripción | Estado | Notas / Deuda Técnica |
+|-------|-------------|--------|------------------------|
+| Etapa 1 | Infraestructura Base — ROS2, Docker, CI, runtime discipline | ✅ Cerrada | |
+| Etapa 2 | Disciplina Operacional — anti-patterns, observabilidad, reproducibilidad | ✅ Cerrada | |
+| Etapa 3A | Modelos Semánticos + ADRs — SAFETY/RESILIENCE/RECOVERY MODEL, ADR-002/003 | ✅ Cerrada | |
+| Etapa 3B | Skeleton Runtime ROS2 — 4 nodos + g1_msgs + threading architecture | ✅ Cerrada | |
+| Etapa 3C | Transition Logic Real — TransitionEvaluator, Scheduler, T8, recovery runtime, 86 tests | ✅ Cerrada | Frozen baseline on commit `861a8b6`. |
+| Etapa 4A | Infrastructure & DDS Characterization | ✅ Cerrada | VM audited. Docker-first ROS2 Humble minimal characterization completed. |
+| Etapa 4B | Isaac Headless Bring-up | 🔲 Próxima | Requires storage mitigation plan (38GB constraint). |
+| Etapa 4C | SDK Unitree Characterization | 🔲 Bloqueada | FastDDS vs CycloneDDS divergence pending characterization. |
+| Etapa 5 | Embodied Intelligence Layer — VLA orchestration, semantic perception, GR00T / LeRobot integration | ⏳ Pre-runtime integration | Architecture intentionally deferred until Isaac + SDK baseline stabilizes. |
+| Etapa 6 | Certification — hardware validation, thresholds reales, safety audit | ⏳ Post-SDK | |
 
 ---
 
@@ -307,6 +340,16 @@ Registrado en `TECHNICAL_DEBT_3C.md`. Deudas identificadas en auditoría post-3C
 | `_execute_transition()` requiere `ActionExecutor` antes de SDK | `safety_orchestrator_g1` | Pre-SDK |
 | `wait_for_primary_restore` mezcla poller y reactor | `recovery_g1` | Post-SDK |
 | `launch_testing` real pendiente bajo DDS real | Todos | Post-SDK |
+
+---
+
+## Stage 4A Inherited Technical Debt
+
+| ID | Debt | Impact | Priority |
+|----|------|---------|-----------|
+| DT-4A-003 | Cross-container DDS characterization remains inconclusive due to shell orchestration noise and limited observability | Low impact for local single-VM headless runtime bring-up | Low |
+| DT-4A-004 | Middleware divergence: baseline currently runs FastDDS (`rmw_fastrtps_cpp`) while Unitree SDK2 requires CycloneDDS 0.10.2 | Pre-hardware integration risk | High |
+| DT-4A-005 | Host storage constraint (38GB available out of 58GB total) may block full Isaac Sim asset deployment | Infrastructure saturation risk | High |
 
 ---
 
@@ -332,6 +375,7 @@ The following claims are **NOT valid** for this repository in its current state:
 - ❌ T8 arbitration is complete — DRAFT, PH-001 open
 - ❌ Recovery actions work on hardware — subprocess isolation validated x86 only
 - ✅ Recovery runtime implementado con subprocess isolation — sin SDK, sin hardware
+- ❌ Cross-container DDS fully characterized — Stage 4A characterization remains partially inconclusive under VM orchestration
 
 ---
 
@@ -348,4 +392,5 @@ The AGV baseline remains frozen as an audited reference. The G1 pipeline inherit
 ---
 
 *G1 ROS2 Pipeline — github.com/jorgerpg1213-mitech/g1-ros2-pipeline*
-*Etapa 3A ✅ | Etapa 3B ✅ | Etapa 3C ✅ | Commit: a6d2efe*
+*Etapa 3A ✅ | Etapa 3B ✅ | Etapa 3C ✅ | Etapa 4A ✅*
+*Infrastructure baseline characterized — Transitioning toward Stage 4B (Isaac Headless Bring-up)*
