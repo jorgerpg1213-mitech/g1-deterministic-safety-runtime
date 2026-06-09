@@ -1,0 +1,74 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_202929.log
+[0.860s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.814s] [ext: omni.client.lib-1.0.0] startup
+[1.873s] [ext: omni.stats-1.0.1] startup
+[1.875s] [ext: omni.client-1.2.2] startup
+[1.884s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.900s] [ext: omni.assets.plugins-0.0.0] startup
+[1.902s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.915s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.920s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.921s] [ext: omni.pip.compute-1.4.5] startup
+[1.922s] [ext: omni.pip.cloud-1.1.7] startup
+[1.946s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.947s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 20:29:31 [1,939ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.957s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.957s] [ext: omni.usd.libs-1.0.1] startup
+[2.074s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.075s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.336s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.341s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.346s] [ext: carb.audio-0.1.0] startup
+[2.349s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.353s] [ext: omni.timeline-1.0.11] startup
+[2.357s] [ext: omni.kit.commands-1.4.9] startup
+[2.400s] [ext: omni.kvdb-106.5.7] startup
+[2.403s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.406s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.479s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.486s] [ext: omni.localcache-106.5.7] startup
+[2.489s] [ext: omni.usd_resolver-1.0.0] startup
+[2.495s] [ext: omni.physx.foundation-106.5.7] startup
+[2.499s] [ext: omni.graph.exec-0.9.4] startup
+[2.499s] [ext: omni.usdphysics-106.5.7] startup
+[2.503s] [ext: omni.usd.core-1.4.2] startup
+[2.506s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.509s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.513s] [ext: omni.physx.cooking-106.5.7] startup
+[2.524s] [ext: omni.metrics.core-0.0.1] startup
+[2.525s] [ext: omni.blobkey-1.1.2] startup
+[2.525s] [ext: omni.datastore-0.0.0] startup
+[2.534s] [ext: omni.ujitso.default-1.0.0] startup
+[2.538s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 20:29:32 [2,523ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 20:29:32 [2,557ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.581s] [ext: omni.usd-1.12.4] startup
+[2.767s] [ext: omni.physx-106.5.7] startup
+[2.812s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.352s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.400s] [ext: omni.physics.tensors-106.5.7] startup
+[3.432s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.440s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.445s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 20:29:32 [3,439ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.459s] [ext: omni.physx.tensors-106.5.7] startup
+[5.097s] [ext: isaacsim.core.version-2.0.2] startup
+[5.100s] [ext: omni.warp.core-1.5.0] startup
+[5.594s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.601s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.605s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.610s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.636s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[10.098s] [ext: omni.kit.stage_templates-1.2.6] startup
+[10.107s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.270s] [ext: isaacsim.core.api-4.2.16] startup
+[10.362s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.364s] [ext: isaacsim.g1.rclpyprobe-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 20:29:39 [10,348ms] [Warning] [isaacsim.g1.rclpyprobe] === STARTUP EXTENSION OK ===
+=== RCLPY IN KIT OK: g1_kit_probe ===
+2026-06-08 20:29:40 [10,544ms] [Warning] [isaacsim.g1.rclpyprobe] === RCLPY IN KIT OK: g1_kit_probe ===
+=== RCLPY SHUTDOWN CLEAN ===
+[10.566s] [ext: 4d3a_probe-4.5.0] startup
+[10.585s] app ready

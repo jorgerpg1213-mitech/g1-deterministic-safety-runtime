@@ -1,0 +1,100 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_204057.log
+[0.812s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.757s] [ext: omni.client.lib-1.0.0] startup
+[1.816s] [ext: omni.stats-1.0.1] startup
+[1.819s] [ext: omni.client-1.2.2] startup
+[1.828s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.845s] [ext: omni.assets.plugins-0.0.0] startup
+[1.847s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.860s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.865s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.866s] [ext: omni.pip.compute-1.4.5] startup
+[1.867s] [ext: omni.pip.cloud-1.1.7] startup
+[1.892s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.893s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 20:40:59 [1,883ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.903s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.904s] [ext: omni.usd.libs-1.0.1] startup
+[2.027s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.028s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.291s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.296s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.302s] [ext: carb.audio-0.1.0] startup
+[2.305s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.309s] [ext: omni.timeline-1.0.11] startup
+[2.313s] [ext: omni.kit.commands-1.4.9] startup
+[2.358s] [ext: omni.kvdb-106.5.7] startup
+[2.361s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.364s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.440s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.447s] [ext: omni.localcache-106.5.7] startup
+[2.450s] [ext: omni.usd_resolver-1.0.0] startup
+[2.457s] [ext: omni.physx.foundation-106.5.7] startup
+[2.460s] [ext: omni.graph.exec-0.9.4] startup
+[2.461s] [ext: omni.usdphysics-106.5.7] startup
+[2.465s] [ext: omni.usd.core-1.4.2] startup
+[2.468s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.471s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.475s] [ext: omni.physx.cooking-106.5.7] startup
+[2.487s] [ext: omni.metrics.core-0.0.1] startup
+[2.487s] [ext: omni.blobkey-1.1.2] startup
+[2.488s] [ext: omni.datastore-0.0.0] startup
+[2.497s] [ext: omni.ujitso.default-1.0.0] startup
+[2.501s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 20:41:00 [2,484ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 20:41:00 [2,520ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.545s] [ext: omni.usd-1.12.4] startup
+[2.699s] [ext: omni.physx-106.5.7] startup
+[2.737s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.186s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.247s] [ext: omni.physics.tensors-106.5.7] startup
+[3.281s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.289s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.293s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 20:41:00 [3,286ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.306s] [ext: omni.physx.tensors-106.5.7] startup
+[4.917s] [ext: isaacsim.core.version-2.0.2] startup
+[4.921s] [ext: omni.warp.core-1.5.0] startup
+[5.458s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.465s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.469s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.474s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.503s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[9.849s] [ext: omni.kit.stage_templates-1.2.6] startup
+[9.858s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.023s] [ext: isaacsim.core.api-4.2.16] startup
+[10.110s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.113s] [ext: isaacsim.g1.bridgestep1-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 20:41:07 [10,095ms] [Warning] [isaacsim.g1.bridgestep1] === STARTUP EXTENSION OK ===
+[10.115s] [ext: 4d3b1-4.5.0] startup
+=== RCLPY NODE OK: g1_bridge_node ===
+2026-06-08 20:41:07 [10,301ms] [Warning] [isaacsim.g1.bridgestep1] === RCLPY NODE OK: g1_bridge_node ===
+[10.331s] app ready
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.159.03    | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | Tesla T4                         | Yes: 0 |     | 15606   MB | 10de      | 0          |
+|     |                                  |        |     |            | 1eb8      | ddfd322a.. |
+|     |                                  |        |     |            | 0         |            |
+|=============================================================================================|
+| OS: 22.04.5 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.5, Kernel: 5.15.0-181-generic
+| Processor: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz
+| Cores: 2 | Logical Cores: 4
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 32092 | Free Memory: 30257
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+2026-06-08 20:41:08 [11,244ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+2026-06-08 20:41:09 [12,137ms] [Warning] [omni.physx.plugin] Detected an articulation at /World/G1 with more than 4 velocity iterations being added to a TGS scene.The related behavior changed recently, please consult the changelog. This warning will only print once.
+=== G1 LOADED ===
+num_dof: 37
+2026-06-08 20:41:10 [12,443ms] [Warning] [isaacsim.g1.bridgestep1] === G1 LOADED === num_dof: 37
+=== G1 + RCLPY COEXIST OK (no publish) ===
+2026-06-08 20:41:10 [12,443ms] [Warning] [isaacsim.g1.bridgestep1] === G1 + RCLPY COEXIST OK (no publish) ===
+=== RCLPY SHUTDOWN CLEAN ===

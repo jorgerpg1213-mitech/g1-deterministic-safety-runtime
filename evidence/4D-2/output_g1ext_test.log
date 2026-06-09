@@ -1,0 +1,71 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_010423.log
+[0.814s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.763s] [ext: omni.client.lib-1.0.0] startup
+[1.822s] [ext: omni.stats-1.0.1] startup
+[1.825s] [ext: omni.client-1.2.2] startup
+[1.834s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.851s] [ext: omni.assets.plugins-0.0.0] startup
+[1.853s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.865s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.870s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.871s] [ext: omni.pip.compute-1.4.5] startup
+[1.872s] [ext: omni.pip.cloud-1.1.7] startup
+[1.896s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.897s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 01:04:25 [1,888ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.906s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.907s] [ext: omni.usd.libs-1.0.1] startup
+[2.022s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.023s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.285s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.290s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.296s] [ext: carb.audio-0.1.0] startup
+[2.299s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.303s] [ext: omni.timeline-1.0.11] startup
+[2.307s] [ext: omni.kit.commands-1.4.9] startup
+[2.352s] [ext: omni.kvdb-106.5.7] startup
+[2.355s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.358s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.435s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.442s] [ext: omni.localcache-106.5.7] startup
+[2.445s] [ext: omni.usd_resolver-1.0.0] startup
+[2.452s] [ext: omni.physx.foundation-106.5.7] startup
+[2.455s] [ext: omni.graph.exec-0.9.4] startup
+[2.456s] [ext: omni.usdphysics-106.5.7] startup
+[2.460s] [ext: omni.usd.core-1.4.2] startup
+[2.463s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.466s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.470s] [ext: omni.physx.cooking-106.5.7] startup
+[2.481s] [ext: omni.metrics.core-0.0.1] startup
+[2.482s] [ext: omni.blobkey-1.1.2] startup
+[2.482s] [ext: omni.datastore-0.0.0] startup
+[2.491s] [ext: omni.ujitso.default-1.0.0] startup
+[2.495s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 01:04:25 [2,480ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 01:04:26 [2,517ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.542s] [ext: omni.usd-1.12.4] startup
+[2.737s] [ext: omni.physx-106.5.7] startup
+[2.781s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.333s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.382s] [ext: omni.physics.tensors-106.5.7] startup
+[3.413s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.421s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.426s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 01:04:26 [3,418ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.438s] [ext: omni.physx.tensors-106.5.7] startup
+[5.089s] [ext: isaacsim.core.version-2.0.2] startup
+[5.092s] [ext: omni.warp.core-1.5.0] startup
+[5.572s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.579s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.583s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.590s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.618s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[10.058s] [ext: omni.kit.stage_templates-1.2.6] startup
+[10.066s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.240s] [ext: isaacsim.core.api-4.2.16] startup
+[10.334s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.337s] [ext: isaacsim.g1.runtime-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 01:04:33 [10,320ms] [Warning] [isaacsim.g1.runtime] === STARTUP EXTENSION OK ===
+[10.338s] [ext: isaacsim.min.loop.g1ext.test-4.5.0] startup
+[10.357s] app ready

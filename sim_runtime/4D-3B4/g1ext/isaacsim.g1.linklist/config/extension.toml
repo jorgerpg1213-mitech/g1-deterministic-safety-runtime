@@ -1,0 +1,9 @@
+[core]
+reloadable = true
+[package]
+version = "0.1.0"
+title = "G1 link lister"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.linklist"

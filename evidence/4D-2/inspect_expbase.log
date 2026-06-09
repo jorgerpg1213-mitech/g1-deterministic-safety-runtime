@@ -1,0 +1,61 @@
+=== exp.base dependencies ===
+[package]
+description = "Base Isaac Sim App"
+title = "Isaac Sim Base"
+version = "4.5.0"
+keywords = ["experience", "app", "usd"] # That makes it browsable in UI with "experience" filter
+
+
+[dependencies]
+# Isaac Sim extensions
+"isaacsim.app.about" = {}
+"isaacsim.asset.browser" = {}
+"isaacsim.core.api" = {}
+"isaacsim.core.cloner" = {}
+"isaacsim.core.deprecation_manager" = { order = -100 }
+"isaacsim.core.nodes" = {}
+"isaacsim.core.simulation_manager" = {}
+"isaacsim.core.throttling" = {}
+"isaacsim.core.utils" = {}
+"isaacsim.core.version" = {}
+"isaacsim.cortex.behaviors" = {}
+"isaacsim.cortex.framework" = {}
+"isaacsim.gui.menu" = {}
+"isaacsim.gui.property" = {}
+"isaacsim.replicator.behavior" = {}
+"isaacsim.replicator.domain_randomization" = {}
+"isaacsim.replicator.writers" = {}
+"isaacsim.robot_motion.lula" = {}
+"isaacsim.robot_motion.motion_generation" = {}
+"isaacsim.robot.manipulators" = {}
+"isaacsim.robot.policy.examples" = {}
+"isaacsim.robot.schema" = {}
+"isaacsim.robot.surface_gripper" = {}
+"isaacsim.robot.wheeled_robots" = {}
+"isaacsim.sensors.camera" = {}
+"isaacsim.sensors.physics" = {}
+"isaacsim.sensors.physx" = {}
+"isaacsim.sensors.rtx" = {}
+"isaacsim.simulation_app" = {}
+"isaacsim.storage.native" = {}
+"isaacsim.util.debug_draw" = {}
+"omni.isaac.core_archive" = {}
+"omni.isaac.ml_archive" = {}
+"omni.kit.loop-isaac" = {}
+"omni.pip.cloud" = {}
+"omni.pip.compute" = {}
+
+# Deprecated extensions for backwards compatibility
+"omni.isaac.asset_browser" = {}
+"omni.isaac.assets_check" = {}
+"omni.isaac.cloner" = {}
+"omni.isaac.core_nodes" = {}
+"omni.isaac.core" = {}
+"omni.isaac.cortex.sample_behaviors" = {}
+"omni.isaac.cortex" = {}
+"omni.isaac.dynamic_control" = {}
+"omni.isaac.franka" = {}
+"omni.isaac.kit" = {}
+"omni.isaac.lula_test_widget" = {}
+"omni.isaac.lula" = {}
+"omni.isaac.manipulators" = {}

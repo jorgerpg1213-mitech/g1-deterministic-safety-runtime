@@ -1,0 +1,11 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "G1 state publisher (joints + base pose + base velocity)"
+description = "4D-3B3: publicar estado minimo del G1 via ROS2, APIs confirmadas, sin sensores nuevos"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.statepub"

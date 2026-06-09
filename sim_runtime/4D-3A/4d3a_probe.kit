@@ -1,0 +1,34 @@
+[package]
+title = "Isaac Sim Minimal Loop Python G1"
+description = "Minimal headless python app + loop runner - testing app ready lifecycle"
+version = "4.5.0"
+keywords = ["experience", "app", "usd", "isaacsim"]
+
+[dependencies]
+"isaacsim.core.api" = {}
+"isaacsim.core.utils" = {}
+"isaacsim.core.prims" = {}
+"isaacsim.storage.native" = {}
+"omni.kit.loop-isaac" = {}
+"isaacsim.g1.rclpyprobe" = {}
+
+[settings.app]
+name = "Isaac-Sim Minimal Loop Python"
+version = "4.5.0"
+settings.persistent = false
+vulkan = true
+
+[settings.app.exts.folders]
+'++' = [
+    "${app}/../exts",
+    "${app}/../extscache",
+    "${app}/../extsPhysics",
+    "${app}/../extsUser",
+    "${app}/../extsDeprecated",
+]
+
+[settings.exts."omni.kit.registry.nucleus"]
+registries = [
+    { name = "kit/default", url = "https://ovextensionsprod.blob.core.windows.net/exts/kit/prod/106/shared" },
+    { name = "kit/sdk", url = "https://ovextensionsprod.blob.core.windows.net/exts/kit/prod/sdk/${kit_version_short}/${kit_git_hash}" },
+]

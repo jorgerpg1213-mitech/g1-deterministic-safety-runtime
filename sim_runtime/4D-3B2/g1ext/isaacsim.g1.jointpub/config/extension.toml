@@ -1,0 +1,11 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "G1 joint_states publisher (mini-bridge)"
+description = "Microprueba 2: publicar /joint_states reales del G1 via rclpy interno"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.jointpub"

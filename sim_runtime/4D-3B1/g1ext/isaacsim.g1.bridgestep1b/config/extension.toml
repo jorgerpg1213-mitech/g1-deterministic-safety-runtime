@@ -1,0 +1,11 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "G1 + rclpy coexist during stepping (no publish)"
+description = "Microprueba 1B: G1 + rclpy vivo durante stepping fisico hasta reposo, sin publicar"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.bridgestep1b"

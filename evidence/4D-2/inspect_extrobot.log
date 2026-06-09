@@ -1,0 +1,26 @@
+=== World usado dentro de extension? ===
+/isaac-sim/exts/isaacsim.examples.interactive/isaacsim/examples/interactive/hello_world/hello_world.py
+/isaac-sim/exts/isaacsim.examples.interactive/isaacsim/examples/interactive/hello_world/hello_world_extension.py
+/isaac-sim/exts/isaacsim.examples.interactive/isaacsim/examples/interactive/cortex/cortex_base.py
+=== patron base_sample ===
+12:from isaacsim.core.api import World
+14:from isaacsim.core.utils.stage import create_new_stage_async, update_stage_async
+38:    async def load_world_async(self):
+40:        await create_new_stage_async()
+41:        self._world = World(**self._world_settings)
+42:        await self._world.initialize_simulation_context_async()
+46:        await self._world.reset_async()
+47:        await self._world.pause_async()
+50:            self._world.add_physics_callback("tasks_step", self._world.step_async)
+53:    async def reset_async(self):
+57:        await self._world.play_async()
+58:        await update_stage_async()
+60:        await self._world.reset_async()
+61:        await self._world.pause_async()
+64:            self._world.add_physics_callback("tasks_step", self._world.step_async)
+77:    async def setup_post_load(self):
+84:    async def setup_pre_reset(self):
+91:    async def setup_post_reset(self):
+96:    async def setup_post_clear(self):
+117:    async def clear_async(self):
+119:        await create_new_stage_async()

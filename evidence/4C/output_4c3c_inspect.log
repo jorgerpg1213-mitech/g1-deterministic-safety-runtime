@@ -1,0 +1,1029 @@
+[Info] [carb] Logging to file: /isaac-sim/kit/logs/Kit/Isaac-Sim/4.2/kit_20260530_064053.log
+2026-05-30 06:40:53 [0ms] [Warning] [omni.kit.app.plugin] No crash reporter present, dumps uploading isn't available.
+[6.561s] [ext: omni.blobkey-1.1.2] startup
+[6.577s] [ext: omni.kit.async_engine-0.0.1] startup
+[42.019s] [ext: omni.stats-1.0.1] startup
+[42.043s] [ext: omni.datastore-0.0.0] startup
+[42.670s] [ext: omni.client-1.2.0] startup
+[44.033s] [ext: omni.ujitso.default-1.0.0] startup
+[44.052s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[44.117s] [ext: omni.hsscclient-1.1.1] startup
+[44.133s] [ext: omni.assets.plugins-0.0.0] startup
+[44.716s] [ext: omni.gpu_foundation-0.0.0] startup
+[46.398s] [ext: carb.windowing.plugins-1.0.0] startup
+2026-05-30 06:41:39 [46,223ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:39 [46,223ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+[46.527s] [ext: omni.kit.renderer.init-0.0.0] startup
+2026-05-30 06:41:39 [46,429ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.159.03    | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | Tesla T4                         | Yes: 0 |     | 15606   MB | 10de      | 0          |
+|     |                                  |        |     |            | 1eb8      | ddfd322a.. |
+|     |                                  |        |     |            | 0         |            |
+|=============================================================================================|
+| OS: 22.04.3 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.3, Kernel: 5.15.0-179-generic
+| Processor: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz | Cores: 2 | Logical: 4
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 7936 | Free Memory: 6654
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+2026-05-30 06:41:48 [54,950ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+[55.524s] [ext: omni.kit.pipapi-0.0.0] startup
+[55.565s] [ext: omni.kit.pip_archive-0.0.0] startup
+[55.566s] [ext: omni.pip.compute-1.4.0] startup
+[55.601s] [ext: omni.pip.cloud-1.1.3] startup
+[55.667s] [ext: omni.isaac.core_archive-2.3.0] startup
+[55.679s] [ext: omni.materialx.libs-1.0.4] startup
+[55.736s] [ext: omni.isaac.ml_archive-2.0.1] startup
+[55.737s] [ext: omni.kit.telemetry-0.5.0] startup
+[55.860s] [ext: omni.usd.config-1.0.4] startup
+[55.987s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[55.988s] [ext: omni.usd.libs-1.0.1] startup
+[58.023s] [ext: omni.iray.libs-0.0.0] startup
+[58.534s] [ext: omni.mdl.neuraylib-0.2.8] startup
+[58.546s] [ext: omni.mdl-55.0.1] startup
+[59.088s] [ext: omni.kit.usd.mdl-1.0.1] startup
+[61.084s] [ext: omni.kit.loop-isaac-1.2.0] startup
+[61.204s] [ext: omni.kit.test-1.1.0] startup
+[62.682s] [ext: omni.appwindow-1.1.8] startup
+2026-05-30 06:41:55 [62,382ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:55 [62,383ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+[62.689s] [ext: omni.kit.renderer.core-1.0.2] startup
+2026-05-30 06:41:55 [62,472ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:55 [62,472ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+2026-05-30 06:41:55 [62,485ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:55 [62,485ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+[62.940s] [ext: omni.kit.renderer.capture-0.0.0] startup
+[63.337s] [ext: omni.kit.renderer.imgui-1.0.1] startup
+2026-05-30 06:41:56 [63,248ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:56 [63,248ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+2026-05-30 06:41:56 [63,253ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:56 [63,253ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+2026-05-30 06:41:56 [63,254ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:41:56 [63,254ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+[64.376s] [ext: omni.ui-2.25.22] startup
+[64.951s] [ext: omni.kit.mainwindow-1.0.3] startup
+[64.971s] [ext: carb.audio-0.1.0] startup
+[65.068s] [ext: omni.uiaudio-1.0.0] startup
+[65.114s] [ext: omni.kit.uiapp-0.0.0] startup
+[65.114s] [ext: omni.usd.schema.isaac-2.1.0] startup
+[65.240s] [ext: omni.usd.schema.audio-0.0.0] startup
+[65.317s] [ext: omni.usd.schema.anim-0.0.0] startup
+[65.488s] [ext: omni.usd.schema.geospatial-0.0.0] startup
+[65.564s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[65.582s] [ext: omni.usd.schema.omnigraph-1.0.0] startup
+[65.617s] [ext: omni.anim.navigation.schema-106.1.0] startup
+[65.627s] [ext: omni.usd.schema.scene.visualization-2.0.2] startup
+[65.665s] [ext: omni.usd.schema.omniscripting-1.0.0] startup
+[65.702s] [ext: omni.anim.graph.schema-106.1.0] startup
+[65.753s] [ext: omni.usd.schema.physx-106.1.9] startup
+[67.800s] [ext: omni.usd.schema.forcefield-106.1.9] startup
+[68.150s] [ext: omni.graph.exec-0.9.4] startup
+[68.170s] [ext: omni.kit.usd_undo-0.1.8] startup
+[68.173s] [ext: omni.kit.actions.core-1.0.0] startup
+[68.191s] [ext: omni.kit.exec.core-0.13.4] startup
+[68.212s] [ext: omni.usd_resolver-1.0.0] startup
+[68.378s] [ext: omni.kit.commands-1.4.9] startup
+[68.476s] [ext: omni.activity.core-1.0.1] startup
+[68.489s] [ext: omni.usd.core-1.4.1] startup
+[68.494s] [ext: omni.resourcemonitor-105.0.1] startup
+[68.597s] [ext: omni.kit.window.popup_dialog-2.0.24] startup
+[68.625s] [ext: omni.timeline-1.0.10] startup
+[68.646s] [ext: omni.kit.widget.nucleus_connector-1.1.9] startup
+[68.660s] [ext: usdrt.scenegraph-7.5.0] startup
+[69.367s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[69.381s] [ext: omni.hydra.usdrt_delegate-7.5.1] startup
+[69.462s] [ext: omni.hydra.scene_delegate-0.3.3] startup
+[69.494s] [ext: omni.usd-1.12.2] startup
+[69.828s] [ext: omni.kit.menu.core-1.0.4] startup
+[69.833s] [ext: omni.kit.collaboration.telemetry-1.0.0] startup
+[69.853s] [ext: omni.kit.property.adapter.core-1.0.1] startup
+[69.859s] [ext: omni.kit.menu.utils-1.5.27] startup
+[69.940s] [ext: omni.kit.clipboard-1.0.4] startup
+[69.942s] [ext: omni.kit.collaboration.channel_manager-1.0.12] startup
+[69.949s] [ext: omni.kit.property.adapter.usd-1.0.1] startup
+[69.953s] [ext: omni.kit.widget.options_menu-1.1.6] startup
+[69.969s] [ext: omni.kit.widget.graph-1.12.15] startup
+[70.248s] [ext: omni.kit.widget.searchfield-1.1.8] startup
+[70.256s] [ext: omni.kit.widget.filter-1.1.4] startup
+[70.262s] [ext: omni.kit.property.adapter.fabric-1.0.1] startup
+[70.328s] [ext: omni.ui_query-1.1.4] startup
+[70.333s] [ext: omni.kit.window.extensions-1.4.11] startup
+[70.386s] [ext: omni.kit.usd.layers-2.1.36] startup
+[70.466s] [ext: omni.kit.widget.context_menu-1.2.2] startup
+[70.474s] [ext: omni.hydra.rtx.shadercache.vulkan-1.0.0] startup
+[70.476s] [ext: omni.kit.notification_manager-1.0.9] startup
+[70.793s] [ext: omni.kit.hotkeys.core-1.3.5] startup
+[70.794s] [ext: omni.kit.context_menu-1.8.1] startup
+[70.820s] [ext: omni.kit.widget.prompt-1.0.7] startup
+[70.825s] [ext: omni.kit.helper.file_utils-0.1.8] startup
+[71.226s] [ext: omni.kit.widget.nucleus_info-1.0.2] startup
+[71.229s] [ext: omni.kit.widget.filebrowser-2.10.51] startup
+[71.271s] [ext: omni.kit.search_core-1.0.5] startup
+[71.275s] [ext: omni.kit.widget.path_field-2.0.10] startup
+[71.281s] [ext: omni.ui.scene-1.10.3] startup
+[71.292s] [ext: omni.kit.widget.search_delegate-1.0.5] startup
+[71.299s] [ext: omni.kit.widget.options_button-1.0.3] startup
+[71.301s] [ext: omni.kit.widget.browser_bar-2.0.10] startup
+[71.306s] [ext: omni.volume-0.5.0] startup
+[71.615s] [ext: omni.kit.window.filepicker-2.10.40] startup
+[71.835s] [ext: omni.ujitso.processor.texture-1.0.0] startup
+[71.837s] [ext: omni.kit.window.file_exporter-1.0.30] startup
+[71.845s] [ext: omni.ujitso.client-0.0.0] startup
+[71.846s] [ext: omni.kit.widget.stage-2.11.2] startup
+[71.992s] [ext: omni.kit.widget.live_session_management.ui-1.0.1] startup
+[72.010s] [ext: omni.kit.collaboration.presence_layer-1.0.9] startup
+[72.050s] [ext: omni.hydra.rtx-1.0.0] startup
+[72.351s] [ext: omni.inspect-1.0.1] startup
+[72.365s] [ext: omni.kit.widget.searchable_combobox-1.0.6] startup
+[72.373s] [ext: omni.kit.window.file_importer-1.1.12] startup
+[72.380s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[72.391s] [ext: omni.kit.widget.settings-1.2.2] startup
+[72.443s] [ext: omni.kit.window.file-1.3.54] startup
+[72.466s] [ext: omni.kit.window.drop_support-1.0.3] startup
+[72.470s] [ext: omni.kit.window.content_browser_registry-0.0.6] startup
+[72.473s] [ext: omni.kit.window.preferences-1.6.0] startup
+[72.623s] [ext: omni.kit.window.content_browser-2.9.18] startup
+[72.671s] [ext: omni.kit.widget.live_session_management-1.2.20] startup
+[72.692s] [ext: omni.kit.widget.text_editor-1.0.2] startup
+[72.702s] [ext: omni.kit.hydra_texture-1.3.9] startup
+[72.708s] [ext: omni.kit.viewport.legacy_gizmos-1.1.0] startup
+[72.712s] [ext: omni.kit.raycast.query-1.0.5] startup
+[72.721s] [ext: omni.kit.material.library-1.5.6] startup
+[72.834s] [ext: omni.kit.widget.viewport-106.1.0] startup
+[73.081s] [ext: omni.kit.viewport.registry-104.0.6] startup
+[73.084s] [ext: omni.hydra.engine.stats-1.0.2] startup
+[73.088s] [ext: omni.kit.widget.highlight_label-1.0.2] startup
+[73.091s] [ext: omni.kit.viewport.window-107.0.6] startup
+[73.168s] [ext: omni.kit.window.property-1.11.3] startup
+[73.181s] [ext: omni.graph.core-2.179.2] startup
+[73.194s] [ext: omni.graph.tools-1.79.0] startup
+[73.632s] [ext: omni.kit.viewport.utility-1.0.17] startup
+[73.647s] [ext: omni.kit.property.usd-4.2.8] startup
+[74.773s] [ext: omni.debugdraw-0.1.3] startup
+[74.782s] [ext: omni.graph-1.140.0] startup
+[77.789s] [ext: omni.graph.ui-1.70.2] startup
+[78.229s] [ext: omni.kvdb-106.1.9] startup
+[78.254s] [ext: omni.graph.image.core-0.4.5] startup
+[78.258s] [ext: omni.localcache-106.1.9] startup
+[78.315s] [ext: omni.graph.image.nodes-1.1.0] startup
+[78.326s] [ext: omni.usdphysics-106.1.9] startup
+[78.332s] [ext: omni.physx.foundation-106.1.9] startup
+[78.415s] [ext: omni.convexdecomposition-106.1.9] startup
+[78.497s] [ext: omni.graph.nodes-1.146.1] startup
+[78.794s] [ext: omni.physx.cooking-106.1.9] startup
+[78.832s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[78.907s] [ext: omni.physx-106.1.9] startup
+[79.139s] [ext: omni.kit.stage_templates-1.2.5] startup
+[79.164s] [ext: omni.isaac.version-1.1.0] startup
+[79.168s] [ext: omni.kit.widget.material_preview-1.0.16] startup
+[79.192s] [ext: omni.isaac.nucleus-0.3.1] startup
+[79.223s] [ext: omni.physics.tensors-106.1.9] startup
+[79.269s] [ext: omni.physx.stageupdate-106.1.9] startup
+[79.309s] [ext: omni.graph.action_core-1.1.6] startup
+[79.388s] [ext: omni.warp.core-1.2.1] startup
+[80.445s] [ext: omni.physx.tensors-106.1.9] startup
+[80.456s] [ext: omni.graph.scriptnode-1.20.1] startup
+[80.501s] [ext: omni.kit.manipulator.viewport-107.0.0] startup
+[80.512s] [ext: omni.graph.action_nodes-1.24.0] startup
+[80.552s] [ext: omni.kit.ui_test-1.3.2] startup
+[80.587s] [ext: omni.isaac.core-3.19.5] startup
+[103.096s] [ext: omni.graph.visualization.nodes-2.1.1] startup
+[103.126s] [ext: omni.graph.action-1.102.1] startup
+[103.138s] [ext: omni.kit.window.cursor-1.1.2] startup
+[103.153s] [ext: omni.isaac.ui-0.16.0] startup
+[103.653s] [ext: omni.kit.viewport.menubar.core-106.1.0] startup
+[103.846s] [ext: omni.kit.graph.delegate.default-1.2.2] startup
+[103.853s] [ext: omni.syntheticdata-0.6.9] startup
+[104.388s] [ext: omni.kit.graph.usd.commands-1.3.1] startup
+[104.476s] [ext: omni.kit.graph.editor.core-1.5.3] startup
+[104.637s] [ext: omni.kit.numpy.common-0.1.2] startup
+[104.654s] [ext: omni.warp-1.2.1] startup
+[104.728s] [ext: omni.kit.window.material_graph-1.8.18] startup
+[105.785s] [ext: omni.isaac.dynamic_control-1.3.8] startup
+[105.862s] [ext: omni.replicator.core-1.11.20] startup
+2026-05-30 06:42:40 [106,898ms] [Warning] [omni.replicator.core.scripts.annotators] Annotator PostProcessDispatch is already registered, overwriting annotator template
+[112.816s] [ext: omni.isaac.lula-3.0.1] startup
+[113.324s] [ext: omni.isaac.surface_gripper-1.0.1] startup
+[113.419s] [ext: omni.isaac.core_nodes-1.16.3] startup
+[113.601s] [ext: omni.isaac.motion_generation-7.1.0] startup
+[113.847s] [ext: omni.isaac.manipulators-2.1.0] startup
+[114.170s] [ext: omni.isaac.franka-0.4.1] startup
+[114.277s] [ext: omni.kit.graph.widget.variables-2.1.0] startup
+[114.307s] [ext: omni.kit.graph.delegate.modern-1.10.6] startup
+[114.356s] [ext: omni.isaac.cortex-0.3.9] startup
+[114.393s] [ext: omni.graph.window.core-1.113.1] startup
+[114.638s] [ext: omni.isaac.wheeled_robots-2.3.3] startup
+[114.836s] [ext: omni.isaac.cortex.sample_behaviors-1.0.6] startup
+[114.865s] [ext: omni.graph.window.generic-1.26.0] startup
+[114.973s] [ext: omni.isaac.menu-0.7.3] startup
+[115.004s] [ext: omni.kit.widget.live-2.1.8] startup
+[115.025s] [ext: omni.kit.actions.window-1.1.1] startup
+[115.245s] [ext: omni.kit.widget.cache_indicator-2.0.10] startup
+[116.595s] [ext: omni.kit.hotkeys.window-1.4.5] startup
+2026-05-30 06:42:49 [116,292ms] [Warning] [omni.kit.widget.cache_indicator.cache_state_menu] Unable to detect Omniverse Cache Server. Consider installing it for better IO performance.
+[116.670s] [ext: omni.kit.ui.actions-1.0.2] startup
+[116.696s] [ext: omni.kit.widget.stage_icons-1.0.5] startup
+[116.720s] [ext: omni.kit.menu.common-1.1.7] startup
+[116.742s] [ext: omni.kit.selection-0.1.4] startup
+[116.823s] [ext: omni.isaac.kit-1.13.2] startup
+[116.825s] [ext: omni.isaac.block_world-1.0.0] startup
+[116.841s] [ext: omni.kit.window.stage-2.5.10] startup
+[116.877s] [ext: omni.isaac.debug_draw-1.1.0] startup
+[116.888s] [ext: omni.kit.menu.edit-1.1.24] startup
+[116.909s] [ext: omni.kit.menu.file-1.1.14] startup
+[116.919s] [ext: omni.kit.profiler.window-2.2.3] startup
+[117.840s] [ext: omni.kit.menu.stage-1.2.5] startup
+[117.875s] [ext: omni.isaac.occupancy_map-1.0.3] startup
+[117.917s] [ext: omni.importer.mjcf-1.1.1] startup
+[118.488s] [ext: omni.graph.window.action-1.28.0] startup
+[119.133s] [ext: omni.kit.property.camera-1.0.8] startup
+[119.161s] [ext: omni.kit.property.light-1.0.10] startup
+[119.171s] [ext: omni.kit.property.geometry-1.3.1] startup
+[119.188s] [ext: omni.hydra.scene_api-0.1.2] startup
+[119.204s] [ext: omni.kit.property.audio-1.0.14] startup
+[119.224s] [ext: omni.kit.property.render-1.1.2] startup
+[119.239s] [ext: omni.kit.property.transform-1.5.9] startup
+[119.289s] [ext: omni.kit.property.material-1.10.8] startup
+[120.900s] [ext: omni.kit.widget.layers-1.8.0] startup
+[120.989s] [ext: omni.kit.property.isaac-0.2.3] startup
+[121.010s] [ext: omni.kit.property.bundle-1.3.1] startup
+[121.022s] [ext: omni.sensors.nv.common-1.2.2-isaac-1] startup
+[121.655s] [ext: omni.kit.property.layer-1.1.8] startup
+[121.671s] [ext: omni.kit.stage_column.payload-2.0.0] startup
+[121.683s] [ext: omni.isaac.scene_blox-0.1.2] startup
+[121.697s] [ext: omni.sensors.nv.materials-1.2.1-isaac-1] startup
+[121.740s] [ext: omni.sensors.nv.wpm-1.2.1-isaac-1] startup
+[121.778s] [ext: omni.kit.viewport.actions-106.0.2] startup
+[122.235s] [ext: omni.sensors.nv.lidar-1.2.2-isaac-1] startup
+[122.245s] [ext: omni.sensors.nv.radar-1.2.1-isaac-1] startup
+[123.015s] [ext: omni.kit.viewport.menubar.display-107.0.2] startup
+[123.025s] [ext: omni.kit.manipulator.transform-104.7.4] startup
+[123.068s] [ext: omni.kit.widget.toolbar-1.7.2] startup
+[123.237s] [ext: omni.sensors.tiled-0.0.6] startup
+[123.572s] [ext: omni.sensors.nv.ids-1.1.0-isaac-1] startup
+[123.681s] [ext: omni.isaac.range_sensor-3.1.2] startup
+[125.018s] [ext: omni.usdphysics.ui-106.1.9] startup
+[125.147s] [ext: omni.physx.commands-106.1.9] startup
+[125.197s] [ext: omni.kit.manipulator.tool.snap-1.5.11] startup
+[125.406s] [ext: omni.isaac.sensor-12.9.1] startup
+[126.618s] [ext: omni.kit.manipulator.selector-1.1.1] startup
+[126.656s] [ext: omni.physx.ui-106.1.9] startup
+[128.565s] [ext: omni.isaac.quadruped-2.0.1] startup
+[128.964s] [ext: omni.kit.viewport.manipulator.transform-107.0.2] startup
+[128.984s] [ext: omni.physx.demos-106.1.9] startup
+[131.944s] [ext: omni.kit.property.physx-106.1.9] startup
+[132.743s] [ext: omni.kit.widget.calendar-1.0.8] startup
+[132.760s] [ext: omni.kit.manipulator.prim.core-107.0.4] startup
+[132.921s] [ext: omni.fabric.commands-1.1.5] startup
+[133.787s] [ext: omni.physx.vehicle-106.1.9] startup
+[134.113s] [ext: omni.kit.widget.extended_searchfield-1.0.28] startup
+[134.256s] [ext: omni.kit.manipulator.prim.fabric-107.0.3] startup
+[134.269s] [ext: omni.kit.manipulator.prim.usd-107.0.2] startup
+[134.276s] [ext: omni.kit.widget.timeline-105.0.1] startup
+[134.312s] [ext: omni.kit.window.commands-0.2.6] startup
+[134.323s] [ext: omni.physx.camera-106.1.9] startup
+[134.664s] [ext: omni.kit.manipulator.camera-105.0.5] startup
+[134.787s] [ext: omni.kit.viewport.menubar.camera-107.0.2] startup
+[134.873s] [ext: omni.kit.manipulator.prim-107.0.0] startup
+[134.873s] [ext: omni.kit.manipulator.selection-106.0.1] startup
+[134.893s] [ext: omni.kit.window.toolbar-1.6.1] startup
+[134.909s] [ext: omni.kit.stage_column.variant-1.0.13] startup
+[134.928s] [ext: omni.kit.viewport.menubar.render-106.1.1] startup
+[134.949s] [ext: omni.kit.viewport.menubar.settings-107.0.3] startup
+[135.017s] [ext: omni.physx.cct-106.1.9] startup
+[135.226s] [ext: omni.physx.graph-106.1.9] startup
+[136.846s] [ext: omni.physx.supportui-106.1.9] startup
+[137.158s] [ext: omni.physx.telemetry-106.1.9] startup
+[137.285s] [ext: omni.graph.ui_nodes-1.26.0] startup
+[137.424s] [ext: omni.kit.viewport.bundle-104.0.1] startup
+[137.424s] [ext: omni.isaac.universal_robots-0.3.5] startup
+[137.441s] [ext: omni.kit.window.console-0.2.13] startup
+[137.523s] [ext: omni.kit.window.script_editor-1.7.6] startup
+[137.593s] [ext: omni.kit.menu.create-1.0.16] startup
+[137.619s] [ext: omni.graph.bundle.action-2.4.1] startup
+[137.646s] [ext: omni.physx.bundle-106.1.9] startup
+[137.650s] [ext: omni.rtx.window.settings-0.6.17] startup
+[138.519s] [ext: omni.kit.window.status_bar-0.1.7] startup
+[138.528s] [ext: omni.kit.window.title-1.1.5] startup
+[138.545s] [ext: omni.replicator.isaac-1.15.2] startup
+[141.242s] [ext: omni.replicator.replicator_yaml-2.0.6] startup
+[141.646s] [ext: omni.rtx.settings.core-0.6.3] startup
+[141.683s] [ext: omni.kit.viewport.menubar.lighting-106.0.2] startup
+[141.711s] [ext: semantics.schema.editor-0.3.8] startup
+[141.722s] [ext: semantics.schema.property-1.0.4] startup
+[141.730s] [ext: omni.kit.viewport.rtx-104.0.1] startup
+[141.730s] [ext: omni.isaac.utils-1.0.1] startup
+[141.737s] [ext: omni.isaac.cloner-0.8.1] startup
+[141.749s] [ext: omni.importer.urdf-1.14.1] startup
+[141.890s] [ext: omni.kit.window.stats-0.1.6] startup
+[141.896s] [ext: omni.isaac.sim.python-4.2.0] startup
+[141.899s] Simulation App Starting
+[517.098s] app ready
+Starting kit application with the following args:  ['/isaac-sim/exts/omni.isaac.kit/omni/isaac/kit/simulation_app.py', '/isaac-sim/apps/omni.isaac.sim.python.kit', '--/app/tokens/exe-path=/isaac-sim/kit', '--/persistent/app/viewport/displayOptions=3094', '--/rtx/materialDb/syncLoads=True', '--/rtx/hydra/materialSyncLoads=True', '--/omni.kit.plugin/syncUsdLoads=True', '--/app/renderer/resolution/width=1280', '--/app/renderer/resolution/height=720', '--/app/window/width=1440', '--/app/window/height=900', '--/renderer/multiGpu/enabled=True', '--/app/fastShutdown=True', '--ext-folder', '/isaac-sim/exts', '--ext-folder', '/isaac-sim/apps', '--/physics/cudaDevice=0', '--portable', '--no-window', '--/app/window/hideUi=1', '--allow-root']
+Passing the following args to the base kit application:  []
+Warp 1.2.1 initialized:
+   CUDA Toolkit 11.8, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "Tesla T4" (15 GiB, sm_75, mempool enabled)
+   Kernel cache:
+     /root/.cache/warp/1.2.1
+SIMULATIONAPP OK
+WORLD CREATED
+WAITING FOR STAGE LOAD
+STAGE LOAD COMPLETE
+WORLD RESET OK
+
+STAGE PHYSICS INSPECTION START
+STAGE ACQUIRED OK
+TOTAL PRIMS IN STAGE: 188
+PHYSICS CANDIDATE COUNT: 134
+
+PHYSICS CANDIDATES:
+  PATH: /Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0
+  TYPE: RenderProduct
+  SCHEMAS: []
+  MATCHED ATTRS: ['farPlaneOverride', 'nearPlaneOverride']
+  ---
+  PATH: /physicsScene
+  TYPE: PhysicsScene
+  SCHEMAS: ['PhysxSceneAPI']
+  MATCHED ATTRS: ['physics:gravityDirection', 'physics:gravityMagnitude', 'physxScene:collisionSystem', 'physxScene:gpuCollisionStackSize', 'physxScene:invertCollisionGroupFilter']
+  ---
+  PATH: /World/G1
+  TYPE: Xform
+  SCHEMAS: ['PhysicsArticulationRootAPI', 'PhysxArticulationAPI']
+  MATCHED ATTRS: ['physxArticulation:enabledSelfCollisions']
+  ---
+  PATH: /World/G1/pelvis
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/pelvis/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/pelvis/left_hip_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/pelvis/pelvis_contour_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/pelvis/right_hip_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/pelvis/torso_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_hip_pitch_link/left_hip_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_hip_roll_link/left_hip_yaw_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_yaw_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_hip_yaw_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_hip_yaw_link/left_knee_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_knee_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_knee_link/collisions
+  TYPE: Cylinder
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_knee_link/left_ankle_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_ankle_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_ankle_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_ankle_pitch_link/left_ankle_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_ankle_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_ankle_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/pelvis_contour_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_hip_pitch_link/right_hip_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_hip_roll_link/right_hip_yaw_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_yaw_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_hip_yaw_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_hip_yaw_link/right_knee_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_knee_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_knee_link/collisions
+  TYPE: Cylinder
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_knee_link/right_ankle_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_ankle_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_ankle_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_ankle_pitch_link/right_ankle_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_ankle_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_ankle_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/torso_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/torso_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/torso_link/head_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/torso_link/imu_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/torso_link/left_shoulder_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/torso_link/logo_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/torso_link/right_shoulder_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/head_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/head_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/imu_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_shoulder_pitch_link/left_shoulder_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_roll_link/collisions
+  TYPE: Cylinder
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_shoulder_roll_link/left_shoulder_yaw_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_yaw_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_shoulder_yaw_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_shoulder_yaw_link/left_elbow_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_elbow_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_elbow_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_elbow_pitch_link/left_elbow_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_elbow_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_elbow_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_elbow_roll_link/left_palm_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/left_palm_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_palm_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_palm_link/left_five_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_palm_link/left_three_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_palm_link/left_zero_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_five_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_five_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_five_link/left_six_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_six_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_six_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_three_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_three_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_three_link/left_four_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_four_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_four_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_zero_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_zero_link/left_one_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_one_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_one_link/collisions
+  TYPE: Cube
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/left_one_link/left_two_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/left_two_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/left_two_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/logo_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/logo_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_shoulder_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_shoulder_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_shoulder_pitch_link/right_shoulder_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_shoulder_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_shoulder_roll_link/collisions
+  TYPE: Cylinder
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_shoulder_roll_link/right_shoulder_yaw_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_shoulder_yaw_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_shoulder_yaw_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_shoulder_yaw_link/right_elbow_pitch_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_elbow_pitch_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_elbow_pitch_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_elbow_pitch_link/right_elbow_roll_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_elbow_roll_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_elbow_roll_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_elbow_roll_link/right_palm_joint
+  TYPE: PhysicsFixedJoint
+  SCHEMAS: []
+  MATCHED ATTRS: ['physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1']
+  ---
+  PATH: /World/G1/right_palm_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_palm_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_palm_link/right_five_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_palm_link/right_three_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_palm_link/right_zero_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_five_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_five_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_five_link/right_six_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_six_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_six_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_three_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_three_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_three_link/right_four_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_four_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_four_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_zero_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_zero_link/right_one_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_one_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_one_link/collisions
+  TYPE: Cube
+  SCHEMAS: ['PhysicsCollisionAPI']
+  MATCHED ATTRS: ['physics:collisionEnabled']
+  ---
+  PATH: /World/G1/right_one_link/right_two_joint
+  TYPE: PhysicsRevoluteJoint
+  SCHEMAS: ['PhysxJointAPI', 'PhysicsJointStateAPI:angular', 'PhysicsDriveAPI:angular']
+  MATCHED ATTRS: ['drive:angular:physics:damping', 'drive:angular:physics:maxForce', 'drive:angular:physics:stiffness', 'drive:angular:physics:targetPosition', 'drive:angular:physics:targetVelocity', 'drive:angular:physics:type', 'physics:axis', 'physics:breakForce', 'physics:breakTorque', 'physics:collisionEnabled', 'physics:excludeFromArticulation', 'physics:jointEnabled', 'physics:localPos0', 'physics:localPos1', 'physics:localRot0', 'physics:localRot1', 'physics:lowerLimit', 'physics:upperLimit', 'state:angular:physics:position', 'state:angular:physics:velocity']
+  ---
+  PATH: /World/G1/right_two_link
+  TYPE: Xform
+  SCHEMAS: ['PhysicsRigidBodyAPI', 'PhysicsMassAPI']
+  MATCHED ATTRS: ['physics:angularVelocity', 'physics:centerOfMass', 'physics:density', 'physics:diagonalInertia', 'physics:kinematicEnabled', 'physics:mass', 'physics:principalAxes', 'physics:rigidBodyEnabled', 'physics:startsAsleep', 'physics:velocity']
+  ---
+  PATH: /World/G1/right_two_link/collisions
+  TYPE: Mesh
+  SCHEMAS: ['PhysicsCollisionAPI', 'PhysicsMeshCollisionAPI']
+  MATCHED ATTRS: ['physics:approximation', 'physics:collisionEnabled']
+  ---
+  PATH: /OmniverseKit_Persp
+  TYPE: Camera
+  SCHEMAS: []
+  MATCHED ATTRS: ['clippingPlanes']
+  ---
+  PATH: /OmniverseKit_Front
+  TYPE: Camera
+  SCHEMAS: []
+  MATCHED ATTRS: ['clippingPlanes']
+  ---
+  PATH: /OmniverseKit_Top
+  TYPE: Camera
+  SCHEMAS: []
+  MATCHED ATTRS: ['clippingPlanes']
+  ---
+  PATH: /OmniverseKit_Right
+  TYPE: Camera
+  SCHEMAS: []
+  MATCHED ATTRS: ['clippingPlanes']
+  ---
+
+STAGE PHYSICS INSPECTION COMPLETE
+2026-05-30 06:49:30 [517,549ms] [Warning] [omni.kit.imgui_renderer.plugin] _createExtendCursor: No windowing.
+2026-05-30 06:49:30 [517,549ms] [Warning] [omni.kit.imgui_renderer.plugin] _createExtendCursor: No windowing.
+[518.180s] Simulation App Startup Complete
+2026-05-30 06:49:49 [535,734ms] [Warning] [omni.physx.plugin] Detected an articulation at /World/G1 with more than 4 velocity iterations being added to a TGS scene.The related behavior changed recently, please consult the changelog. This warning will only print once.
+2026-05-30 06:49:53 [540,450ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-05-30 06:49:53 [540,450ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.4]) (impl: carb.windowing-glfw.plugin)
+2026-05-30 06:49:53 [540,551ms] [Warning] [omni.usd] Unexpected reference count of 2 for UsdStage 'anon:0x30229550:World0.usd' while being closed in UsdContext (this may indicate it is still resident in memory).
+[541.048s] Simulation App Shutting Down

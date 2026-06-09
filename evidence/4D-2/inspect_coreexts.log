@@ -1,0 +1,12 @@
+=== existe omni.isaac.sim.python.kit? ===
+=== core.* exts disponibles ===
+isaacsim.core.api
+isaacsim.core.cloner
+isaacsim.core.deprecation_manager
+isaacsim.core.includes
+isaacsim.core.nodes
+isaacsim.core.prims
+isaacsim.core.simulation_manager
+isaacsim.core.throttling
+isaacsim.core.utils
+isaacsim.core.version

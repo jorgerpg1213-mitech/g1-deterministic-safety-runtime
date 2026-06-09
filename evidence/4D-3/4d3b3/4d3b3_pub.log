@@ -1,0 +1,160 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_221153.log
+[0.823s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.759s] [ext: omni.client.lib-1.0.0] startup
+[1.819s] [ext: omni.stats-1.0.1] startup
+[1.821s] [ext: omni.client-1.2.2] startup
+[1.830s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.845s] [ext: omni.assets.plugins-0.0.0] startup
+[1.847s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.859s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.864s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.865s] [ext: omni.pip.compute-1.4.5] startup
+[1.866s] [ext: omni.pip.cloud-1.1.7] startup
+[1.889s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.890s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 22:11:55 [1,883ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.901s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.901s] [ext: omni.usd.libs-1.0.1] startup
+[2.019s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.020s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.283s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.288s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.294s] [ext: carb.audio-0.1.0] startup
+[2.297s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.301s] [ext: omni.timeline-1.0.11] startup
+[2.304s] [ext: omni.kit.commands-1.4.9] startup
+[2.349s] [ext: omni.kvdb-106.5.7] startup
+[2.352s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.356s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.426s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.433s] [ext: omni.localcache-106.5.7] startup
+[2.436s] [ext: omni.usd_resolver-1.0.0] startup
+[2.442s] [ext: omni.physx.foundation-106.5.7] startup
+[2.446s] [ext: omni.graph.exec-0.9.4] startup
+[2.447s] [ext: omni.usdphysics-106.5.7] startup
+[2.450s] [ext: omni.usd.core-1.4.2] startup
+[2.453s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.456s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.460s] [ext: omni.physx.cooking-106.5.7] startup
+[2.471s] [ext: omni.metrics.core-0.0.1] startup
+[2.472s] [ext: omni.blobkey-1.1.2] startup
+[2.472s] [ext: omni.datastore-0.0.0] startup
+[2.481s] [ext: omni.ujitso.default-1.0.0] startup
+[2.485s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 22:11:55 [2,471ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 22:11:55 [2,507ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.530s] [ext: omni.usd-1.12.4] startup
+[2.703s] [ext: omni.physx-106.5.7] startup
+[2.744s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.231s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.291s] [ext: omni.physics.tensors-106.5.7] startup
+[3.326s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.334s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.338s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 22:11:56 [3,333ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.351s] [ext: omni.physx.tensors-106.5.7] startup
+[4.958s] [ext: isaacsim.core.version-2.0.2] startup
+[4.961s] [ext: omni.warp.core-1.5.0] startup
+[5.459s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.469s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.472s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.478s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.503s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[10.117s] [ext: omni.kit.stage_templates-1.2.6] startup
+[10.127s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.306s] [ext: isaacsim.core.api-4.2.16] startup
+[10.393s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.395s] [ext: isaacsim.g1.statepub-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 22:12:03 [10,381ms] [Warning] [isaacsim.g1.statepub] === STARTUP EXTENSION OK ===
+[10.398s] [ext: 4d3b3-4.5.0] startup
+=== RCLPY + 3 PUBLISHERS OK ===
+2026-06-08 22:12:04 [11,269ms] [Warning] [isaacsim.g1.statepub] === RCLPY + 3 PUBLISHERS OK ===
+[11.297s] app ready
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.159.03    | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | Tesla T4                         | Yes: 0 |     | 15606   MB | 10de      | 0          |
+|     |                                  |        |     |            | 1eb8      | ddfd322a.. |
+|     |                                  |        |     |            | 0         |            |
+|=============================================================================================|
+| OS: 22.04.5 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.5, Kernel: 5.15.0-181-generic
+| Processor: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz
+| Cores: 2 | Logical Cores: 4
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 32092 | Free Memory: 30213
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+2026-06-08 22:12:05 [12,163ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+2026-06-08 22:12:06 [13,281ms] [Warning] [omni.physx.plugin] Detected an articulation at /World/G1 with more than 4 velocity iterations being added to a TGS scene.The related behavior changed recently, please consult the changelog. This warning will only print once.
+=== G1 LOADED === num_dof: 37 names: 37
+2026-06-08 22:12:07 [13,619ms] [Warning] [isaacsim.g1.statepub] === G1 LOADED === num_dof: 37 names: 37
+=== G1 AT REST (150 steps) ===
+=== PUBLISHED 50 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:13 [19,784ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 50 z=0.1618
+=== PUBLISHED 100 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:19 [25,611ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 100 z=0.1618
+=== PUBLISHED 150 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:24 [31,451ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 150 z=0.1618
+=== PUBLISHED 200 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:30 [37,289ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 200 z=0.1618
+=== PUBLISHED 250 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:36 [43,130ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 250 z=0.1618
+=== PUBLISHED 300 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:42 [48,971ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 300 z=0.1618
+=== PUBLISHED 350 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:48 [54,812ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 350 z=0.1618
+=== PUBLISHED 400 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:54 [60,656ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 400 z=0.1618
+=== PUBLISHED 450 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:12:59 [66,469ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 450 z=0.1618
+=== PUBLISHED 500 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:05 [72,299ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 500 z=0.1618
+=== PUBLISHED 550 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:11 [78,149ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 550 z=0.1618
+=== PUBLISHED 600 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:17 [83,975ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 600 z=0.1618
+=== PUBLISHED 650 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:23 [89,819ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 650 z=0.1618
+=== PUBLISHED 700 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:29 [95,660ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 700 z=0.1618
+=== PUBLISHED 750 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:34 [101,500ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 750 z=0.1618
+=== PUBLISHED 800 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:40 [107,340ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 800 z=0.1618
+=== PUBLISHED 850 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:46 [113,180ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 850 z=0.1618
+=== PUBLISHED 900 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:52 [119,020ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 900 z=0.1618
+=== PUBLISHED 950 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:13:58 [124,860ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 950 z=0.1618
+=== PUBLISHED 1000 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:04 [130,701ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1000 z=0.1618
+=== PUBLISHED 1050 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:09 [136,541ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1050 z=0.1618
+=== PUBLISHED 1100 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:15 [142,382ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1100 z=0.1618
+=== PUBLISHED 1150 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:21 [148,222ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1150 z=0.1618
+=== PUBLISHED 1200 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:27 [154,063ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1200 z=0.1618
+=== PUBLISHED 1250 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:33 [159,910ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1250 z=0.1618
+=== PUBLISHED 1300 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:39 [165,750ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1300 z=0.1618
+=== PUBLISHED 1350 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:45 [171,592ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1350 z=0.1618
+=== PUBLISHED 1400 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:50 [177,432ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1400 z=0.1618
+=== PUBLISHED 1450 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:14:56 [183,272ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1450 z=0.1618
+=== PUBLISHED 1500 (js+pose+vel) z=0.1618 ===
+2026-06-08 22:15:02 [189,112ms] [Warning] [isaacsim.g1.statepub] PUBLISHED 1500 z=0.1618
+=== PUBLISH WINDOW DONE: total 1542 msgs x3 topics ===
+2026-06-08 22:15:07 [194,130ms] [Warning] [isaacsim.g1.statepub] === PUBLISH WINDOW DONE: 1542 msgs ===
+=== RCLPY SHUTDOWN CLEAN ===

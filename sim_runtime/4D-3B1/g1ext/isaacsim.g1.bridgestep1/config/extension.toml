@@ -1,0 +1,11 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "G1 + rclpy coexist (no publish)"
+description = "Microprueba 1: cargar G1 y rclpy en misma extension, sin publicar"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.bridgestep1"

@@ -1,0 +1,20 @@
+41:    This class wraps all matching articulations found at the regex provided at the ``prim_paths_expr`` argument
+54:        prim_paths_expr (Union[str, List[str]]): prim paths regex to encapsulate all prims that match it.
+106:        >>> prims = Articulation(prim_paths_expr="/World/envs/env.*/panda", name="franka_panda_view")
+111:    def __init__(
+113:        prim_paths_expr: Union[str, List[str]],
+124:        if isinstance(prim_paths_expr, list):
+125:            prim_paths_expr = [
+126:                get_articulation_root_api_prim_path(prim_paths_expression) for prim_paths_expression in prim_paths_expr
+129:            prim_paths_expr = get_articulation_root_api_prim_path(prim_paths_expr)
+131:        self._num_dof = None
+148:            prim_paths_expr=prim_paths_expr,
+188:    def num_dof(self) -> int:
+198:            >>> prims.num_dof
+204:        return self._num_dof
+439:            Shape is (N, num_dof, 2). For the last dimension, index 0 corresponds to lower limits and index 1 corresponds to upper limits
+477:            Shape is (N, num_dof). For the last dimension, index 0 corresponds to lower limits and index 1 corresponds to upper limits
+545:            >>> prims.set_friction_coefficients(np.full((num_envs, prims.num_dof), 0.05))
+560:            joint_indices = self._backend_utils.resolve_indices(joint_indices, self.num_dof, "cpu")
+575:                self._backend_utils.resolve_indices(joint_indices, self.num_dof, self._device)
+651:            joint_indices = self._backend_utils.resolve_indices(joint_indices, self.num_dof, self._device)

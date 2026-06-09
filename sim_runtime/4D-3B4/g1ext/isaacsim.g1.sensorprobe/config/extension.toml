@@ -1,0 +1,12 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "Sensor physics load probe"
+description = "4D-3B4 probe: cargar isaacsim.sensors.physics en kit minimo, sin G1, sin sensores"
+[dependencies]
+"isaacsim.core.api" = {}
+"isaacsim.sensors.physics" = {}
+[[python.module]]
+name = "isaacsim.g1.sensorprobe"

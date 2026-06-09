@@ -1,0 +1,5 @@
+=== SUB LISTENING on 3 topics ===
+=== JOINT_STATES OK: names=37 pos=37 vel=37 ===
+=== BASE_POSE OK: xyz=[0.88,-0.097,0.162] wxyz=[0.672,0.383,0.623,0.114] ===
+=== BASE_VELOCITY OK: lin=[-0.0083,-0.0092,-0.0003] ang=[0.0383,0.0125,0.0041] ===
+=== SUB DONE: js=50 pose=50 vel=50 ===

@@ -1,0 +1,13 @@
+=== que es isaacsim.SimulationApp ===
+10:import builtins
+11:import os
+12:import sys
+14:import carb
+16:from .app_framework import AppFramework
+17:from .simulation_app import SimulationApp
+22:    import omni.kit.app
+29:    import traceback
+48:    carb.log_warn("Please import 'isaacsim' before importing the 'isaacsim.simulation_app' extension...")
+49:    carb.log_warn("  >>> import isaacsim")
+=== existe omni.isaac.kit? ===
+/isaac-sim/extsDeprecated/omni.isaac.kit/omni/isaac/kit/__init__.py

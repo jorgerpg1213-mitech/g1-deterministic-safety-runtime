@@ -1,0 +1,14 @@
+[core]
+reloadable = true
+order = 0
+
+[package]
+version = "0.1.0"
+title = "G1 Runtime Startup"
+description = "Minimal startup extension - prints OK, no SimulationApp"
+
+[dependencies]
+"isaacsim.core.api" = {}
+
+[[python.module]]
+name = "isaacsim.g1.runtime"

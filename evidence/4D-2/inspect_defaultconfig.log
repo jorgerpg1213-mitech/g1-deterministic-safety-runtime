@@ -1,0 +1,10 @@
+50:            The settings in :obj:`DEFAULT_LAUNCHER_CONFIG` are overwritten by those in :obj:`config`.
+54:        experience (str): Path to the application config loaded by the launcher (default: "", will load apps/isaacsim.kit if left blank)
+57:    DEFAULT_LAUNCHER_CONFIG = {
+99:        display_options (int): used to specify whats visible in the stage by default. Defaults to 3094 so extra objects do not appear in synthetic data. 3286 is another good default, used for the regular isaac-sim editor experience
+115:    def __init__(self, launch_config: dict = None, experience: str = "") -> None:
+183:        self.config = self.DEFAULT_LAUNCHER_CONFIG
+184:        if experience == "":
+191:                    experience = exp
+193:        self.config.update({"experience": experience})
+309:            f'{self.config["experience"]}',

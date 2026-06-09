@@ -1,0 +1,56 @@
+        self._exiting = False
+
+        # Override settings from input config
+        self.config = self.DEFAULT_LAUNCHER_CONFIG
+        if experience == "":
+            for exp in [
+                f'{os.environ["EXP_PATH"]}/omni.isaac.sim.python.kit',
+                f'{os.environ["EXP_PATH"]}/isaacsim.exp.base.python.kit',
+                f'{os.environ["EXP_PATH"]}/isaacsim.exp.base.kit',
+            ]:
+                if os.path.isfile(exp):
+                    experience = exp
+                    break
+        self.config.update({"experience": experience})
+        if launch_config is not None:
+            self.config.update(launch_config)
+        if builtins.ISAAC_LAUNCHED_FROM_JUPYTER:
+            if self.config["headless"] is False:
+                carb.log_warn("Non-headless mode not supported with jupyter notebooks")
+            if self.config["fast_shutdown"] is True:
+                carb.log_warn("fast shutdown not supported with jupyter notebooks")
+                self.config["fast_shutdown"] = False
+                # self.config.update({"headless": True}) # Disable this, in case the user really wants to run non-headless
+
+        # Load omniverse application plugins
+        self._framework = carb.get_framework()
+        self._framework.load_plugins(
+            loaded_file_wildcards=["omni.kit.app.plugin"],
+            search_paths=[os.path.abspath(f'{os.environ["CARB_APP_PATH"]}/kernel/plugins')],
+        )
+        # Get Omniverse application
+        self._app = omni.kit.app.get_app()
+        self._start_app()
+
+        # Register signal handler to exit when ctrl-c happens
+        # This needs to happen after the app starts so that we can overide the default handler
+        def signal_handler(signal, frame):
+            # Disable logging as we are forcefully exiting
+            _logging = carb.logging.acquire_logging()
+            _logging.set_log_enabled(False)
+            self._app.shutdown()
+            self._framework.unload_all_plugins()
+            sys.exit(0)
+
+        signal.signal(signal.SIGINT, signal_handler)
+
+        # once app starts, we can set settings
+        from .utils import create_new_stage, open_stage
+
+        self._carb_settings = carb.settings.get_settings()
+        # apply render settings specified in config
+        self._carb_settings.set(
+            "/app/player/useFixedTimeStepping", False
+        )  # Set to False since the loop runner controls stepping
+        self.reset_render_settings()
+

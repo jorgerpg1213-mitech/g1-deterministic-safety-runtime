@@ -1,0 +1,76 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_201924.log
+[0.815s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.757s] [ext: omni.client.lib-1.0.0] startup
+[1.812s] [ext: omni.stats-1.0.1] startup
+[1.815s] [ext: omni.client-1.2.2] startup
+[1.823s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.839s] [ext: omni.assets.plugins-0.0.0] startup
+[1.841s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.854s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.858s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.859s] [ext: omni.pip.compute-1.4.5] startup
+[1.860s] [ext: omni.pip.cloud-1.1.7] startup
+[1.884s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.885s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 20:19:26 [1,873ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.894s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.895s] [ext: omni.usd.libs-1.0.1] startup
+[2.013s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.014s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.267s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.272s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.277s] [ext: carb.audio-0.1.0] startup
+[2.299s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.303s] [ext: omni.timeline-1.0.11] startup
+[2.306s] [ext: omni.kit.commands-1.4.9] startup
+[2.349s] [ext: omni.kvdb-106.5.7] startup
+[2.352s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.355s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.427s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.434s] [ext: omni.localcache-106.5.7] startup
+[2.437s] [ext: omni.usd_resolver-1.0.0] startup
+[2.443s] [ext: omni.physx.foundation-106.5.7] startup
+[2.447s] [ext: omni.graph.exec-0.9.4] startup
+[2.447s] [ext: omni.usdphysics-106.5.7] startup
+[2.451s] [ext: omni.usd.core-1.4.2] startup
+[2.454s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.457s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.461s] [ext: omni.physx.cooking-106.5.7] startup
+[2.472s] [ext: omni.metrics.core-0.0.1] startup
+[2.472s] [ext: omni.blobkey-1.1.2] startup
+[2.473s] [ext: omni.datastore-0.0.0] startup
+[2.482s] [ext: omni.ujitso.default-1.0.0] startup
+[2.486s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 20:19:26 [2,468ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 20:19:27 [2,501ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.529s] [ext: omni.usd-1.12.4] startup
+[2.723s] [ext: omni.physx-106.5.7] startup
+[2.761s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.214s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.274s] [ext: omni.physics.tensors-106.5.7] startup
+[3.303s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.310s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.315s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 20:19:27 [3,306ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.327s] [ext: omni.physx.tensors-106.5.7] startup
+[4.956s] [ext: isaacsim.core.version-2.0.2] startup
+[4.959s] [ext: omni.warp.core-1.5.0] startup
+[5.517s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.528s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.532s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.538s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.562s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[9.949s] [ext: omni.kit.stage_templates-1.2.6] startup
+[9.958s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.128s] [ext: isaacsim.core.api-4.2.16] startup
+[10.224s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.227s] [ext: isaacsim.g1.rclpyprobe-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 20:19:34 [10,208ms] [Warning] [isaacsim.g1.rclpyprobe] === STARTUP EXTENSION OK ===
+=== RCLPY IN KIT FAILED: ModuleNotFoundError: No module named 'rclpy' ===
+2026-06-08 20:19:34 [10,209ms] [Error] [omni.kit.app._impl] [py stderr]: Traceback (most recent call last):
+2026-06-08 20:19:34 [10,209ms] [Error] [omni.kit.app._impl] [py stderr]:   File "/g1ext/isaacsim.g1.rclpyprobe/isaacsim/g1/rclpyprobe/__init__.py", line 8, in on_startup
+    import rclpy
+2026-06-08 20:19:34 [10,209ms] [Error] [omni.kit.app._impl] [py stderr]: ModuleNotFoundError: No module named 'rclpy'
+[10.230s] [ext: 4d3a_probe-4.5.0] startup
+[10.249s] app ready

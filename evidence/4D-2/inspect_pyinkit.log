@@ -1,0 +1,20 @@
+=== settings que ejecutan python/script en kit ===
+2:description = "Base Isaac Sim App"
+93:"omni.graph.scriptnode" = {}
+152:renderer.gpuEnumeration.glInterop.enabled = false # Improves startup speed.
+155:rtx.post.dlss.execMode = 0 # Set the DLSS model can be 0 (Performance), 1 (Balanced), 2 (Quality), or 3 (Auto)
+163:isaac.startup.ros_bridge_extension = ""
+165:isaac.startup.ros_bridge_extension = ""
+254:app.viewport.camShowSpeedOnStart = false # Hide camera speed on startup
+261:renderer.startupMessageDisplayed = true # hides the IOMMU popup window
+=== como arranca kit standalone python? buscar ejemplos run_isaac o standalone ===
+/isaac-sim/standalone_examples/replicator/infinigen/infinigen_sdg.py
+/isaac-sim/standalone_examples/replicator/infinigen/infinigen_sdg_utils.py
+/isaac-sim/standalone_examples/replicator/scene_based_sdg/scene_based_sdg.py
+/isaac-sim/standalone_examples/replicator/scene_based_sdg/scene_based_sdg_utils.py
+/isaac-sim/standalone_examples/replicator/object_based_sdg/object_based_sdg_utils.py
+/isaac-sim/standalone_examples/replicator/object_based_sdg/object_based_sdg.py
+/isaac-sim/standalone_examples/replicator/online_generation/usd_convertor.py
+/isaac-sim/standalone_examples/replicator/online_generation/train_shapenet.py
+/isaac-sim/standalone_examples/replicator/online_generation/shapenet_utils.py
+/isaac-sim/standalone_examples/replicator/online_generation/generate_shapenet.py

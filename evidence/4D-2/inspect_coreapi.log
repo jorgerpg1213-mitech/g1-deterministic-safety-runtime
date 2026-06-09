@@ -1,0 +1,61 @@
+=== core.api extension.toml ===
+[core]
+reloadable = true
+order = 0
+
+[package]
+version = "4.2.16"
+category = "Simulation"
+title = "Isaac Sim Core"
+description = "The Core extension provides a set of APIs to control the Simulation State as well as the physics scene. It also provides wrappers for USD objects, physics and visual materials."
+authors = ["NVIDIA"]
+repository = ""
+keywords = ["isaac"]
+changelog = "docs/CHANGELOG.md"
+readme = "docs/README.md"
+preview_image = "data/preview.png"
+icon = "data/icon.png"
+writeTarget.kit = true
+
+[dependencies]
+"isaacsim.core.deprecation_manager" = {}
+"isaacsim.core.prims" = {}
+"isaacsim.core.utils" = {}
+"isaacsim.core.version" = {}
+"isaacsim.storage.native" = {}
+"omni.isaac.core_archive" = {}
+"omni.isaac.ml_archive" = {}
+"omni.kit.material.library" = {optional = true} # OmniGlass
+"omni.kit.stage_templates" = {}
+"omni.kit.usd.layers" = {}
+"omni.physx.stageupdate" = {}
+"omni.physx.tensors" = {}
+"omni.pip.cloud" = {}
+"omni.pip.compute" = {} # scipy
+"omni.usd.schema.semantics" = {}
+"omni.warp.core" = {}
+"isaacsim.core.simulation_manager" = {}
+
+[[python.module]]
+name = "isaacsim.core.api"
+
+[[python.module]]
+name = "isaacsim.core.api.tests"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+recursive = false
+
+[[test]]
+timeout = 900
+dependencies = [
+    "isaacsim.core.cloner",
+    "isaacsim.storage.native",
+    "omni.warp",
+]
+
+stdoutFailPatterns.exclude = [
+    "*Invalid articulation pointer for*", # Per node tests won't have valid bundles
+    '*[Error] [carb] [Plugin: omni.sensors.nv.lidar.ext.plugin] Dependency: [omni::sensors::lidar::IGenericModelOutputIOFactory v0.1] failed to be resolved.*', # feature not included in Windows
+]
+

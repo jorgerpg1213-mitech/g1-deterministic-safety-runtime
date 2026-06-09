@@ -1,0 +1,11 @@
+[core]
+reloadable = true
+order = 0
+[package]
+version = "0.1.0"
+title = "G1 rclpy Kit Probe"
+description = "Probe: import rclpy inside kit minimal, no G1, no bridge"
+[dependencies]
+"isaacsim.core.api" = {}
+[[python.module]]
+name = "isaacsim.g1.rclpyprobe"

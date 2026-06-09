@@ -1,0 +1,7 @@
+=== SUBSCRIBER LISTENING on /joint_states ===
+=== RECEIVED 1st msg: names=37 pos=37 vel=37 ===
+  name[0:3]=['torso_joint', 'left_shoulder_pitch_joint', 'right_shoulder_pitch_joint']
+  pos[0:3]=[-0.0001, 0.0001, 0.6781]
+=== RECEIVED 50 msgs ===
+=== RECEIVED 100 msgs ===
+=== SUB DONE: total received 100 msgs ===

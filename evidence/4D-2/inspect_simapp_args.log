@@ -1,0 +1,111 @@
+        # apply render settings specified in config
+        self._carb_settings.set(
+            "/app/player/useFixedTimeStepping", False
+        )  # Set to False since the loop runner controls stepping
+        self.reset_render_settings()
+
+        self._app.print_and_log("Simulation App Starting")
+
+        self._app.update()
+
+        self.open_usd = self.config.get("open_usd")
+        if self.open_usd is not None:
+            print("Opening usd file at ", self.open_usd, " ...", end="")
+            if open_stage(self.open_usd) is False:
+                print("Could not open", self.open_usd, "creating a new empty stage")
+                create_new_stage()
+            else:
+                print("Done.")
+
+        if self.config["create_new_stage"] is True:
+            create_new_stage()
+
+        # Update the app
+        self._app.update()
+        self._prepare_ui()
+
+        # Increase hang detection timeout
+        omni.client.set_hang_detection_time_ms(10000)
+
+        # Set the window title to something simpler
+        try:
+            from isaacsim.core.version import get_version
+            from omni.kit.window.title import get_main_window_title
+
+            window_title = get_main_window_title()
+            app_version_core, _, _, _, _, _, _, _ = get_version()
+            window_title.set_app_version(app_version_core)
+        except:
+            pass
+
+        self._wait_for_viewport()
+
+        # Notify toolkit is running
+        self._app.print_and_log("Simulation App Startup Complete")
+
+        # Record startup time as time at which app is ready for use
+        ext_manager = omni.kit.app.get_app().get_extension_manager()
+        if ext_manager.is_extension_enabled("isaacsim.benchmark.services"):
+            from isaacsim.benchmark.services import BaseIsaacBenchmark
+
+            benchmark = BaseIsaacBenchmark(
+                benchmark_name="app_startup",
+                workflow_metadata={
+                    "metadata": [
+                        {"name": "mode", "data": "non-async"},
+                    ]
+                },
+            )
+            benchmark.set_phase("startup", start_recording_frametime=False, start_recording_runtime=False)
+            benchmark.store_measurements()
+            benchmark.stop()
+
+    def __del__(self):
+        """Destructor for the class."""
+        if self._exiting is False and sys.meta_path is None:
+            print(
+                "\033[91m"
+                + "ERROR: Python exiting while SimulationApp was still running, Please call close() on the SimulationApp object to exit cleanly"
+                + "\033[0m"
+            )
+
+    ### Private methods
+
+    def _start_app(self) -> None:
+        """Launch the Omniverse application."""
+        exe_path = os.path.abspath(f'{os.environ["CARB_APP_PATH"]}')
+        # input arguments to the application
+        args = [
+            os.path.abspath(__file__),
+            f'{self.config["experience"]}',
+            f"--/app/tokens/exe-path={exe_path}",  # this is needed so dlss lib is found
+            f'--/persistent/app/viewport/displayOptions={self.config["display_options"]}',  # hide extra stuff in viewport
+            # Forces kit to not render until all USD files are loaded
+            f'--/rtx/materialDb/syncLoads={self.config["sync_loads"]}',
+            f'--/rtx/hydra/materialSyncLoads={self.config["sync_loads"]}',
+            f'--/omni.kit.plugin/syncUsdLoads={self.config["sync_loads"]}',
+            f'--/app/renderer/resolution/width={self.config["width"]}',
+            f'--/app/renderer/resolution/height={self.config["height"]}',
+            f'--/app/window/width={self.config["window_width"]}',
+            f'--/app/window/height={self.config["window_height"]}',
+            f'--/renderer/multiGpu/enabled={self.config["multi_gpu"]}',
+            f'--/app/fastShutdown={self.config["fast_shutdown"]}',
+            "--/app/installSignalHandlers=0",
+            "--ext-folder",
+            f'{os.path.abspath(os.environ["ISAAC_PATH"])}/exts',  # adding to json doesn't work
+            "--ext-folder",
+            f'{os.path.abspath(os.environ["ISAAC_PATH"])}/apps',  # so we can reference other kit files
+        ]
+        # Add additional command line arguments
+        extra_args = self.config.get("extra_args", [])
+        if isinstance(extra_args, list):
+            args.extend(self.config.get("extra_args", []))
+        else:
+            print("Ignoring extra_args, extra_args must be of type list")
+
+        if self.config.get("active_gpu") is not None:
+            args.append(f'--/renderer/activeGpu={self.config["active_gpu"]}')
+        if self.config.get("physics_gpu") is not None:
+            args.append(f'--/physics/cudaDevice={self.config["physics_gpu"]}')
+        if self.config.get("max_gpu_count") is not None:
+            args.append(f'--/renderer/multiGpu/maxGpuCount={self.config["max_gpu_count"]}')

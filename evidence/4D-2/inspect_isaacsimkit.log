@@ -1,0 +1,4 @@
+=== isaacsim.kit existe? ===
+ls: cannot access '/isaac-sim/apps/isaacsim.kit': No such file or directory
+=== deps isaacsim.kit ===
+sed: can't read /isaac-sim/apps/isaacsim.kit: No such file or directory

@@ -1,0 +1,37 @@
+=== ejemplo standalone basico, primeras lineas ===
+/isaac-sim/standalone_examples/api/omni.isaac.dynamic_control/franka_articulation.py
+/isaac-sim/standalone_examples/api/omni.kit.app/app_framework.py
+/isaac-sim/standalone_examples/api/isaacsim.robot.wheeled_robots.examples/jetbot_differential_move.py
+/isaac-sim/standalone_examples/api/isaacsim.robot.wheeled_robots.examples/kaya_holonomic_move.py
+/isaac-sim/standalone_examples/api/isaacsim.sensors.physics/effort_sensor.py
+=== como arranca uno ===
+# Copyright (c) 2021-2024, NVIDIA CORPORATION. All rights reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto. Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+#
+
+from isaacsim import SimulationApp
+
+simulation_app = SimulationApp({"headless": True})
+
+from isaacsim.core.api import SimulationContext
+from isaacsim.core.utils.stage import add_reference_to_stage
+from isaacsim.storage.native import get_assets_root_path
+
+assets_root_path = get_assets_root_path()
+asset_path = assets_root_path + "/Isaac/Robots/Franka/franka_alt_fingers.usd"
+
+simulation_context = SimulationContext(stage_units_in_meters=1.0)
+add_reference_to_stage(asset_path, "/Franka")
+# need to initialize physics getting any articulation..etc
+simulation_context.initialize_physics()
+
+
+def step_callback(step_size):
+    print("simulate with step: ", step_size)
+    return
+

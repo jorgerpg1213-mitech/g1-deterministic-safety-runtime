@@ -1,0 +1,109 @@
+===== isaacsim.simulation_app =====
+[core]
+reloadable = false
+order = 0
+
+[package]
+version = "2.4.2"
+category = "Simulation"
+title = "Isaac Sim Kit Helpers"
+description = "This Extension that provides a way to launch a python app"
+authors = ["NVIDIA"]
+repository = ""
+keywords = ["isaac", "kit", "python"]
+changelog = "docs/CHANGELOG.md"
+readme = "docs/README.md"
+icon = "data/icon.png"
+preview_image = "data/preview.png"
+writeTarget.kit = true
+toggleable = false
+
+[dependencies]
+"omni.usd" = {}
+
+[[python.module]]
+name = "isaacsim.simulation_app"
+
+===== isaacsim.app.setup =====
+[package]
+version = "1.3.5"
+category = "Setup"
+title = "Isaac Sim Setup"
+description = "This Extension does the setup of the Isaac Sim App"
+authors = ["NVIDIA"]
+repository = ""
+keywords = ["isaac"]
+changelog = "docs/CHANGELOG.md"
+readme = "docs/README.md"
+icon = "data/omni.isaac.sim.png"
+preview_image = "data/preview.png"
+toggleable = false
+
+[dependencies]
+"omni.usd" = {}
+"omni.ui" = {}
+"omni.client" = {}
+"omni.kit.stage_templates" = {}
+"omni.kit.window.title" = {}
+"isaacsim.core.version" = {}
+"omni.kit.quicklayout" = {}
+"omni.kit.viewport.utility" = {}
+"omni.kit.window.property" = {}
+"omni.kit.menu.common" = {}
+
+[[python.module]]
+name = "isaacsim.app.setup"
+
+[settings]
+isaac.startup.create_new_stage = true # create a new stage on startup
+[settings."filter:platform"."windows-x86_64"]
+isaac.startup.ros_bridge_extension = ""
+[settings."filter:platform"."linux-x86_64"]
+isaac.startup.ros_bridge_extension = ""
+
+[[test]]
+dependencies = [
+   "omni.rtx.settings.core", "omni.pip.cloud"
+]
+
+===== omni.kit.loop-isaac =====
+[package]
+# Semantic Versioning is used: https://semver.org/
+version = "1.2.1"
+category = "Internal"
+authors = ["NVIDIA"]
+title = "Isaac Loop Runner"
+description = "Custom Loop Runner for Isaac Sim"
+repository = ""
+keywords = ["isaac", "loop"]
+changelog = "docs/CHANGELOG.md"
+readme = "docs/README.md"
+icon = "data/icon.png"
+preview_image = "data/preview.png"
+writeTarget.kit = true
+
+[[python.module]]
+name = "omni.kit.loop"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+recursive = false
+
+
+[settings]
+# Don't sync threads to the present thread
+app.runLoopsGlobal.syncToPresent = false
+
+# Frequency limit can be enabled per run loop:
+app.runLoops.main.rateLimitEnabled = true
+app.runLoops.main.rateLimitFrequency = 120
+app.runLoops.main.rateLimitUseBusyLoop = false
+
+app.runLoops.present.rateLimitEnabled = true
+app.runLoops.present.rateLimitFrequency = 60
+app.runLoops.present.rateLimitUseBusyLoop = false
+
+app.runLoops.rendering_0.rateLimitEnabled = true
+app.runLoops.rendering_0.rateLimitFrequency = 120
+app.runLoops.rendering_0.rateLimitUseBusyLoop = false
+

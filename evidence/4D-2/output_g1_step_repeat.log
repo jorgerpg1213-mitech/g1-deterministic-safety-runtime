@@ -1,0 +1,121 @@
+[Info] [carb] Logging to file: /root/.nvidia-omniverse/logs/Kit/Isaac-Sim Minimal Loop Python/4.5/kit_20260608_030746.log
+[0.834s] [ext: omni.kit.async_engine-0.0.1] startup
+[1.761s] [ext: omni.client.lib-1.0.0] startup
+[1.816s] [ext: omni.stats-1.0.1] startup
+[1.818s] [ext: omni.client-1.2.2] startup
+[1.827s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[1.842s] [ext: omni.assets.plugins-0.0.0] startup
+[1.845s] [ext: omni.gpu_foundation-0.0.0] startup
+[1.856s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.861s] [ext: omni.kit.pip_archive-0.0.0] startup
+[1.862s] [ext: omni.pip.compute-1.4.5] startup
+[1.863s] [ext: omni.pip.cloud-1.1.7] startup
+[1.886s] [ext: omni.isaac.core_archive-2.3.3] startup
+[1.887s] [ext: omni.usd.config-1.0.5] startup
+2026-06-08 03:07:48 [1,877ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+[1.897s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.898s] [ext: omni.usd.libs-1.0.1] startup
+[2.014s] [ext: omni.isaac.ml_archive-2.1.2] startup
+[2.015s] [ext: omni.usd.schema.physx-106.5.7] startup
+[2.277s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.282s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.288s] [ext: carb.audio-0.1.0] startup
+[2.308s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.312s] [ext: omni.timeline-1.0.11] startup
+[2.316s] [ext: omni.kit.commands-1.4.9] startup
+[2.360s] [ext: omni.kvdb-106.5.7] startup
+[2.363s] [ext: omni.kit.audiodeviceenum-1.0.1] startup
+[2.367s] [ext: usdrt.scenegraph-7.5.1] startup
+[2.440s] [ext: omni.convexdecomposition-106.5.7] startup
+[2.447s] [ext: omni.localcache-106.5.7] startup
+[2.450s] [ext: omni.usd_resolver-1.0.0] startup
+[2.457s] [ext: omni.physx.foundation-106.5.7] startup
+[2.461s] [ext: omni.graph.exec-0.9.4] startup
+[2.461s] [ext: omni.usdphysics-106.5.7] startup
+[2.465s] [ext: omni.usd.core-1.4.2] startup
+[2.468s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.471s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.475s] [ext: omni.physx.cooking-106.5.7] startup
+[2.487s] [ext: omni.metrics.core-0.0.1] startup
+[2.487s] [ext: omni.blobkey-1.1.2] startup
+[2.488s] [ext: omni.datastore-0.0.0] startup
+[2.497s] [ext: omni.ujitso.default-1.0.0] startup
+[2.501s] [ext: omni.hsscclient-1.1.1] startup
+2026-06-08 03:07:48 [2,483ms] [Warning] [omni.datastore] OmniHub is inaccessible
+2026-06-08 03:07:48 [2,523ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[2.550s] [ext: omni.usd-1.12.4] startup
+[2.738s] [ext: omni.physx-106.5.7] startup
+[2.774s] [ext: omni.kit.numpy.common-0.1.2] startup
+[3.244s] [ext: omni.kit.usd.layers-2.2.0] startup
+[3.291s] [ext: omni.physics.tensors-106.5.7] startup
+[3.326s] [ext: omni.physx.stageupdate-106.5.7] startup
+[3.334s] [ext: isaacsim.core.deprecation_manager-0.2.2] startup
+[3.339s] [ext: omni.isaac.dynamic_control-1.3.15] startup
+2026-06-08 03:07:49 [3,330ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.351s] [ext: omni.physx.tensors-106.5.7] startup
+[4.981s] [ext: isaacsim.core.version-2.0.2] startup
+[4.984s] [ext: omni.warp.core-1.5.0] startup
+[5.458s] [ext: isaacsim.storage.native-1.0.6] startup
+[5.471s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[5.475s] [ext: isaacsim.core.utils-2.2.8] startup
+[5.480s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[5.505s] [ext: isaacsim.core.simulation_manager-0.3.3] startup
+[10.041s] [ext: omni.kit.stage_templates-1.2.6] startup
+[10.051s] [ext: isaacsim.core.prims-0.3.7] startup
+[10.246s] [ext: isaacsim.core.api-4.2.16] startup
+[10.341s] [ext: omni.kit.loop-isaac-1.2.1] startup
+[10.344s] [ext: isaacsim.g1.runtime-0.1.0] startup
+=== STARTUP EXTENSION OK ===
+2026-06-08 03:07:56 [10,326ms] [Warning] [isaacsim.g1.runtime] === STARTUP EXTENSION OK ===
+[10.346s] [ext: isaacsim.min.loop.g1ext.test-4.5.0] startup
+[10.365s] app ready
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.159.03    | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | Tesla T4                         | Yes: 0 |     | 15606   MB | 10de      | 0          |
+|     |                                  |        |     |            | 1eb8      | ddfd322a.. |
+|     |                                  |        |     |            | 0         |            |
+|=============================================================================================|
+| OS: 22.04.5 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.5, Kernel: 5.15.0-181-generic
+| Processor: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz
+| Cores: 2 | Logical Cores: 4
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 32092 | Free Memory: 30291
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+2026-06-08 03:07:57 [11,234ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+2026-06-08 03:07:58 [12,108ms] [Warning] [omni.physx.plugin] Detected an articulation at /World/G1 with more than 4 velocity iterations being added to a TGS scene.The related behavior changed recently, please consult the changelog. This warning will only print once.
+=== G1 LOADED ===
+num_dof: 37
+2026-06-08 03:07:58 [12,425ms] [Warning] [isaacsim.g1.runtime] === G1 LOADED === num_dof: 37
+--- STEP 0 ---
+  world_position: [ 7.4364943e-05 -5.2800868e-05  1.5084687e-01]
+  world_orientation(WXYZ): [9.9999988e-01 3.5862412e-04 3.1685256e-04 4.5964975e-05]
+  joint_pos[:3]: [ 1.4383503e-04 -9.6327596e-05  1.9069965e-05]
+  joint_vel[:3]: [-0.01161985 -0.04441528  0.12859085]
+2026-06-08 03:07:58 [12,433ms] [Warning] [isaacsim.g1.runtime] STEP 0 pos=[ 7.4364943e-05 -5.2800868e-05  1.5084687e-01] quat=[9.9999988e-01 3.5862412e-04 3.1685256e-04 4.5964975e-05]
+--- STEP 10 ---
+  world_position: [0.05809341 0.03482911 0.6317103 ]
+  world_orientation(WXYZ): [ 0.9971255  -0.0159901   0.02459336 -0.06985831]
+  joint_pos[:3]: [ 8.2515762e-06 -1.8940226e-04 -5.7204568e-05]
+  joint_vel[:3]: [1.7064835  0.05193532 0.35292226]
+2026-06-08 03:07:58 [12,469ms] [Warning] [isaacsim.g1.runtime] STEP 10 pos=[0.05809341 0.03482911 0.6317103 ] quat=[ 0.9971255  -0.0159901   0.02459336 -0.06985831]
+--- STEP 30 ---
+  world_position: [0.36314195 0.065878   0.8717121 ]
+  world_orientation(WXYZ): [0.9401998  0.08710478 0.32694873 0.03926335]
+  joint_pos[:3]: [-2.1857733e-07  4.5143445e-08 -3.1329325e-08]
+  joint_vel[:3]: [-8.5729989e-05  6.1961429e-05 -1.2632823e-05]
+2026-06-08 03:07:58 [12,527ms] [Warning] [isaacsim.g1.runtime] STEP 30 pos=[0.36314195 0.065878   0.8717121 ] quat=[0.9401998  0.08710478 0.32694873 0.03926335]
+--- STEP 60 ---
+  world_position: [ 0.81788075 -0.04528854  0.2092318 ]
+  world_orientation(WXYZ): [0.72170717 0.2955109  0.6259022  0.00764688]
+  joint_pos[:3]: [-3.9370945e-05  1.5434843e-01  5.5667698e-01]
+  joint_vel[:3]: [ 0.12125915 -4.298464    3.6709979 ]
+2026-06-08 03:07:58 [12,617ms] [Warning] [isaacsim.g1.runtime] STEP 60 pos=[ 0.81788075 -0.04528854  0.2092318 ] quat=[0.72170717 0.2955109  0.6259022  0.00764688]
+=== PHYS STEPPING DONE ===
+2026-06-08 03:07:58 [12,617ms] [Warning] [isaacsim.g1.runtime] === PHYS STEPPING DONE ===

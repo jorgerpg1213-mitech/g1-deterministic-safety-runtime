@@ -1,0 +1,6 @@
+=== isaacsim.simulation_app ===
+/isaac-sim/exts/isaacsim.simulation_app/config/extension.toml
+=== omni.kit.loop-isaac ===
+/isaac-sim/exts/omni.kit.loop-isaac/config/extension.toml
+=== isaacsim.app.setup ===
+/isaac-sim/exts/isaacsim.app.setup/config/extension.toml

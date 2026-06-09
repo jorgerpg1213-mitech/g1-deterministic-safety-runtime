@@ -1,0 +1,10 @@
+[core]
+reloadable = true
+[package]
+version = "0.1.0"
+title = "G1 IMU + Contact read"
+[dependencies]
+"isaacsim.core.api" = {}
+"isaacsim.sensors.physics" = {}
+[[python.module]]
+name = "isaacsim.g1.sensorread"
