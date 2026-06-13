@@ -12,7 +12,7 @@
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-4.5.0-76B900?logo=nvidia)
 ![Platform](https://img.shields.io/badge/Platform-x86__64-lightgrey)
-![Status](https://img.shields.io/badge/Etapa-4D--3%20In%20Progress-green)
+![Status](https://img.shields.io/badge/Etapa-4D--3%20Closed-brightgreen)
 ![Tests](https://img.shields.io/badge/Tests-86%20passing-brightgreen)
 
 </div>
@@ -73,16 +73,16 @@ This README is the **master index**. Full evidence and reproducible artifacts ar
 | **Etapa 4C** | Physical & Control Characterization (4.2.0) — 37 DOF, KP/KD, toppling | ✅ Closed | 2026-06-01 |
 | **Etapa 4D-1** | Disk / Baseline Preservation Audit — image swap 4.2→4.5, 4C backup | ✅ Closed | 2026-06-08 |
 | **Etapa 4D-2** | Isaac Sim 4.5 Feasibility on T4 — light path, G1 load + stepping (600 steps) | ✅ Closed | 2026-06-08 |
-| **Etapa 4D-3** | ROS2 Feasibility + Sensor Observability — mini-bridge, DDS, IMU/contacts | 🔄 In Progress | — |
-| **Etapa 4E** | Standing Policy Plug-and-Play + Runtime Validation | 🔲 Proposed | — |
+| **Etapa 4D-3** | ROS2 Feasibility + Sensor Observability + Observer→Orchestrator closure | ✅ Closed | 2026-06-12 |
+| **Etapa 4E** | Standing Policy Plug-and-Play + Runtime Validation | 🔄 Next | — |
 | **Etapa 5A** | Isaac Lab Bring-up / G1 Validation | 🔒 Blocked | — |
 | **Etapa 5** | VLA / GR00T / LeRobot Integration | ⏳ Future | — |
 | **Etapa 6** | Real Embodied Behaviors | ⏳ Future | — |
 | **Etapa 7** | Refinement & Autonomy | ⏳ Future | — |
 
-### Current Frontier (4D-3)
+### Latest Closed Frontier (4D-3) / Next Frontier (4E)
 
-The G1 is now **fully observable over real ROS2** (joints + base pose + base velocity + IMU + foot contacts) toward external processes, cross-container, without the heavy RTX stack, on the Tesla T4. Live streaming was validated with 1:1 temporal traceability. This is **observation only** — no control commands are issued to the robot.
+Stage 4D-3 is now closed. The G1 is observable over real ROS2 (joints + base pose + base velocity + IMU + typed foot contacts), the cross-consistency observer consumes real telemetry, emits a real `SafetyEvent`, and the `safety_orchestrator_g1` receives and acknowledges it with `event_type=SCHEDULED`. This is still **observation only** — no control commands are issued to the robot.
 
 | Microphase | Description | Status |
 |------------|-------------|--------|
@@ -92,9 +92,9 @@ The G1 is now **fully observable over real ROS2** (joints + base pose + base vel
 | 4D-3B3 | Minimal state — joints + base pose + base velocity (3 topics) | ✅ Closed |
 | 4D-3B4 | Probe physical sensors (load without crash — "RTX tolerated") | ✅ Closed |
 | 4D-3B4A | IMU + 2 ContactSensors read during fall (+ live stream) | ✅ Closed |
-| 4D-3B4B | Publish IMU + contacts with dedicated ROS2 types | 🔲 Pending |
-| 4D-3C | Deterministic Runtime in OBSERVER mode (read + evaluate, no control) | 🔲 Pending |
-| 4D-3D | First runtime → G1 closure (events/safety, no physical control) | 🔲 Pending |
+| 4D-3B4B | Publish IMU + contacts with dedicated ROS2 types | ✅ Closed |
+| 4D-3C | Deterministic Runtime in OBSERVER mode — real telemetry consumed, mock disabled | ✅ Closed |
+| 4D-3D | Observer→orchestrator closure — real SafetyEvent ACKed by orchestrator | ✅ Closed |
 
 ---
 
@@ -135,7 +135,7 @@ The G1 is now **fully observable over real ROS2** (joints + base pose + base vel
 │  │                             (subprocess isolation · retry       │ │
 │  │                              policy · escalation)               │ │
 │  │                                        /recovery_events         │ │
-│  │              [4D-3C — observer connection pending]              │ │
+│  │              [4D-3D — observer→orchestrator ACK validated]      │ │
 │  └─────────────────────────────────────────────────────────────────┘ │
 │                                                                      │
 │  ┌─────────────────────────────────────────────────────────────────┐ │
@@ -421,7 +421,7 @@ A **custom, reproducible light path** was built: launch the `kit` binary directl
 
 ---
 
-## Stage 4D-3 — ROS2 Feasibility + Sensor Observability (In Progress)
+## Stage 4D-3 — ROS2 Feasibility + Runtime Observer Closure (Closed)
 
 **Reference:** [`docs/informe_etapa_4D3_2026-06-08.md`](docs/informe_etapa_4D3_2026-06-08.md)
 
@@ -439,6 +439,9 @@ The G1 is **fully observable over real ROS2** (joints + base pose + base velocit
 | 4D-3B3 | Minimal state — `/joint_states` (JointState) + `/g1/base_pose` (PoseStamped) + `/g1/base_velocity` (TwistStamped). Base velocity via `get_linear_velocities()` + `get_angular_velocities()` **separated** to avoid order ambiguity |
 | 4D-3B4 | Physical sensors probe — `isaacsim.sensors.physics` (IMUSensor + ContactSensor) loads without crash. Pulls an RTX plugin (`rtx.neuraylib`) that warns about ECC but does **not** crash → "RTX tolerated" |
 | 4D-3B4A | IMU (torso) + 2 ContactSensors (feet) read during the full fall (300 steps), physically coherent. Live stream `/g1/imu` + `/g1/feet` validated frame-by-frame |
+| 4D-3B4B | IMU + foot contacts published with dedicated ROS2 types (`sensor_msgs/Imu`, `g1_msgs/FootContact`) and externally received cross-container |
+| 4D-3C | `cross_consistency_observer` connected to real G1 telemetry; first real coherence rule implemented: fallen/no-support detection with freshness gating and mock disabled |
+| 4D-3D | End-to-end runtime closure validated: observer emitted real `CONDITION_DETECTED`; orchestrator received it and published ACK `SCHEDULED`; no improper state escalation |
 
 ### Confirmed ROS2 Path (custom mini-bridge)
 
@@ -458,7 +461,8 @@ Reproducible code: [`sim_runtime/4D-3A`](sim_runtime/4D-3A) … [`sim_runtime/4D
 |----|------|----------|--------|
 | DT-4D-006 | `get_contact_sensor_raw_data` deprecated in 4.5 (works) | Low | New — migrate before production |
 | DT-4D-007 | `estado()` label in `sub_live.py` miscalibrated (data correct, label lies) | Low | New — 3-line fix |
-| DT-4D-008 | Contacts published as raw `Float32MultiArray`, not a dedicated ROS2 type | Medium | New — formalize in 4D-3B4B |
+| DT-4D-008 | Contacts initially published as raw `Float32MultiArray` | Medium | Resolved in 4D-3B4B with `g1_msgs/FootContact` |
+| DT-4D-009 | Orchestrator ACK is observable on `/safety_events`, not printed in C terminal logs | Low | Documented — use topic monitor for evidence |
 
 ### Strategic Reorientation (clarified during 4D-3)
 
@@ -468,9 +472,9 @@ The operator will **not** train locomotion (no local RL). A **plug-and-play stan
 
 ---
 
-## Stage 4E — Standing Policy Plug-and-Play + Runtime Validation (Proposed)
+## Stage 4E — Standing Policy Plug-and-Play + Runtime Validation (Next)
 
-**Status:** 🔲 Proposed (pending PM decision)
+**Status:** 🔄 Next — opened after 4D-3D closure
 
 Investigate/verify a plug-and-play standing policy for the G1 that keeps it upright (the "healthy" baseline), then inject controlled perturbations to validate the runtime's state detection (healthy → "OK"; perturbed/fallen → detected). This is the prerequisite for full runtime validation and is independent of training. See thesis v12 §4E.
 
@@ -713,7 +717,6 @@ The following claims are **NOT valid** for this repository in its current state:
 | Recovery actions work on hardware | ❌ | Subprocess isolation validated x86 only |
 | Isaac Lab runs on T4 | ❌ | Undemonstrated — DT-4D-003 |
 | Zero RTX in sim | ❌ | Sensors pull a tolerated RTX plugin — "RTX tolerated", not zero |
-| Contacts published with dedicated ROS2 type | ❌ | Raw `Float32MultiArray` — DT-4D-008, pending 4D-3B4B |
 
 ---
 
@@ -756,6 +759,6 @@ The AGV baseline remains frozen as an audited reference. The G1 pipeline inherit
 
 *G1 ROS2 Pipeline — github.com/jorgerpg1213-mitech/g1-ros2-pipeline*
 
-*Etapa 1 ✅ · 2 ✅ · 3A ✅ · 3B ✅ · 3C ✅ · 4A ✅ · 4B ✅ · 4C ✅ · 4D-1 ✅ · 4D-2 ✅ · 4D-3 🔄 · 4E 🔲 · 5A 🔒*
+*Etapa 1 ✅ · 2 ✅ · 3A ✅ · 3B ✅ · 3C ✅ · 4A ✅ · 4B ✅ · 4C ✅ · 4D-1 ✅ · 4D-2 ✅ · 4D-3 ✅ · 4E 🔄 · 5A 🔒*
 
-*86 tests · 0 failures · Isaac Sim 4.5.0 light path validated on T4 · G1 fully observable over ROS2 (joints + pose + velocity + IMU + contacts) · Runtime Framework ready for observer connection (4D-3C)*
+*86 tests · 0 failures · Isaac Sim 4.5.0 light path validated on T4 · G1 observable over ROS2 · Observer→orchestrator SafetyEvent ACK validated (4D-3D) · Next: 4E healthy standing baseline with plug-and-play policy*
