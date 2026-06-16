@@ -77,7 +77,6 @@ jobs:
               colcon test \
                 --packages-select \
                 g1_msgs \
-                g1_description \
                 cross_consistency_observer \
                 watchdog_g1 \
                 safety_orchestrator_g1 \

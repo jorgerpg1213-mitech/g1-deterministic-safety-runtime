@@ -189,3 +189,15 @@ Verificación de build = colcon build + colcon test del core, en verde.
 - README.md:615 — árbol etiqueta el archivo "CANONICAL G1 ENTRYPOINT".
 
 **Estado:** registrado. Ejecución de archivado diferida a Fase 3 (cuarentena agv_bringup completo). Corrección README en Fase 4.
+
+---
+
+## 7. Hallazgo H14 (detectado al verificar CI en Fase 2)
+
+| # | Hallazgo | Evidencia | Gravedad |
+|---|---|---|---|
+| H14 | `g1_description` launch test falla con `No module named 'tf2_msgs'` en la imagen runtime `g1-ros-phase-b:humble`. La dependencia no está en esa imagen; sí se resuelve vía `rosdep install` en `ci-audit` (imagen `ros:humble-ros-base`). | colcon test g1_description | Media |
+
+**Resolución aplicada:** `g1_description` (TF tree, no core de seguridad) se retira de `ci-build` (rápido, por push, imagen runtime). Su validación de launch queda en `ci-audit` (completo, con rosdep). `ci-build` ahora cubre los 6 paquetes del core de seguridad: g1_msgs, cross_consistency_observer, watchdog_g1, safety_orchestrator_g1, recovery_g1, test_g1_safety_layer — todos PASS verificados localmente.
+
+**Estado:** resuelto en Fase 2.
