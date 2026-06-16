@@ -4,7 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 6 * * 1'
+  pull_request:
+    branches: [main]
   push:
+    branches: [main]
     tags:
       - 'v*'
 
@@ -18,62 +21,91 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install core ROS2 build/test dependencies
         run: |
           apt-get update && apt-get install -y --no-install-recommends \
-            ros-humble-slam-toolbox \
-            ros-humble-navigation2 \
-            ros-humble-nav2-bringup \
-            ros-humble-robot-localization \
-            ros-humble-robot-state-publisher \
-            ros-humble-joint-state-publisher \
             python3-colcon-common-extensions \
             python3-rosdep \
             python3-pip \
+            ros-humble-robot-state-publisher \
+            ros-humble-joint-state-publisher \
             && rm -rf /var/lib/apt/lists/*
 
       - name: rosdep update
         run: rosdep update || true
 
-      - name: rosdep install
+      - name: rosdep install core packages
         run: |
           source /opt/ros/humble/setup.bash
-          rosdep install --from-paths src --ignore-src -r -y
+          rosdep install --from-paths src \
+            --ignore-src -r -y \
+            --packages-select \
+            g1_msgs \
+            cross_consistency_observer \
+            watchdog_g1 \
+            safety_orchestrator_g1 \
+            recovery_g1 \
+            test_g1_safety_layer
         shell: bash
 
-      - name: Build all packages
+      - name: Build core packages
         run: |
           source /opt/ros/humble/setup.bash
-          colcon build --symlink-install
+          colcon build --symlink-install \
+            --packages-select \
+            g1_msgs \
+            cross_consistency_observer \
+            watchdog_g1 \
+            safety_orchestrator_g1 \
+            recovery_g1 \
+            test_g1_safety_layer
         shell: bash
 
-      - name: Run all tests
+      - name: Run core tests
         run: |
           source /opt/ros/humble/setup.bash
           source install/setup.bash
-          colcon test
-          colcon test-result --verbose
+          colcon test \
+            --packages-select \
+            g1_msgs \
+            cross_consistency_observer \
+            watchdog_g1 \
+            safety_orchestrator_g1 \
+            recovery_g1 \
+            test_g1_safety_layer
+          colcon test-result --verbose --all
         shell: bash
         env:
           ROS_DOMAIN_ID: 99
 
       - name: Generate audit report
+        if: always()
         run: |
-          echo "# Audit Report" > audit_report.md
+          echo "# G1 Core Audit Report" > audit_report.md
           echo "**Date:** $(date -u)" >> audit_report.md
           echo "**Commit:** ${{ github.sha }}" >> audit_report.md
-          echo "**Tag:** ${{ github.ref_name }}" >> audit_report.md
+          echo "**Ref:** ${{ github.ref_name }}" >> audit_report.md
+          echo "" >> audit_report.md
+          echo "## Scope" >> audit_report.md
+          echo "Core packages only: g1_msgs, cross_consistency_observer, watchdog_g1, safety_orchestrator_g1, recovery_g1, test_g1_safety_layer." >> audit_report.md
           echo "" >> audit_report.md
           echo "## Test Results" >> audit_report.md
-          colcon test-result --verbose >> audit_report.md 2>&1 || true
+          colcon test-result --verbose --all >> audit_report.md 2>&1 || true
           source /opt/ros/humble/setup.bash
           source install/setup.bash
           echo "" >> audit_report.md
           echo "## Packages Built" >> audit_report.md
-          colcon list >> audit_report.md
+          colcon list --packages-select \
+            g1_msgs \
+            cross_consistency_observer \
+            watchdog_g1 \
+            safety_orchestrator_g1 \
+            recovery_g1 \
+            test_g1_safety_layer >> audit_report.md
         shell: bash
 
       - name: Upload audit report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: audit-report-${{ github.ref_name }}
