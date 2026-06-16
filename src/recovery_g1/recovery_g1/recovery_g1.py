@@ -232,6 +232,18 @@ class RecoveryG1(Node):
             self._recovery_active = True
 
         try:
+            # 4F-P5: log de latencia t1→t2
+            recv_time = self.get_clock().now()
+            event_stamp = getattr(msg, 'timestamp', None)
+            if event_stamp is not None:
+                t1_ns = event_stamp.sec * 1_000_000_000 + event_stamp.nanosec
+                t2_ns = recv_time.nanoseconds
+                latency_ms = (t2_ns - t1_ns) / 1_000_000
+                self.get_logger().info(
+                    f'[4F-P5] LATENCY t1→t2 source={source} target={target} '
+                    f'latency_ms={latency_ms:.3f} '
+                    f't1_ns={t1_ns} t2_ns={t2_ns}'
+                )
             self._dispatch_recovery(event_type, target, source)
         finally:
             with self._recovery_lock:
