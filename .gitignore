@@ -7,3 +7,6 @@ install/
 log/
 agv_share/
 g1_share/
+
+# Local runtime/evidence scratch outputs
+runs/
