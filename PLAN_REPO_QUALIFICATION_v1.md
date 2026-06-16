@@ -171,3 +171,21 @@ Verificación de build = colcon build + colcon test del core, en verde.
 
 *PLAN_REPO_QUALIFICATION_v1 — G1 ROS2 Pipeline*
 *Generado en VM: 2026-06-16 — Estado: PLAN, pendiente aprobación*
+
+---
+
+## 6. Hallazgo H13 (detectado en auditoría de Fase 1)
+
+| # | Hallazgo | Evidencia | Gravedad |
+|---|---|---|---|
+| H13 | `system_g1.launch.py` (marcado "CANONICAL G1 ENTRYPOINT" en README) NO lanza el core de seguridad real (observer/watchdog_g1/orchestrator/recovery_g1). Lanza stack AGV legacy: slam_toolbox, ekf_node, safety_policy_node + scripts agv_watchdog_node.py / agv_recovery_manager.py. | cat system_g1.launch.py | ROJA |
+
+**Implicación:** el arranque validado en 4D/4F NO es este launch — son las 4 terminales manuales del bootstrap v15 (Isaac + observer + watchdog + recovery).
+
+**Decisión PM (aprobada):** Opción 1 — archivar el launch AGV como legacy; construir `g1_bringup` que lance el core real DESPUÉS del MIT, con tiempo de probarlo. No se reescribe launch sin probar antes del MIT.
+
+**Referencias a corregir (en Fase 4, README):**
+- README.md:523 — Quick Start invoca `ros2 launch agv_bringup system_g1.launch.py` (arranque falso).
+- README.md:615 — árbol etiqueta el archivo "CANONICAL G1 ENTRYPOINT".
+
+**Estado:** registrado. Ejecución de archivado diferida a Fase 3 (cuarentena agv_bringup completo). Corrección README en Fase 4.
