@@ -341,12 +341,12 @@ class CrossConsistencyObserver(Node):
         both_lost = (not left['in_contact']) and (not right['in_contact'])
         one_lost  = (not left['in_contact']) ^ (not right['in_contact'])
 
-        if abs_w >= FALLEN_W_WARN and not one_lost and not both_lost:
-            severity = 'INFO'
+        if abs_w < FALLEN_W_CRITICAL or both_lost:
+            severity = 'CRITICAL'  # inclinacion fuerte O ambos pies perdidos
         elif (FALLEN_W_CRITICAL <= abs_w < FALLEN_W_WARN) or one_lost:
-            severity = 'WARN'
+            severity = 'WARN'      # inclinacion moderada O un pie perdido
         else:
-            severity = 'CRITICAL'  # abs_w < FALLEN_W_CRITICAL OR both_lost
+            severity = 'INFO'      # abs_w >= FALLEN_W_WARN y ambos pies en contacto
 
         if severity == 'CRITICAL':
             self._fallen_consecutive += 1
