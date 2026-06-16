@@ -76,8 +76,10 @@ MOCK_EVENT_INTERVAL_S = 15.0      # Solo skeleton — mock event controlado
 SNAPSHOT_LOG_HZ = 1.0             # 4D-3C2a — log de input readiness (solo lectura)
 # 4D-3C2b - umbrales regla fallen/no-support (pragmaticos, declarados)
 FRESH_MAX_AGE_S = 0.5          # frescura obligatoria (ages vivos 0.02-0.11s)
-FALLEN_W_MAX = 0.85            # umbral PRAGMATICO no-vertical sobre abs(w) (caida w~0.672); NO detector general (DT-4D-016)
-FALLEN_CONSECUTIVE_N = 3       # muestras frescas consecutivas (SNAPSHOT_LOG_HZ=1.0 -> ~3s)
+# 4F-P1: umbrales con severidad (pragmaticos, calibrables — DT-4D-016)
+FALLEN_W_CRITICAL = 0.75       # CRITICAL: inclinacion fuerte sostenida
+FALLEN_W_WARN     = 0.85       # WARN: inclinacion moderada
+FALLEN_CONSECUTIVE_N = 3       # muestras frescas consecutivas (~3s a 1Hz)
 HARDWARE_ID = 'g1_ros2_pipeline'
 
 
@@ -320,8 +322,12 @@ class CrossConsistencyObserver(Node):
     # -----------------------------------------------------------------------
 
     def _evaluate_fallen_rule(self, ori, imu_age, left, left_age, right, right_age):
-        """IMU no vertical + sin contacto L/R por N muestras FRESCAS -> SafetyEvent real.
-        Freshness obligatorio; edge-triggered (1 evento por episodio). abs(w) por signo de quaternion."""
+        """4F-P1: regla con severidad INFO/WARN/CRITICAL.
+        INFO  = abs_w>=0.85 + ambos pies en contacto.
+        WARN  = inclinacion moderada (0.75<=abs_w<0.85) O un pie perdido.
+        CRITICAL = inclinacion fuerte (abs_w<0.75) O ambos pies perdidos.
+        CRITICAL dispara aunque un pie siga en contacto (contacto residual != soporte sano).
+        Freshness obligatorio. Umbrales pragmaticos calibrables (DT-4D-016)."""
         fresh = (
             ori is not None and imu_age is not None and imu_age <= FRESH_MAX_AGE_S
             and left is not None and left_age is not None and left_age <= FRESH_MAX_AGE_S
@@ -332,18 +338,26 @@ class CrossConsistencyObserver(Node):
             return
         w_raw = ori[0]
         abs_w = abs(w_raw)
-        not_vertical = abs_w < FALLEN_W_MAX
-        no_support = (not left['in_contact']) and (not right['in_contact'])
-        if not_vertical and no_support:
+        both_lost = (not left['in_contact']) and (not right['in_contact'])
+        one_lost  = (not left['in_contact']) ^ (not right['in_contact'])
+
+        if abs_w >= FALLEN_W_WARN and not one_lost and not both_lost:
+            severity = 'INFO'
+        elif (FALLEN_W_CRITICAL <= abs_w < FALLEN_W_WARN) or one_lost:
+            severity = 'WARN'
+        else:
+            severity = 'CRITICAL'  # abs_w < FALLEN_W_CRITICAL OR both_lost
+
+        if severity == 'CRITICAL':
             self._fallen_consecutive += 1
             if self._fallen_consecutive >= FALLEN_CONSECUTIVE_N and not self._fallen_latched:
-                self._publish_fallen_safety_event(w_raw, abs_w, left, right)
+                self._publish_fallen_safety_event(w_raw, abs_w, left, right, severity)
                 self._fallen_latched = True
         else:
             self._fallen_consecutive = 0
             self._fallen_latched = False
 
-    def _publish_fallen_safety_event(self, w_raw, abs_w, left, right):
+    def _publish_fallen_safety_event(self, w_raw, abs_w, left, right, severity='CRITICAL'):
         """SafetyEvent REAL 3C2b (SECONDARY, no escala PRIMARY)."""
         pair_key = 'imu_contact_support'
         now = self.get_clock().now()
@@ -365,9 +379,12 @@ class CrossConsistencyObserver(Node):
         msg.execution_confidence = 'BEST_EFFORT'
         msg.timestamp = now.to_msg()
         msg.notes = (
-            f'3C2b RULE fallen/no-support: IMU no vertical (abs_w={abs_w:.3f} < {FALLEN_W_MAX}, '
-            f'w_raw={w_raw:.3f}) sin contacto L/R por {FALLEN_CONSECUTIVE_N} muestras frescas. '
-            f'Umbral pragmatico vs caida conocida; NO detector general.'
+            f'rule_id=4F-P1 severity={severity} abs_w={abs_w:.3f} '
+            f'(CRITICAL<{FALLEN_W_CRITICAL} WARN<{FALLEN_W_WARN}) w_raw={w_raw:.3f} '
+            f'L={left["in_contact"]} R={right["in_contact"]} '
+            f'{FALLEN_CONSECUTIVE_N} muestras frescas. '
+            f'CRITICAL puede ser caida/salto/teleport/perdida total soporte. '
+            f'Umbral pragmatico calibrable (DT-4D-016).'
         )
         self._pub_safety_events.publish(msg)
         self.get_logger().warn(
