@@ -77,7 +77,7 @@ SNAPSHOT_LOG_HZ = 1.0             # 4D-3C2a — log de input readiness (solo lec
 # 4D-3C2b - umbrales regla fallen/no-support (pragmaticos, declarados)
 FRESH_MAX_AGE_S = 0.5          # frescura obligatoria (ages vivos 0.02-0.11s)
 # 4F-P1: umbrales con severidad (pragmaticos, calibrables — DT-4D-016)
-FALLEN_W_CRITICAL = 0.75       # CRITICAL: inclinacion fuerte sostenida
+FALLEN_W_CRITICAL = 0.80       # CRITICAL: inclinacion fuerte sostenida
 FALLEN_W_WARN     = 0.85       # WARN: inclinacion moderada
 FALLEN_CONSECUTIVE_N = 3       # muestras frescas consecutivas (~3s a 1Hz)
 HARDWARE_ID = 'g1_ros2_pipeline'
