@@ -42,6 +42,7 @@ FREEZE_N             = 5
 MIN_RATE_HZ          = 3.0
 RATE_WINDOW_S        = 2.0
 RATE_WARMUP_N        = 5
+STARTUP_GRACE_S      = 15.0   # gracia al arrancar antes de evaluar STALE
 WATCHDOG_HZ          = 2.0
 WATCHDOG_HEARTBEAT_HZ= 1.0
 HARDWARE_ID          = 'g1_ros2_pipeline'
@@ -106,6 +107,7 @@ class WatchdogG1(Node):
         self.create_subscription(FootContact,'/g1/contact/right',self._cb_cr,QOS_SUB)
         self.create_subscription(JointState,'/joint_states',self._cb_js,QOS_SUB)
         self.create_subscription(PoseStamped,'/g1/base_pose',self._cb_pose,QOS_SUB)
+        self._start_time = time.time()
         self.create_timer(1.0/WATCHDOG_HZ,self._check)
         self.create_timer(1.0/WATCHDOG_HEARTBEAT_HZ,self._heartbeat)
         self.get_logger().info('4F-P2 watchdog_g1 iniciado. STALE>{}s FREEZE>{} RATE<{}Hz warmup={}msgs (DT-4F-001).'.format(STALE_TIMEOUT_S,FREEZE_N,MIN_RATE_HZ,RATE_WARMUP_N))
@@ -146,6 +148,8 @@ class WatchdogG1(Node):
 
     def _check(self):
         wall=time.time()
+        if wall - self._start_time < STARTUP_GRACE_S:
+            return
         for topic,m in self._monitors.items():
             if m.is_stale(wall):
                 dur=m.stale_duration(wall); age=m.age(wall)
