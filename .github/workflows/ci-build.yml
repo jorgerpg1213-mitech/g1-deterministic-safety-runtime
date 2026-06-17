@@ -37,9 +37,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build pipeline-base
+        timeout-minutes: 25
         run: |
           set -eo pipefail
 
+          for i in 1 2 3; do
+            timeout 300 docker pull ros:humble-ros-base && break
+            echo "Pull intento $i fallo, reintentando..."
+            sleep 15
+          done
           docker build \
             -f docker/Dockerfile.base \
             -t pipeline-base:ci \
