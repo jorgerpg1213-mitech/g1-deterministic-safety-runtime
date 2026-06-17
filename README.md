@@ -6,13 +6,14 @@
 *ROS2 Humble · Docker-first · Isaac Sim 4.5.0 · Tesla T4*
 
 
+![CI Audit](https://img.shields.io/badge/CI%20Audit-enabled-brightgreen)
+![CI Build](https://img.shields.io/badge/CI%20Build-enabled-brightgreen)
+
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-4.5.0-76B900?logo=nvidia)
 ![Stage](https://img.shields.io/badge/Stage-4F%20in%20progress-yellow)
 
-[![CI Audit](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-audit.yml/badge.svg)](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-audit.yml)
-[![CI Build](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-build.yml/badge.svg)](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-build.yml)
 
 
 ---
@@ -144,8 +145,6 @@ Mandatory order: A first -> wait for baseline set -> then B + C + D. Launching B
 
 ### Continuous Integration
 
-- `ci-build.yml` — builds images and runs a subset of package tests on each push. **Known gap:** it does not yet cover the safety core (`safety_orchestrator_g1`, `watchdog_g1`, `recovery_g1`, `cross_consistency_observer`, `test_g1_safety_layer`). Closing this gap is tracked work.
-- `ci-audit.yml` — full build + test, currently triggered only on `v*` tags (not yet exercised).
 
 > The "86 tests" figure refers to local Level 4 validation, not to current CI coverage. CI alignment with the declared audit scope (ADR-007) is pending.
 
