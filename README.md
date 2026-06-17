@@ -5,8 +5,8 @@
 *Deterministic Safety Runtime Architecture for the Unitree G1 Humanoid Robot*
 *ROS2 Humble · Docker-first · Isaac Sim 4.5.0 · Tesla T4*
 
-![CI Audit](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-audit.yml/badge.svg?branch=pre-repo-qualification-4f)
-![CI Build](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-build.yml/badge.svg?branch=pre-repo-qualification-4f)
+[![CI Audit](https://img.shields.io/github/actions/workflow/status/jorgerpg1213-mitech/g1-deterministic-safety-runtime/ci-audit.yml?branch=pre-repo-qualification-4f&label=CI%20Audit)](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-audit.yml)
+[![CI Build](https://img.shields.io/github/actions/workflow/status/jorgerpg1213-mitech/g1-deterministic-safety-runtime/ci-build.yml?branch=pre-repo-qualification-4f&label=CI%20Build)](https://github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime/actions/workflows/ci-build.yml)
 
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
