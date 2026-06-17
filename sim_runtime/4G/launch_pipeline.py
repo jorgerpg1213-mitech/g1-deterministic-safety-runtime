@@ -28,6 +28,7 @@ EXPECTED_NODES = [
     "/cross_consistency_observer",
     "/watchdog_g1",
     "/recovery_g1",
+    "/safety_orchestrator_g1",
 ]
 
 EXPECTED_TOPICS = [
@@ -36,6 +37,8 @@ EXPECTED_TOPICS = [
     "/g1/contact/right",
     "/joint_states",
     "/safety_events",
+    "/system_state",
+    "/safety_actions",
     "/recovery_events",
 ]
 
@@ -289,6 +292,10 @@ def main():
         "recovery",
         f"{ros2_env()} && ros2 run recovery_g1 recovery_g1",
         os.path.join(run_dir, "D_recovery.log"))
+    procs["orchestrator"] = launch_ros2(
+        "orchestrator",
+        f"{ros2_env()} && ros2 run safety_orchestrator_g1 safety_orchestrator_g1",
+        os.path.join(run_dir, "E_orchestrator.log"))
 
     # ── Esperar startup y verificar ───────────────────────────────────────────
     log(f"Esperando {NODE_VERIFY_WAIT}s para startup de nodos...")
