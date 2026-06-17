@@ -110,7 +110,7 @@ def isaac_cmd():
         "-e", "OMNI_KIT_ALLOW_ROOT=1",
         "-e", "RMW_IMPLEMENTATION=rmw_fastrtps_cpp",
         "-e", "FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_udp.xml",
-        "-e", "PYTHONPATH=/g1msgs/local/lib/python3.10/dist-packages",
+        "-e", "PYTHONPATH=/g1msgs/local/lib/python3.10/dist-packages:/isaac-sim/exts/isaacsim.ros2.bridge/humble/rclpy",
         "-e", "LD_LIBRARY_PATH=/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib:/g1msgs/lib",
         "-v", f"{REPO}/sim_runtime/common/fastdds_udp.xml:/fastdds_udp.xml:ro",
         "-v", f"{REPO}/install/g1_msgs:/g1msgs:ro",
