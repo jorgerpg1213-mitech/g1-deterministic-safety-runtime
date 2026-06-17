@@ -1,0 +1,9 @@
+[package]
+version = "0.1.0"
+title = "G1 Observer Telemetry (joints+pose+vel+imu+contactLR)"
+description = "Publishes /joint_states /g1/base_pose /g1/base_velocity /g1/imu for 4D-3C2a observer (input readiness)"
+[dependencies]
+"isaacsim.core.api" = {}
+"isaacsim.sensors.physics" = {}
+[[python.module]]
+name = "isaacsim.g1.obstelem_contact_3c2a"
