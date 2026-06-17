@@ -106,7 +106,7 @@ cd ~/g1-ros2-pipeline && timeout 600 docker run --rm --gpus all --network=host \
   -e PYTHONPATH=/g1msgs/local/lib/python3.10/dist-packages \
   -e LD_LIBRARY_PATH=/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib:/g1msgs/lib \
   -v ~/runs/4d3b2/fastdds_udp.xml:/fastdds_udp.xml:ro \
-  -v ~/g1-ros2-pipeline/install/g1_msgs:/g1msgs:ro \
+  -v ~/g1-deterministic-safety-runtime/install/g1_msgs:/g1msgs:ro \
   -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw \
   -v ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw \
   -v ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw \
