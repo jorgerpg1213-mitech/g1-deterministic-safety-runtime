@@ -1,4 +1,4 @@
-# G1 ROS2 Pipeline
+# G1 Deterministic Safety Runtime
 
 **Reproducible · Auditable · Operationally Honest**
 
@@ -14,7 +14,7 @@
 
 ## What This Is
 
-`g1-ros2-pipeline` is a **deterministic safety runtime framework** for the Unitree G1 humanoid robot (37 DOF): a supervision system that observes robot state, decides by severity, acts through recovery, and measures its own latency.
+`g1-deterministic-safety-runtime` is a **deterministic safety runtime framework** for the Unitree G1 humanoid robot (37 DOF): a supervision system that observes robot state, decides by severity, acts through recovery, and measures its own latency.
 
 It is engineered to **laboratory rigor** — reproducible, evidence-based, with validated and non-validated claims explicitly separated. This repository targets **audit-readiness mapped to MIT / NASA / Boston Dynamics standards of rigor**. It does not claim certified medical or aerospace compliance.
 
