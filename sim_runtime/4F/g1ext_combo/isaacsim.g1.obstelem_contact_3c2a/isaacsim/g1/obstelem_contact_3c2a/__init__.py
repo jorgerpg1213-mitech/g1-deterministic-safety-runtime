@@ -120,7 +120,8 @@ class Extension(omni.ext.IExt):
                     print(f"=== PUBLISHED {count} (js+pose+vel+imu+contactLR) z={round(float(pos[2]),4)} W={round(float(ori[0]),3)} L={lf['in_contact']} R={rf['in_contact']} ===", flush=True)
                 await asyncio.sleep(0.1)
             print(f"=== PUBLISH WINDOW DONE: total {count} x6 topics ===", flush=True)
-            node.destroy_node(); rclpy.shutdown()
+            node.destroy_node()
+            if rclpy.ok(): rclpy.shutdown()
             print("=== RCLPY SHUTDOWN CLEAN ===", flush=True)
         except Exception as e:
             print(f"=== PUBLISH FAILED: {type(e).__name__}: {e} ===", flush=True)

@@ -348,7 +348,7 @@ def main():
     launcher_pass = nodes_ok and topics_ok and procs_ok and isaac_ok
     log(f"\n{'='*50}")
     log(f"LAUNCHER {'PASS' if launcher_pass else 'FAIL'}")
-    log(f"  nodos_ok={nodes_ok} topics_ok={topics_ok} procs_ok={procs_ok}")
+    log(f"  nodos_ok={nodes_ok} topics_ok={topics_ok} procs_ok={procs_ok} isaac_ok={isaac_ok}")
     log(f"{'='*50}")
 
     if launcher_pass:
