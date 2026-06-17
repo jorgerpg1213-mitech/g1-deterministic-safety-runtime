@@ -262,6 +262,8 @@ def main():
     parser.add_argument("--runs-dir", default=os.path.expanduser("~/runs/4G"),
                         help="Directorio raíz de corridas")
     parser.add_argument("--output", choices=["markdown", "csv"], default="markdown")
+    parser.add_argument("--since", default=None,
+                        help="Filtrar corridas desde este timestamp YYYYMMDD_HHMMSS (inclusive)")
     args = parser.parse_args()
 
     runs_dir = os.path.expanduser(args.runs_dir)
@@ -281,7 +283,22 @@ def main():
         print(f"No se encontraron corridas con launcher.log en {runs_dir}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Analizando {len(run_dirs)} corridas en {runs_dir}...", file=sys.stderr)
+    total_found = len(run_dirs)
+    ignored = 0
+    if args.since:
+        filtered = [d for d in run_dirs if os.path.basename(d) >= args.since]
+        ignored = total_found - len(filtered)
+        run_dirs = filtered
+
+    print(f"runs_dir:  {runs_dir}", file=sys.stderr)
+    print(f"since:     {args.since or 'sin filtro'}", file=sys.stderr)
+    print(f"encontradas: {total_found}", file=sys.stderr)
+    print(f"ignoradas:   {ignored}", file=sys.stderr)
+    print(f"analizadas:  {len(run_dirs)}", file=sys.stderr)
+
+    if not run_dirs:
+        print("No quedan corridas tras aplicar --since", file=sys.stderr)
+        sys.exit(1)
 
     results = [analyze_run(d) for d in run_dirs]
     agg = aggregate(results)
