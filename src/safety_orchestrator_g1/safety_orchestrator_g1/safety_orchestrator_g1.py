@@ -567,6 +567,8 @@ class TransitionEvaluator:
         Implementa la ruta gobernada requerida por DT-4G-001; cierre formal
         sujeto a tests + piloto P2-C.
         """
+        if state.compound_key() == ('STABILITY_RISK', 'R3'):
+            return None
         if event_type != 'CONDITION_DETECTED':
             return None
         if source_authority != 'SECONDARY':
