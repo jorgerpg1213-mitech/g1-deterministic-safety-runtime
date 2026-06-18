@@ -199,6 +199,38 @@ def preflight(allow_dirty):
         log("  FAIL preflight: /ws/install/setup.bash no existe en contenedor")
         ok = False
 
+    # 4G-P5 — Laboratorio limpio bloqueante
+    import subprocess as _sp
+    try:
+        ps_out = _sp.check_output(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             "ps -ef | grep -E 'cross_consistency_observer|safety_orchestrator_g1|watchdog_g1|recovery_g1' | grep -v grep || true"],
+            text=True, timeout=10
+        ).strip()
+        if ps_out:
+            log(f"  FAIL preflight: procesos safety residuales:\n{ps_out}")
+            ok = False
+        else:
+            log("  LABORATORIO LIMPIO: 0 procesos safety residuales")
+    except Exception as e:
+        log(f"  FAIL preflight: check procesos fallido ({e})")
+        ok = False
+    try:
+        topic_out = _sp.check_output(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && "
+             "ros2 topic info /safety_events -v 2>/dev/null | grep 'Publisher count' || echo 'Publisher count: 0'"],
+            text=True, timeout=15
+        ).strip()
+        if "Publisher count: 0" in topic_out or topic_out == "":
+            log("  LABORATORIO LIMPIO: 0 publishers en /safety_events")
+        else:
+            log(f"  FAIL preflight: publishers residuales: {topic_out}")
+            ok = False
+    except Exception as e:
+        log(f"  FAIL preflight: check publishers fallido ({e})")
+        ok = False
+
     return ok
 
 # ─── METADATA ────────────────────────────────────────────────────────────────
@@ -380,6 +412,36 @@ def main():
     for name, p in procs.items():
         teardown_proc(name, p)
     teardown_proc("isaac", isaac_proc)
+
+    # 4G-P5 — Verificación post-teardown pasiva (observacional, no bloquea)
+    log("=== POST-TEARDOWN HYGIENE CHECK ===")
+    import subprocess as _sp
+    try:
+        ps_out = _sp.check_output(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             "ps -ef | grep -E 'cross_consistency_observer|safety_orchestrator_g1|watchdog_g1|recovery_g1' | grep -v grep || true"],
+            text=True, timeout=10
+        ).strip()
+        if ps_out:
+            log(f"  POST-TEARDOWN RESIDUAL — procesos vivos:\n{ps_out}")
+        else:
+            log("  POST-TEARDOWN CLEAN — 0 procesos safety residuales")
+    except Exception as e:
+        log(f"  POST-TEARDOWN CHECK FAILED (procesos): {e}")
+
+    try:
+        topic_out = _sp.check_output(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && "
+             "ros2 topic info /safety_events -v 2>/dev/null | grep 'Publisher count' || echo 'Publisher count: 0'"],
+            text=True, timeout=15
+        ).strip()
+        if "Publisher count: 0" in topic_out or topic_out == "":
+            log("  POST-TEARDOWN CLEAN — 0 publishers en /safety_events")
+        else:
+            log(f"  POST-TEARDOWN RESIDUAL — publishers activos: {topic_out}")
+    except Exception as e:
+        log(f"  POST-TEARDOWN CHECK FAILED (publishers): {e}")
 
     log(f"Logs en: {run_dir}")
     sys.exit(0 if launcher_pass else 1)

@@ -40,7 +40,7 @@ from rclpy.qos import (
 )
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus, KeyValue
 
-from g1_msgs.msg import RecoveryEvent, SafetyEvent, SystemState
+from g1_msgs.msg import RecoveryEvent, SafetyAction, SafetyEvent, SystemState
 
 
 # ---------------------------------------------------------------------------
@@ -150,6 +150,14 @@ class RecoveryG1(Node):
             reliable_qos,
         )
 
+        # Subscriber ruta gobernada orchestrator→recovery (4G-P4-C)
+        self._sub_safety_actions = self.create_subscription(
+            SafetyAction,
+            '/safety_actions',
+            self._on_safety_action,
+            reliable_qos,
+        )
+
         # Estado interno
         self._current_risk_level: str = 'SAFE'
         self._current_restriction_level: str = 'NONE'
@@ -167,6 +175,10 @@ class RecoveryG1(Node):
         # Recovery en curso — evita re-entrancy
         self._recovery_active: bool = False
         self._recovery_lock = threading.Lock()
+        # Guard ruta gobernada — anti-doble ejecución por ventana temporal (4G-P4-C)
+        self._last_governed_key: tuple = ('', '')
+        self._last_governed_time: float = 0.0
+        self._governed_dedup_window_s: float = 5.0
 
         # Estadísticas
         self._total_actions: int = 0
@@ -185,6 +197,46 @@ class RecoveryG1(Node):
     # -----------------------------------------------------------------------
     # Callbacks
     # -----------------------------------------------------------------------
+
+    def _on_safety_action(self, msg: SafetyAction):
+        """Ruta gobernada orchestrator→recovery (4G-P4-C).
+        Actúa solo ante stabilization_mode TX-011 AUTONOMOUS.
+        Guard temporal evita doble ejecución dentro de ventana 5s.
+        Ruta directa SafetyEvent sigue activa como fallback.
+        """
+        if msg.action_name != 'stabilization_mode':
+            return
+        if msg.transition_id != 'TX-011':
+            return
+        if msg.execution_authority != 'AUTONOMOUS':
+            return
+        # Re-entrancy guard primero
+        with self._recovery_lock:
+            if self._recovery_active:
+                self.get_logger().debug('[4G-P4] ORCH_ACTION→RECOVERY ignorado — recovery en curso')
+                return
+            # Dedup por ventana temporal — después de confirmar ejecución
+            key = (msg.transition_id, msg.action_name)
+            now = time.monotonic()
+            if key == self._last_governed_key and (now - self._last_governed_time) < self._governed_dedup_window_s:
+                self.get_logger().debug('[4G-P4] ORCH_ACTION→RECOVERY duplicado ignorado (ventana 5s)')
+                return
+            self._last_governed_key = key
+            self._last_governed_time = now
+            self._recovery_active = True
+        t2_ns = self.get_clock().now().nanoseconds
+        t1_ns = msg.timestamp.sec * 1_000_000_000 + msg.timestamp.nanosec
+        latency_ms = (t2_ns - t1_ns) / 1e6
+        self.get_logger().warn(
+            f'[4G-P4] ORCH_ACTION→RECOVERY route=orchestrator_safety_action '
+            f'action={msg.action_name} tx={msg.transition_id} '
+            f'latency_ms={latency_ms:.3f} t1_ns={t1_ns} t2_ns={t2_ns}'
+        )
+        try:
+            self._dispatch_recovery('CONDITION_DETECTED', 'imu_contact_support', 'orchestrator')
+        finally:
+            with self._recovery_lock:
+                self._recovery_active = False
 
     def _on_system_state(self, msg: SystemState):
         """Actualiza compound state local. Reset retry counters si vuelve a SAFE."""

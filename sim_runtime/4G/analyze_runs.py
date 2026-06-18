@@ -35,6 +35,7 @@ RE_FALL_MARKER      = re.compile(r'=== G1_FALL_MARKER ({.*?}) ===')
 RE_OBS_MARKER_LINE  = re.compile(r'G1_OBSERVER_EVENT_TIME')
 RE_SAFETY_REAL      = re.compile(r'SafetyEvent REAL')
 RE_TX011            = re.compile(r'TRANSICION TX-011|TRANSICIÓN TX-011')
+RE_T1T2             = re.compile(r'LATENCY t1.*?source=(\S+).*?latency_ms=([\d.]+).*?t1_ns=(\d+).*?t2_ns=(\d+)')
 RE_OBS_EVENT_TIME   = re.compile(r'=== G1_OBSERVER_EVENT_TIME ({.*?}) ===')
 
 # ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -199,12 +200,17 @@ def analyze_run_p3b(run_dir):
         "safety_real":    False,
         "tx011":          False,
         "launcher_pass":  False,
-        "invalid_reason": None,
+        "invalid_reason":   None,
+        "t1_to_t2_ms":      None,
+        "recovery_t1_ns":   None,
+        "recovery_t2_ns":   None,
+        "recovery_source":  None,
     }
     launcher = read(os.path.join(run_dir, "launcher.log"))
     isaac    = read(os.path.join(run_dir, "A_isaac.log"))
     observer = read(os.path.join(run_dir, "B_observer.log"))
     orch     = read(os.path.join(run_dir, "E_orchestrator.log"))
+    recovery = read(os.path.join(run_dir, "D_recovery.log"))
 
     if not launcher:
         result["pass_fail"] = "INVALID"
@@ -249,22 +255,31 @@ def analyze_run_p3b(run_dir):
     else:
         result["pass_fail"] = "PASS"
 
+    # t1->t2 pasivo — no afecta PASS/FAIL
+    m_t1t2 = RE_T1T2.search(recovery)
+    if m_t1t2:
+        result["recovery_source"] = m_t1t2.group(1)
+        result["t1_to_t2_ms"]     = float(m_t1t2.group(2))
+        result["recovery_t1_ns"]  = int(m_t1t2.group(3))
+        result["recovery_t2_ns"]  = int(m_t1t2.group(4))
+
     return result
 
 
 def print_p3b(results):
     import statistics as _st
     print("\n# 4G-P3-B — t0->t1 Latencia fisica->SafetyEvent")
-    print("| Corrida | PASS/FAIL | t0_to_t1_ms | fall | obs | real | tx011 | nota |")
-    print("|---|---|---|---|---|---|---|---|")
+    print("| Corrida | PASS/FAIL | t0_to_t1_ms | t1_to_t2_ms | fall | obs | real | tx011 | nota |")
+    print("|---|---|---|---|---|---|---|---|---|")
     for r in results:
-        ms = ("%.2f" % r["t0_to_t1_ms"]) if r["t0_to_t1_ms"] else "N/A"
+        ms   = ("%.2f" % r["t0_to_t1_ms"]) if r["t0_to_t1_ms"] else "N/A"
+        t1t2 = ("%.2f" % r["t1_to_t2_ms"]) if r.get("t1_to_t2_ms") else "N/A"
         fl = "OK" if r["fall_marker"] else "NO"
         ob = "OK" if r["obs_marker"]  else "NO"
         sr = "OK" if r["safety_real"] else "NO"
         tx = "OK" if r["tx011"]       else "NO"
         nt = r["invalid_reason"] or ""
-        print("| " + r["run_dir"] + " | " + r["pass_fail"] + " | " + ms + " | " + fl + " | " + ob + " | " + sr + " | " + tx + " | " + nt + " |")
+        print("| " + r["run_dir"] + " | " + r["pass_fail"] + " | " + ms + " | " + t1t2 + " | " + fl + " | " + ob + " | " + sr + " | " + tx + " | " + nt + " |")
     n = len(results)
     p = sum(1 for r in results if r["pass_fail"] == "PASS")
     vals = [r["t0_to_t1_ms"] for r in results if r["t0_to_t1_ms"] and r["pass_fail"] == "PASS"]
@@ -274,6 +289,11 @@ def print_p3b(results):
         print("| " + str(n) + " | " + str(p) + " | %.2f | %.2f | %.2f |" % (_st.mean(vals), min(vals), max(vals)))
     else:
         print("| " + str(n) + " | " + str(p) + " | N/A | N/A | N/A |")
+    v_t1t2 = [r["t1_to_t2_ms"] for r in results if r.get("t1_to_t2_ms")]
+    if v_t1t2:
+        print("\n| t1->t2 | media ms | min ms | max ms |")
+        print("|---|---|---|---|")
+        print("| stats | %.2f | %.2f | %.2f |" % (_st.mean(v_t1t2), min(v_t1t2), max(v_t1t2)))
 
 # ─── ESTADÍSTICA AGREGADA ────────────────────────────────────────────────────
 
