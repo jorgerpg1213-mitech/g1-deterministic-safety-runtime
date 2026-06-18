@@ -323,9 +323,9 @@ class CrossConsistencyObserver(Node):
 
     def _evaluate_fallen_rule(self, ori, imu_age, left, left_age, right, right_age):
         """4F-P1: regla con severidad INFO/WARN/CRITICAL.
-        INFO  = abs_w>=0.85 + ambos pies en contacto.
-        WARN  = inclinacion moderada (0.75<=abs_w<0.85) O un pie perdido.
-        CRITICAL = inclinacion fuerte (abs_w<0.75) O ambos pies perdidos.
+        INFO  = abs_w>=FALLEN_W_WARN (0.85) + ambos pies en contacto.
+        WARN  = inclinacion moderada (FALLEN_W_CRITICAL<=abs_w<FALLEN_W_WARN, 0.80<=abs_w<0.85) O un pie perdido.
+        CRITICAL = inclinacion fuerte (abs_w<FALLEN_W_CRITICAL, 0.80) O ambos pies perdidos.
         CRITICAL dispara aunque un pie siga en contacto (contacto residual != soporte sano).
         Freshness obligatorio. Umbrales pragmaticos calibrables (DT-4D-016)."""
         fresh = (
