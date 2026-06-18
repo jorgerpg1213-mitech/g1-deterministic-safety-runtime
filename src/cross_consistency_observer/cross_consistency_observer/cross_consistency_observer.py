@@ -390,6 +390,7 @@ class CrossConsistencyObserver(Node):
         _t1_ns = _tm.monotonic_ns()
         self._pub_safety_events.publish(msg)
         _obs_evt = _json.dumps({"schema": "g1_observer_event_time_v1", "event_id": msg.event_id, "host_time_ns": _t1_ns, "event_type": msg.event_type, "source": msg.source})
+        print(f"=== G1_OBSERVER_EVENT_TIME {_obs_evt} ===", flush=True)
         self.get_logger().warn(f"=== G1_OBSERVER_EVENT_TIME {_obs_evt} ===")
         self.get_logger().warn(
             f'[3C2b] SafetyEvent REAL - fallen/no-support abs_w={abs_w:.3f} '

@@ -32,6 +32,9 @@ RE_SAFETY_EVENT_WDG = re.compile(r'SafetyEvent|4F-P2-', re.IGNORECASE)
 RE_RECOVERY_REACT   = re.compile(r'executing|intervención|RECOVERY_ACTION|recovery_action', re.IGNORECASE)
 
 RE_FALL_MARKER      = re.compile(r'=== G1_FALL_MARKER ({.*?}) ===')
+RE_OBS_MARKER_LINE  = re.compile(r'G1_OBSERVER_EVENT_TIME')
+RE_SAFETY_REAL      = re.compile(r'SafetyEvent REAL')
+RE_TX011            = re.compile(r'TRANSICION TX-011|TRANSICIÓN TX-011')
 RE_OBS_EVENT_TIME   = re.compile(r'=== G1_OBSERVER_EVENT_TIME ({.*?}) ===')
 
 # ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -182,6 +185,96 @@ def analyze_run(run_dir):
 
     return result
 
+# ─── ANÁLISIS P3-B ───────────────────────────────────────────────────────────
+
+def analyze_run_p3b(run_dir):
+    import json as _json
+    result = {
+        "run_dir":        os.path.basename(run_dir),
+        "pass_fail":      "UNKNOWN",
+        "t0_to_t1_ms":    None,
+        "t0_t1_error":    None,
+        "fall_marker":    False,
+        "obs_marker":     False,
+        "safety_real":    False,
+        "tx011":          False,
+        "launcher_pass":  False,
+        "invalid_reason": None,
+    }
+    launcher = read(os.path.join(run_dir, "launcher.log"))
+    isaac    = read(os.path.join(run_dir, "A_isaac.log"))
+    observer = read(os.path.join(run_dir, "B_observer.log"))
+    orch     = read(os.path.join(run_dir, "E_orchestrator.log"))
+
+    if not launcher:
+        result["pass_fail"] = "INVALID"
+        result["invalid_reason"] = "launcher.log ausente"
+        return result
+
+    result["launcher_pass"] = bool(re.search(r"LAUNCHER\s*\(?PASS\)?", launcher))
+    result["fall_marker"]   = bool(RE_FALL_MARKER.search(isaac))
+    result["obs_marker"]    = bool(RE_OBS_MARKER_LINE.search(observer))
+    result["safety_real"]   = bool(RE_SAFETY_REAL.search(observer))
+    result["tx011"]         = bool(RE_TX011.search(orch))
+
+    m_fall = RE_FALL_MARKER.search(isaac)
+    m_obs  = RE_OBS_EVENT_TIME.search(observer)
+    if m_fall and m_obs:
+        try:
+            t0 = _json.loads(m_fall.group(1))
+            t1 = _json.loads(m_obs.group(1))
+            if t0.get("schema") == "g1_fall_marker_v1" and t1.get("schema") == "g1_observer_event_time_v1":
+                result["t0_to_t1_ms"] = (t1["host_time_ns"] - t0["host_time_ns"]) / 1e6
+            else:
+                result["t0_t1_error"] = "schema mismatch"
+        except Exception as e:
+            result["t0_t1_error"] = str(type(e).__name__) + ": " + str(e)
+    elif not m_fall:
+        result["t0_t1_error"] = "G1_FALL_MARKER ausente"
+    elif not m_obs:
+        result["t0_t1_error"] = "G1_OBSERVER_EVENT_TIME ausente"
+
+    if not result["launcher_pass"]:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "launcher no PASS"
+    elif not result["fall_marker"]:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "G1_FALL_MARKER ausente"
+    elif not result["obs_marker"]:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "G1_OBSERVER_EVENT_TIME ausente"
+    elif not result["safety_real"]:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "SafetyEvent REAL ausente"
+    elif not result["tx011"]:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "TX-011 ausente"
+    elif result["t0_to_t1_ms"] is None or result["t0_to_t1_ms"] <= 0:
+        result["pass_fail"] = "FAIL"; result["invalid_reason"] = "t0_to_t1_ms invalido"
+    else:
+        result["pass_fail"] = "PASS"
+
+    return result
+
+
+def print_p3b(results):
+    import statistics as _st
+    print("\n# 4G-P3-B — t0->t1 Latencia fisica->SafetyEvent")
+    print("| Corrida | PASS/FAIL | t0_to_t1_ms | fall | obs | real | tx011 | nota |")
+    print("|---|---|---|---|---|---|---|---|")
+    for r in results:
+        ms = ("%.2f" % r["t0_to_t1_ms"]) if r["t0_to_t1_ms"] else "N/A"
+        fl = "OK" if r["fall_marker"] else "NO"
+        ob = "OK" if r["obs_marker"]  else "NO"
+        sr = "OK" if r["safety_real"] else "NO"
+        tx = "OK" if r["tx011"]       else "NO"
+        nt = r["invalid_reason"] or ""
+        print("| " + r["run_dir"] + " | " + r["pass_fail"] + " | " + ms + " | " + fl + " | " + ob + " | " + sr + " | " + tx + " | " + nt + " |")
+    n = len(results)
+    p = sum(1 for r in results if r["pass_fail"] == "PASS")
+    vals = [r["t0_to_t1_ms"] for r in results if r["t0_to_t1_ms"] and r["pass_fail"] == "PASS"]
+    print("\n| N | PASS | media ms | min ms | max ms |")
+    print("|---|---|---|---|---|")
+    if vals:
+        print("| " + str(n) + " | " + str(p) + " | %.2f | %.2f | %.2f |" % (_st.mean(vals), min(vals), max(vals)))
+    else:
+        print("| " + str(n) + " | " + str(p) + " | N/A | N/A | N/A |")
+
 # ─── ESTADÍSTICA AGREGADA ────────────────────────────────────────────────────
 
 def aggregate(results):
@@ -295,6 +388,8 @@ def main():
     parser.add_argument("--runs-dir", default=os.path.expanduser("~/runs/4G"),
                         help="Directorio raíz de corridas")
     parser.add_argument("--output", choices=["markdown", "csv"], default="markdown")
+    parser.add_argument("--phase", choices=["p2", "p3b"], default="p2",
+                        help="Modo: p2 (baseline/caida) o p3b (t0->t1)")
     parser.add_argument("--since", default=None,
                         help="Filtrar corridas desde este timestamp YYYYMMDD_HHMMSS (inclusive)")
     args = parser.parse_args()
@@ -333,6 +428,10 @@ def main():
         print("No quedan corridas tras aplicar --since", file=sys.stderr)
         sys.exit(1)
 
+    if args.phase == "p3b":
+        results = [analyze_run_p3b(d) for d in run_dirs]
+        print_p3b(results)
+        return
     results = [analyze_run(d) for d in run_dirs]
     agg = aggregate(results)
 

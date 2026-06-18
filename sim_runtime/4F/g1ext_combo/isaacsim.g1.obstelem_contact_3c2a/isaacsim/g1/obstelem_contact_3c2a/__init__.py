@@ -86,18 +86,20 @@ class Extension(omni.ext.IExt):
             while rclpy.ok() and time.time() < t_end:
                 # 4F-P1: estimulo de caida en it=450
                 if count == 450 and not _fell:
+                    import time as _tm, json as _json
+                    from std_msgs.msg import String as StringMsg
+                    _t0_ns = _tm.monotonic_ns()
+                    _marker = _json.dumps({"schema": "g1_fall_marker_v1", "iteration": 450, "host_time_ns": _t0_ns, "reason": "FALL_TRIGGER"})
+                    print(f"=== 4F-P1 FALL TRIGGER it=450 t0_wall={_tm.time():.6f} t0_ns={_t0_ns} ===", flush=True)
+                    print(f"=== G1_FALL_MARKER {_marker} ===", flush=True)
+                    # P3-B: marker por log, no por ROS topic; evita scope/pub_marker en Isaac
+                    # _sm = StringMsg(); _sm.data = _marker; pub_marker.publish(_sm)
                     robot.set_world_poses(
                         positions=_np.array([[0.0, 0.0, 1.10]], dtype=_np.float32),
                         orientations=_np.array([[0.9238795, 0.3826834, 0.0, 0.0]], dtype=_np.float32))
                     robot.set_velocities(_np.zeros((1, 6), dtype=_np.float32))
                     robot.set_joint_velocities(_np.zeros((1, robot.num_dof), dtype=_np.float32))
                     _fell = True
-                    import time as _tm, json as _json
-                    _t0_ns = _tm.monotonic_ns()
-                    _marker = _json.dumps({"schema": "g1_fall_marker_v1", "iteration": 450, "host_time_ns": _t0_ns, "reason": "FALL_TRIGGER"})
-                    print(f"=== 4F-P1 FALL TRIGGER it=450 t0_wall={_tm.time():.6f} t0_ns={_t0_ns} ===", flush=True)
-                    print(f"=== G1_FALL_MARKER {_marker} ===", flush=True)
-                    _sm = StringMsg(); _sm.data = _marker; pub_marker.publish(_sm)
                 world.step(render=False)
                 jp = robot.get_joint_positions()[0]; jv = robot.get_joint_velocities()[0]
                 pos, quat = robot.get_world_poses(); pos = pos[0]; quat = quat[0]
