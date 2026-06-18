@@ -212,6 +212,11 @@ class TransitionEvaluator:
         if result:
             return result
 
+        # TX-011 — SECONDARY/fallen escalación gobernada (NORMAL)
+        result = self._eval_TX011(event_type, source_authority, authority_eff, state)
+        if result:
+            return result
+
         result = self._eval_TX003(event_type, source_authority, authority_eff, state)
         if result:
             return result
@@ -550,6 +555,38 @@ class TransitionEvaluator:
 # ---------------------------------------------------------------------------
 # Scheduler — 4 buckets de prioridad
 # ---------------------------------------------------------------------------
+
+    # -----------------------------------------------------------------------
+    # TX-011 — ANY → stabilization_mode (NORMAL — SECONDARY/fallen)
+    # -----------------------------------------------------------------------
+    def _eval_TX011(self, event_type, source_authority, authority_eff, state):
+        """
+        Escalación gobernada desde observer SECONDARY (cross_consistency_observer).
+        Contrato: CONDITION_DETECTED + SECONDARY + EFFECTIVE.
+        No requiere PRIMARY — fuente SECONDARY validada en 4G-P2-B (N=10).
+        Implementa la ruta gobernada requerida por DT-4G-001; cierre formal
+        sujeto a tests + piloto P2-C.
+        """
+        if event_type != 'CONDITION_DETECTED':
+            return None
+        if source_authority != 'SECONDARY':
+            return None
+        if authority_eff != 'EFFECTIVE':
+            return None
+
+        return {
+            'transition_id': 'TX-011',
+            'transition_priority': 'NORMAL',
+            'execution_authority': 'AUTONOMOUS',
+            'runtime_action': 'stabilization_mode',
+            'target_risk_level': 'STABILITY_RISK',
+            'target_restriction_level': 'R3',
+            'execution_confidence': 'BEST_EFFORT',
+            'notes': (
+                f'TX-011: escalación gobernada SECONDARY fallen/no-support '
+                f'{source_authority} authority_eff={authority_eff}'
+            ),
+        }
 
 class PriorityScheduler:
     """

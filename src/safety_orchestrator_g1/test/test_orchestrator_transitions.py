@@ -482,6 +482,43 @@ class TestTransitionEvaluator:
         assert result is None
 
 
+    # --- TX-011 ---
+
+    def test_TX011_triggers_on_condition_detected_secondary(self, evaluator, safe_state):
+        """Contrato exacto CONDITION_DETECTED + SECONDARY + EFFECTIVE dispara TX-011."""
+        event = make_event(
+            event_type='CONDITION_DETECTED',
+            source_authority='SECONDARY',
+            authority_effectiveness='EFFECTIVE',
+        )
+        result = evaluator.evaluate(event, safe_state)
+        assert result is not None
+        assert result['transition_id'] == 'TX-011'
+        assert result['transition_priority'] == 'NORMAL'
+        assert result['runtime_action'] == 'stabilization_mode'
+        assert result['execution_confidence'] == 'BEST_EFFORT'
+
+    def test_TX011_not_trigger_from_primary(self, evaluator, safe_state):
+        """PRIMARY no dispara TX-011."""
+        event = make_event(
+            event_type='CONDITION_DETECTED',
+            source_authority='PRIMARY_IMU',
+            authority_effectiveness='EFFECTIVE',
+        )
+        result = evaluator.evaluate(event, safe_state)
+        assert result is None or result.get('transition_id') != 'TX-011'
+
+    def test_TX011_not_trigger_without_effective(self, evaluator, safe_state):
+        """SECONDARY sin EFFECTIVE no dispara TX-011."""
+        event = make_event(
+            event_type='CONDITION_DETECTED',
+            source_authority='SECONDARY',
+            authority_effectiveness='DEGRADED_EFFECTIVE',
+        )
+        result = evaluator.evaluate(event, safe_state)
+        assert result is None or result.get('transition_id') != 'TX-011'
+
+
 # ===========================================================================
 # Tests del PriorityScheduler
 # ===========================================================================
@@ -804,3 +841,4 @@ class TestCoverageDeclaration:
         }
         assert all(covered.values()), 'Cobertura declarada incompleta'
         assert len(not_covered) > 0, 'Debe existir deferred explícito'
+
