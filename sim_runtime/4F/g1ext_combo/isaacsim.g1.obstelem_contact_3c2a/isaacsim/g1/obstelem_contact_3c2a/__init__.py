@@ -14,9 +14,9 @@ class Extension(omni.ext.IExt):
             from geometry_msgs.msg import PoseStamped, TwistStamped
             from g1_msgs.msg import FootContact
             from std_msgs.msg import String as StringMsg
-            pub_marker = node.create_publisher(StringMsg, "/g1/fall_marker", 10)
             rclpy.init() if not rclpy.ok() else None
             node = rclpy.create_node("g1_obstelem_contact_node")
+            pub_marker = node.create_publisher(StringMsg, "/g1/fall_marker", 10)
             pub_js = node.create_publisher(JointState, "/joint_states", 10)
             pub_pose = node.create_publisher(PoseStamped, "/g1/base_pose", 10)
             pub_vel = node.create_publisher(TwistStamped, "/g1/base_velocity", 10)
