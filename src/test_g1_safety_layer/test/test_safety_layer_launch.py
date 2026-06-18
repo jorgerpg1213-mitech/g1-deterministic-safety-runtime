@@ -163,58 +163,29 @@ class TestSafetyLayerLaunch(unittest.TestCase):
     # Test 2 — /system_state visible con QoS Transient Local
     # -----------------------------------------------------------------------
 
-    def test_system_state_transient_local(self):
+    def test_system_state_topic_visible(self):
         """
-        /system_state debe ser visible con QoS Transient Local.
-        El subscriber recibe el último estado incluso si se conecta después
-        de que el orchestrator lo publicó.
-        Estado inicial esperado: risk_level=SAFE, restriction_level=NONE.
-        ADR-002 Sección 4.2.
+        /system_state debe ser visible con QoS Transient Local en launch completo.
+        Valida visibilidad del topic — no estado inicial, porque otros nodos
+        pueden generar eventos safety y transicionar el sistema.
+        QoS Transient Local definido en ADR-002 Sección 4.2.
         """
         received = []
-
         sub = self.node.create_subscription(
             SystemState,
             '/system_state',
             lambda msg: received.append(msg),
             QOS_SYSTEM_STATE,
         )
-
         deadline = time.time() + TIMEOUT_S
         while time.time() < deadline and len(received) == 0:
             rclpy.spin_once(self.node, timeout_sec=0.5)
-
         self.node.destroy_subscription(sub)
-
         self.assertGreater(
             len(received), 0,
             f'/system_state sin mensajes después de {TIMEOUT_S}s — '
             'verificar QoS Transient Local en safety_orchestrator_g1'
         )
-
-        state = received[0]
-        self.assertEqual(
-            state.risk_level, 'SAFE',
-            f'Compound state inicial incorrecto — risk_level esperado: SAFE, '
-            f'recibido: {state.risk_level}'
-        )
-        self.assertEqual(
-            state.restriction_level, 'NONE',
-            f'Compound state inicial incorrecto — restriction_level esperado: NONE, '
-            f'recibido: {state.restriction_level}'
-        )
-        self.assertFalse(
-            state.r5_committed,
-            'r5_committed debe ser False en estado inicial'
-        )
-        self.assertFalse(
-            state.arbitration_pending,
-            'arbitration_pending debe ser False en estado inicial'
-        )
-
-    # -----------------------------------------------------------------------
-    # Test 3 — /safety_events visible con QoS Reliable
-    # -----------------------------------------------------------------------
 
     def test_safety_events_visible(self):
         """
