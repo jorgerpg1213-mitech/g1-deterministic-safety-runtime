@@ -13,6 +13,8 @@ class Extension(omni.ext.IExt):
             from sensor_msgs.msg import JointState, Imu
             from geometry_msgs.msg import PoseStamped, TwistStamped
             from g1_msgs.msg import FootContact
+            from std_msgs.msg import String as StringMsg
+            pub_marker = node.create_publisher(StringMsg, "/g1/fall_marker", 10)
             rclpy.init() if not rclpy.ok() else None
             node = rclpy.create_node("g1_obstelem_contact_node")
             pub_js = node.create_publisher(JointState, "/joint_states", 10)
@@ -90,7 +92,12 @@ class Extension(omni.ext.IExt):
                     robot.set_velocities(_np.zeros((1, 6), dtype=_np.float32))
                     robot.set_joint_velocities(_np.zeros((1, robot.num_dof), dtype=_np.float32))
                     _fell = True
-                    import time as _t; print(f"=== 4F-P1 FALL TRIGGER it=450 t0_wall={_t.time():.6f} teleport+tilt45X+vel_reset ===", flush=True)
+                    import time as _tm, json as _json
+                    _t0_ns = _tm.monotonic_ns()
+                    _marker = _json.dumps({"schema": "g1_fall_marker_v1", "iteration": 450, "host_time_ns": _t0_ns, "reason": "FALL_TRIGGER"})
+                    print(f"=== 4F-P1 FALL TRIGGER it=450 t0_wall={_tm.time():.6f} t0_ns={_t0_ns} ===", flush=True)
+                    print(f"=== G1_FALL_MARKER {_marker} ===", flush=True)
+                    _sm = StringMsg(); _sm.data = _marker; pub_marker.publish(_sm)
                 world.step(render=False)
                 jp = robot.get_joint_positions()[0]; jv = robot.get_joint_velocities()[0]
                 pos, quat = robot.get_world_poses(); pos = pos[0]; quat = quat[0]
