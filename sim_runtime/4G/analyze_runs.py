@@ -31,6 +31,9 @@ RE_SAFETY_EVENT_OBS = re.compile(r'SafetyEvent|4F-P1', re.IGNORECASE)
 RE_SAFETY_EVENT_WDG = re.compile(r'SafetyEvent|4F-P2-', re.IGNORECASE)
 RE_RECOVERY_REACT   = re.compile(r'executing|intervención|RECOVERY_ACTION|recovery_action', re.IGNORECASE)
 
+RE_FALL_MARKER      = re.compile(r'=== G1_FALL_MARKER ({.*?}) ===')
+RE_OBS_EVENT_TIME   = re.compile(r'=== G1_OBSERVER_EVENT_TIME ({.*?}) ===')
+
 # ─── HELPERS ─────────────────────────────────────────────────────────────────
 
 def to_seconds(t_str):
@@ -83,9 +86,14 @@ def analyze_run(run_dir):
         "recovery_reaction_count":    0,
         "false_positive_count_total": 0,
         "invalid_reason":             None,
+        "t0_ns":                      None,
+        "t1_ns":                      None,
+        "t0_to_t1_ms":                None,
+        "t0_t1_error":                None,
     }
 
     launcher = read(os.path.join(run_dir, "launcher.log"))
+    isaac_log = read(os.path.join(run_dir, "A_isaac.log"))
     observer = read(os.path.join(run_dir, "B_observer.log"))
     watchdog = read(os.path.join(run_dir, "C_watchdog.log"))
     recovery = read(os.path.join(run_dir, "D_recovery.log"))
@@ -93,7 +101,27 @@ def analyze_run(run_dir):
     if not launcher:
         result["pass_fail"] = "INVALID"
         result["invalid_reason"] = "launcher.log vacío o ausente"
-        return result
+        # t0→t1 latencia física→SafetyEvent (P3-B)
+    import json as _json
+    m_fall = RE_FALL_MARKER.search(isaac_log)
+    m_obs  = RE_OBS_EVENT_TIME.search(observer)
+    if m_fall and m_obs:
+        try:
+            t0 = _json.loads(m_fall.group(1))
+            t1 = _json.loads(m_obs.group(1))
+            if t0.get("schema") == "g1_fall_marker_v1" and t1.get("schema") == "g1_observer_event_time_v1":
+                result["t0_ns"]       = t0["host_time_ns"]
+                result["t1_ns"]       = t1["host_time_ns"]
+                result["t0_to_t1_ms"] = (t1["host_time_ns"] - t0["host_time_ns"]) / 1e6
+            else:
+                result["t0_t1_error"] = f"schema mismatch: fall={t0.get('schema')} obs={t1.get('schema')}"
+        except Exception as e:
+            result["t0_t1_error"] = f"{type(e).__name__}: {e}"
+    elif not m_fall:
+        result["t0_t1_error"] = "G1_FALL_MARKER ausente en A_isaac.log"
+    elif not m_obs:
+        result["t0_t1_error"] = "G1_OBSERVER_EVENT_TIME ausente en B_observer.log"
+    return result
 
     # Extraer timestamps
     t_start   = RE_LAUNCHER_START.search(launcher)
@@ -189,6 +217,7 @@ def aggregate(results):
         "observer_fp":      sum(r["observer_fp_count"] for r in results),
         "watchdog_fp":      sum(r["watchdog_fp_count"] for r in results),
         "recovery_react":   sum(r["recovery_reaction_count"] for r in results),
+        "t0_to_t1_ms":      stats("t0_to_t1_ms"),
     }
 
 # ─── OUTPUT ──────────────────────────────────────────────────────────────────
@@ -209,6 +238,8 @@ def print_markdown(results, agg):
     print(f"| Observer FP | {agg['observer_fp']} |")
     print(f"| Watchdog FP | {agg['watchdog_fp']} |")
     print(f"| Recovery reacciones | {agg['recovery_react']} |")
+    print(f"| t0→t1 ms (media) | {agg['t0_to_t1_ms']['mean']:.2f} ms |" if agg["t0_to_t1_ms"]["n"] else "| t0→t1 ms | N/A |")
+    print(f"| t0→t1 ms (min/max) | {agg['t0_to_t1_ms']['min']:.2f} / {agg['t0_to_t1_ms']['max']:.2f} ms |" if agg["t0_to_t1_ms"]["n"] else "")
 
     print(f"\n## Estadística de tiempos (corridas PASS)")
     for key, label in [
@@ -242,7 +273,7 @@ def print_markdown(results, agg):
 
 def print_csv(results, agg):
     print("run_dir,pass_fail,t_isaac_marker_s,t_bcd_ready_s,t_total_pass_s,"
-          "observer_fp,watchdog_fp,recovery_react,post_window,teardown,nota")
+          "observer_fp,watchdog_fp,recovery_react,post_window,teardown,t0_to_t1_ms,t0_t1_error,nota")
     for r in results:
         print(f"{r['run_dir']},{r['pass_fail']},"
               f"{r['t_isaac_marker_s'] or ''},"
@@ -253,6 +284,8 @@ def print_csv(results, agg):
               f"{r['recovery_reaction_count']},"
               f"{r['post_window_alive']},"
               f"{r['teardown_clean']},"
+              f"{r['t0_to_t1_ms'] or ''},"
+              f"{r['t0_t1_error'] or ''},"
               f"{r['invalid_reason'] or ''}")
 
 # ─── MAIN ────────────────────────────────────────────────────────────────────
