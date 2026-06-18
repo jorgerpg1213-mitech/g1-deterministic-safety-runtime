@@ -92,6 +92,25 @@ This README is the **master index and initial audit document**. It is intended t
 
 ---
 
+
+---
+
+## State-of-the-Art Vision — 10 Pillars
+
+The following table defines what "state of the art" means for this project and what evidence is required to claim it. This is not a wishlist — it is a traceable commitment: each pillar has a concrete closure criterion and a mapped microphase.
+
+| # | Pillar | What it requires | Closure criterion | Microphase | Priority |
+|---|---|---|---|---|---|
+| 1 | Governed Runtime Assurance | Every critical detection passes through orchestrator → recovery | Governed transition verifiable in `/system_state` or `/safety_actions` | 4G-P2-C / TX-011 | **Critical** |
+| 2 | Semantic event contract | `event_type`, `source_authority`, `rule_id`, `severity` compatible across nodes | Formal contract table + tests proving TX match per critical event | 4G-P2-C / 4I | **Critical** |
+| 3 | Physical latency t0→t1 | Measure physical event → ROS detection with aligned clocks | min/mean/std/max/p95 of fall→SafetyEvent | 4G-P3 | **Critical** |
+| 4 | End-to-end latency t0→t3 | t0→t1→t2→t3 measured per stage | Per-stage report, not mixed | 4G-P3 + P2-C | **High** |
+| 5 | Deterministic safety-first scheduling | Callback priority: `/safety_events` > `/joint_states` > logs | Measured profile: lower jitter, lower p95, no starvation | 4G-P4 | **High / conditional on P3** |
+| 6 | Runtime verification | Formal property monitors during execution | "If FALL_TRIGGER → SafetyEvent"; "If CRITICAL → recovery before deadline D" | 4I/4J | **High** |
+| 7 | Intelligent recovery | Recovery differentiated by rule_id/cause | Fall/FREEZE/STALE/IMU_OOR trigger distinct tested actions | 4H | **High** |
+| 8 | Formal lifecycle supervisor | configure→activate→monitor→recover→shutdown | Supervisor detects dead node, recovers in order, preserves evidence | 4H/4G-P5 | **Medium-high** |
+| 9 | Auditable assurance case | Claim→Evidence→Limitations→Mitigation | Document what is proven, with what evidence, what is not, and which debt mitigates it | 4I | **High** |
+| 10 | Expanded fault-injection matrix | Freeze, stale, NaN, contact/pose inconsistency, DDS latency, duplicates | N≥10 per fault class, detection/recovery rate, classified FP | 4H/4J | **High** |
 ## Explicit Non-Validated Boundaries
 
 These are stated as prominently as the validated results — this is the core discipline of the project.
