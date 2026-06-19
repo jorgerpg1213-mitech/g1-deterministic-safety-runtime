@@ -7,7 +7,7 @@
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-4.5.0-76B900?logo=nvidia)
-![Stage](https://img.shields.io/badge/Stage-4H--P1%20closed%20%C2%B7%204H--P2%20next-green)
+![Stage](https://img.shields.io/badge/Stage-4H%20closed%20%C2%B7%204I%20next-green)
 
 ---
 
@@ -77,8 +77,8 @@ This README is the **master index and initial audit document**. It is intended t
 | 4G-P4-D | Governed orchestrator→recovery path N=10 · DT-4G-003 closed | ✅ Closed |
 | **4G-P5** | **Blocking preflight + post-teardown hygiene** | **✅ Closed** |
 | **4H-P1** | **Cause-aware intelligent recovery (rule_id/source → differentiated action)** | **✅ Closed** |
-| 4H-P2 | Recovery policy hardening (priority/cooldown/escalation audit) | 🔲 Next |
-| 4I | Formalization (semantic models, thresholds, assurance case) | 🔲 Pending |
+| **4H-P2** | **Recovery policy hardening — terminal causes bypass cooldown/retry** | **✅ Closed** |
+| 4I | Formalization (semantic models, thresholds, assurance case) | 🔲 Next |
 | 4J | Paper preparation + fault injection matrix | 🔲 Pending |
 | 5A | Isaac Lab Bring-up | 🔒 Blocked (out of T4 critical path) |
 | 5–7 | VLA / Embodied behaviors / Autonomy | ⏳ Future |
@@ -143,7 +143,7 @@ These are stated as prominently as the validated results — this is the core di
 - **UUID end-to-end traceability** (DT-4G-002) — t1→t2 is measured but not correlated by UUID/event_id across the full pipeline. Parser infrastructure exists; formal traceability deferred to paper phase.
 - **Container reaper limitation** (DT-4G-004B) — `<defunct>` zombie processes can accumulate because PID1 in `boring_noether` does not reap children. They do not execute or publish; non-blocking for normal runs. Real fix deferred to container lifecycle / `--init`.
 - **Thresholds** — `FALLEN_W_CRITICAL=0.80` and `FALLEN_W_WARN=0.85` are pragmatic calibration values (DT-4F-001), not derived from a formal threat model.
-- **Recovery policy tuning** — 4H-P1 differentiates recovery by cause, but full policy hardening remains open: priority among simultaneous faults, cooldown/escalation calibration, and larger N validation are deferred to 4H-P2/4J.
+- **Recovery policy tuning** — 4H-P1 differentiates recovery by cause, but policy hardening closed in 4H-P2: terminal causes bypass cooldown/retry. Simultaneous fault priority and larger N deferred to 4J.
 - **Active PD control** (DT-4E-006) — the G1 does not yet stand under active control. Passive baseline only.
 - **Hardware** — no Unitree SDK integration. All results are simulation (Isaac Sim 4.5.0, Tesla T4).
 
@@ -292,8 +292,8 @@ Full build + test (as CI Audit):
 ## Roadmap
 
 - **4H-P1 — Intelligent recovery:** ✅ Closed. Recovery action differentiated by cause: fallen, STALE, FREEZE, NANINF, TIMESTAMP.
-- **4H-P2 — Recovery policy hardening:** next bounded microphase. Audit priority, cooldown, escalation, simultaneous faults, and direct fallen fallback semantics. No broad redesign.
-- **4I — Formalization:** recreate SAFETY_MODEL_G1.md, justify thresholds, formal assurance case (claim→evidence→limitation→mitigation).
+- **4H-P2 — Recovery policy hardening:** ✅ Closed. Terminal causes (FREEZE/NANINF/TIMESTAMP) bypass cooldown/retry. Validated focally. Policy documented.
+- **4I — Formalization:** next. Recreate SAFETY_MODEL_G1.md, justify thresholds, formal assurance case.
 - **4J — Paper preparation:** fault injection matrix extended (N≥10 per fault class), runtime verification properties.
 - **5A — Isaac Lab:** blocked on T4 (needs GPU ≥ RTX 4080).
 
@@ -310,5 +310,5 @@ Full build + test (as CI Audit):
 ---
 
 *G1 Deterministic Safety Runtime — github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime*
-*Status 2026-06-19: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H-P1 ✅ · 4H-P2 🔲 · 4I 🔲 · 4J 🔲 · 5A 🔒*
+*Status 2026-06-19: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H ✅ · 4I 🔲 · 4J 🔲 · 5A 🔒*
 *Audit-readiness mapped to MIT / NASA / Boston Dynamics rigor — not certified compliance.*
