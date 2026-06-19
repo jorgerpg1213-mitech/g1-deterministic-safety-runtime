@@ -285,7 +285,7 @@ def preflight(allow_dirty):
     try:
         ps_out = _sp.check_output(
             ["docker", "exec", CONTAINER, "bash", "-c",
-             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep || true"],
+             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep | grep -v '<defunct>' || true"],
             text=True, timeout=10
         ).strip()
         if ps_out:
@@ -501,7 +501,7 @@ def main():
     try:
         ps_out = _sp.check_output(
             ["docker", "exec", CONTAINER, "bash", "-c",
-             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep || true"],
+             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep | grep -v '<defunct>' || true"],
             text=True, timeout=10
         ).strip()
         if ps_out:

@@ -296,7 +296,8 @@ class RecoveryG1(Node):
                     f'latency_ms={latency_ms:.3f} '
                     f't1_ns={t1_ns} t2_ns={t2_ns}'
                 )
-            self._dispatch_recovery(event_type, target, source)
+            notes = getattr(msg, 'notes', '') or ''
+            self._dispatch_recovery(event_type, target, source, notes=notes)
         finally:
             with self._recovery_lock:
                 self._recovery_active = False
@@ -317,10 +318,22 @@ class RecoveryG1(Node):
         return not (risk_blocked and restriction_blocked)
 
     # -----------------------------------------------------------------------
+    # Helper 4H-P1
+    # -----------------------------------------------------------------------
+
+    def _extract_rule_id(self, notes: str) -> str:
+        """4H-P1: extrae rule_id de msg.notes. Defensivo: tolera None y vacio."""
+        notes = notes or ''
+        for token in notes.split():
+            if token.startswith('rule_id='):
+                return token.split('=', 1)[1]
+        return ''
+
+    # -----------------------------------------------------------------------
     # Dispatcher
     # -----------------------------------------------------------------------
 
-    def _dispatch_recovery(self, event_type: str, target: str, source: str):
+    def _dispatch_recovery(self, event_type: str, target: str, source: str, notes: str = ''):
         """Selecciona y ejecuta la RecoveryAction apropiada."""
         self._total_actions += 1
 
@@ -350,8 +363,40 @@ class RecoveryG1(Node):
             self._publish_recovery_event(result, event_type, source, 'REC-MANUAL')
             return
 
-        # Mapear event_type a RecoveryAction
-        if event_type in ('NODE_TIMEOUT', 'NONCRITICAL_NODE_DEAD'):
+        # 4H-P1 — Mapeo causal por source + rule_id (ruta directa)
+        rule_id = self._extract_rule_id(notes)
+        if source == 'cross_consistency_observer':
+            self.get_logger().warn(
+                '[4H-P1] cause=fallen route=direct_fallback action=wait_for_primary_restore'
+            )
+            result = self._action_wait_for_primary_restore(target, attempt + 1)
+            recovery_type = 'REC-AUTO'
+        elif rule_id == '4F-P2-STALE':
+            self.get_logger().warn(
+                f'[4H-P1] cause=STALE target={target} action=wait_for_primary_restore'
+            )
+            result = self._action_wait_for_primary_restore(target, attempt + 1)
+            recovery_type = 'REC-AUTO'
+        elif rule_id == '4F-P2-FREEZE':
+            self.get_logger().warn(
+                f'[4H-P1] cause=FREEZE target={target} action=operator_intervention'
+            )
+            result = self._action_request_operator_intervention(target, attempt + 1)
+            recovery_type = 'REC-MANUAL'
+        elif rule_id == '4F-P2-NANINF':
+            self.get_logger().warn(
+                f'[4H-P1] cause=NANINF target={target} action=operator_intervention'
+            )
+            result = self._action_request_operator_intervention(target, attempt + 1)
+            recovery_type = 'REC-MANUAL'
+        elif rule_id == '4F-P2-TIMESTAMP':
+            self.get_logger().warn(
+                f'[4H-P1] cause=TIMESTAMP target={target} action=operator_intervention'
+            )
+            result = self._action_request_operator_intervention(target, attempt + 1)
+            recovery_type = 'REC-MANUAL'
+        # Mapear event_type a RecoveryAction (rutas previas sin cambio)
+        elif event_type in ('NODE_TIMEOUT', 'NONCRITICAL_NODE_DEAD'):
             if target in RESTARTABLE_NONCRITICAL_NODES:
                 result = self._action_restart_noncritical_node(target, attempt + 1)
                 recovery_type = 'REC-AUTO'
