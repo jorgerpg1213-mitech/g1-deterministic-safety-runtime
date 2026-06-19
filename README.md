@@ -7,7 +7,7 @@
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-4.5.0-76B900?logo=nvidia)
-![Stage](https://img.shields.io/badge/Stage-4G%20closed%20%C2%B7%204H%20pending-green)
+![Stage](https://img.shields.io/badge/Stage-4H--P1%20closed%20%C2%B7%204H--P2%20next-green)
 
 ---
 
@@ -30,7 +30,8 @@ This README is the **master index and initial audit document**. It is intended t
 - **Governed path TX-011** (4G-P2-C): N=13, 100% PASS. `CONDITION_DETECTED + SECONDARY + EFFECTIVE` → `STABILITY_RISK/R3`.
 - **Physical latency t0→t1** (4G-P3-C): N=10, 100% PASS. Fall trigger → SafetyEvent: mean=2474ms, min=2046ms, max=3511ms.
 - **Governed orchestrator→recovery path** (4G-P4-D): N=10, 100% PASS. `SafetyAction(/safety_actions)` → recovery: mean t1→t2=1.19ms. DT-4G-003 closed.
-- **Operational hygiene** (4G-P5): blocking preflight guarantees clean lab (0 residual processes, 0 publishers) before every formal run.
+- **Operational hygiene** (4G-P5 / DT-4G-004A): active container teardown + blocking preflight; no `docker restart` required for normal consecutive runs due to ACTIVE processes or `/safety_events` publishers.
+- **Cause-aware recovery** (4H-P1): recovery differentiates fallen, STALE, FREEZE, NANINF, and TIMESTAMP, with causal logs and validated actions.
 - Continuous Integration: **CI Build green · CI Audit green** on `main`.
 
 ---
@@ -75,7 +76,8 @@ This README is the **master index and initial audit document**. It is intended t
 | 4G-P3-D | End-to-end latency t1→t2 governed path N=10 · mean=1.19ms | ✅ Closed |
 | 4G-P4-D | Governed orchestrator→recovery path N=10 · DT-4G-003 closed | ✅ Closed |
 | **4G-P5** | **Blocking preflight + post-teardown hygiene** | **✅ Closed** |
-| 4H | Intelligent recovery (rule_id → differentiated action) | 🔲 Pending |
+| **4H-P1** | **Cause-aware intelligent recovery (rule_id/source → differentiated action)** | **✅ Closed** |
+| 4H-P2 | Recovery policy hardening (priority/cooldown/escalation audit) | 🔲 Next |
 | 4I | Formalization (semantic models, thresholds, assurance case) | 🔲 Pending |
 | 4J | Paper preparation + fault injection matrix | 🔲 Pending |
 | 5A | Isaac Lab Bring-up | 🔒 Blocked (out of T4 critical path) |
@@ -101,7 +103,8 @@ This README is the **master index and initial audit document**. It is intended t
 - **Physical latency t0→t1 (4G-P3-C):** N=10, 100% PASS. Fall injection → SafetyEvent: mean=2474ms, min=2046ms, max=3511ms. Includes physical dynamics, sensors, DDS transport, 3-sample rule 3C2b.
 - **End-to-end governed latency t1→t2 (4G-P3-D/P4-D):** N=10, 100% PASS. SafetyAction(orchestrator) → recovery: mean=1.19ms, min=0.83ms, max=2.02ms.
 - **Governed orchestrator→recovery path (4G-P4-D):** `SafetyAction` subscriber in `recovery_g1` consuming `/safety_actions`. TX-011 → `stabilization_mode` → recovery in all 10 runs. Temporal dedup guard (5s window). DT-4G-003 closed.
-- **Operational hygiene (4G-P5):** blocking preflight checks 0 residual processes + 0 publishers in `/safety_events` before every run. Post-teardown hygiene logging confirms residual state after each run.
+- **Operational hygiene (4G-P5 / DT-4G-004A):** active teardown inside `boring_noether` plus blocking preflight. Consecutive normal runs no longer require `docker restart` for ACTIVE process or `/safety_events` publisher residue. Remaining `<defunct>` zombies are classified as DT-4G-004B, non-blocking.
+- **Cause-aware recovery (4H-P1):** recovery differentiates `fallen`, `STALE`, `FREEZE`, `NANINF`, and `TIMESTAMP`. Validated chain: topic/SafetyEvent → watchdog/observer → recovery log `[4H-P1] cause=...` → expected action.
 
 ---
 
@@ -125,7 +128,7 @@ This README is the **master index and initial audit document**. It is intended t
 | 4 | End-to-end latency t0→t3 | t0→t1→t2→t3 measured per stage | Per-stage report, not mixed | 4G-P3-D + P4-D | ✅ t0→t2 closed / t3 pending |
 | 5 | Deterministic safety-first scheduling | Callback priority measurable | Measured profile: lower jitter, lower p95 | 4G-P4 | Partial |
 | 6 | Runtime verification | Formal property monitors | "If FALL_TRIGGER → SafetyEvent"; "If CRITICAL → recovery before deadline D" | 4I/4J | 🔲 Pending |
-| 7 | Intelligent recovery | Recovery differentiated by rule_id/cause | Fall/FREEZE/STALE trigger distinct tested actions | 4H | 🔲 Pending |
+| 7 | Intelligent recovery | Recovery differentiated by rule_id/cause | Fallen/STALE/FREEZE/NANINF/TIMESTAMP trigger distinct tested actions | 4H-P1 | ✅ **Closed** |
 | 8 | Formal lifecycle supervisor | configure→activate→monitor→recover→shutdown | Supervisor detects dead node, recovers in order | 4H/4G-P5 | Partial (P5 hygiene) |
 | 9 | Auditable assurance case | Claim→Evidence→Limitations→Mitigation | Document what is proven, what is not | 4I | 🔲 Pending |
 | 10 | Expanded fault-injection matrix | Freeze, stale, NaN, contact inconsistency, DDS latency, duplicates | N≥10 per fault class | 4H/4J | 🔲 Pending |
@@ -138,9 +141,9 @@ These are stated as prominently as the validated results — this is the core di
 
 - **Deadline D for recovery** — t0→t1=~2474ms and t1→t2=~1.19ms are measured, but no formal SLA or deadline has been defined. This requires calibration from 4H recovery experiments and threat model in 4I.
 - **UUID end-to-end traceability** (DT-4G-002) — t1→t2 is measured but not correlated by UUID/event_id across the full pipeline. Parser infrastructure exists; formal traceability deferred to paper phase.
-- **Teardown active inside container** (DT-4G-004) — `docker restart boring_noether` is required between formal runs. Teardown does not actively kill processes inside the container. Mitigated by blocking preflight; formal fix deferred.
+- **Container reaper limitation** (DT-4G-004B) — `<defunct>` zombie processes can accumulate because PID1 in `boring_noether` does not reap children. They do not execute or publish; non-blocking for normal runs. Real fix deferred to container lifecycle / `--init`.
 - **Thresholds** — `FALLEN_W_CRITICAL=0.80` and `FALLEN_W_WARN=0.85` are pragmatic calibration values (DT-4F-001), not derived from a formal threat model.
-- **Intelligent recovery** — recovery currently executes `stabilization_mode` uniformly for all governed events. Differentiation by `rule_id`/cause deferred to 4H.
+- **Recovery policy tuning** — 4H-P1 differentiates recovery by cause, but full policy hardening remains open: priority among simultaneous faults, cooldown/escalation calibration, and larger N validation are deferred to 4H-P2/4J.
 - **Active PD control** (DT-4E-006) — the G1 does not yet stand under active control. Passive baseline only.
 - **Hardware** — no Unitree SDK integration. All results are simulation (Isaac Sim 4.5.0, Tesla T4).
 
@@ -176,7 +179,7 @@ watchdog_g1 ──SafetyEvent──▶ safety_orchestrator_g1
 | `cross_consistency_observer` | IMU × foot-contact coherence, severity INFO/WARN/CRITICAL, 3C2b rule | 4F-P1 / 4G-P2-B/C |
 | `watchdog_g1` | STALE / FREEZE / NANINF / TIMESTAMP / RATE across 5 topics | 4F-P2 |
 | `safety_orchestrator_g1` | TX-001→TX-011 evaluator, compound state, `/safety_actions` publisher | 3C / 4G-P2-C / 4G-P4 |
-| `recovery_g1` | Recovery executor — governed `/safety_actions` subscriber + direct fallback, 5 actions, subprocess isolation | 3C / 4F-P4 / 4G-P4-D |
+| `recovery_g1` | Recovery executor — governed `/safety_actions` subscriber + direct fallback, cause-aware 4H-P1 routing, 5 actions, subprocess isolation | 3C / 4F-P4 / 4G-P4-D / 4H-P1 |
 | `test_g1_safety_layer` | Level-4 launch integration tests | 3C / 4G-P2-C |
 | `g1_description` | Robot description (XACRO, TF tree) | 3B |
 
@@ -189,7 +192,7 @@ watchdog_g1 ──SafetyEvent──▶ safety_orchestrator_g1
     ├── docs/
     │   ├── architecture/           # ADRs (ARCHITECTURE_DECISIONS.md)
     │   ├── audit/                  # AUDIT_READINESS_CHECKLIST, TRANSITION_MATRIX_G1
-    │   ├── current/                # source-of-truth: thesis v23, bootstrap v20, session reports
+    │   ├── current/                # source-of-truth: thesis v24, bootstrap v21, current session reports
     │   ├── archive/                # historical versions (fully traceable)
     │   └── phases/                 # per-stage notes
     ├── evidence/                   # raw logs — proof of what actually happened
@@ -222,6 +225,7 @@ watchdog_g1 ──SafetyEvent──▶ safety_orchestrator_g1
 | 4G-P2-C — TX-011 N=13 | `~/runs/4G/20260618_081905…101200` | `docs/current/informe_etapa_4G_P2C_2026-06-18.md` |
 | **4G-P3-C — t0→t1 N=10** | **`~/runs/4G/20260618_133215…135904`** | **`docs/current/informe_etapa_4G_P3_P5_2026-06-18.md`** |
 | **4G-P4-D — governed path N=10** | **`~/runs/4G/20260618_160555…164129`** | **`docs/current/informe_etapa_4G_P3_P5_2026-06-18.md`** |
+| **DT-4G-004 + 4H-P1 — teardown + cause-aware recovery** | **harness logs + launcher regression** | **`docs/current/informe_etapa_4G_004_4H_P1_2026-06-19.md`** |
 
 ---
 
@@ -244,10 +248,10 @@ Safety-core unit tests (no hardware, no Isaac):
       "source /opt/ros/humble/setup.bash && source /ws/install/setup.bash && \
        python3 -m pytest src/safety_orchestrator_g1/test/test_orchestrator_transitions.py -v"
 
-Unified launcher (4G, with P5 blocking preflight):
+Unified launcher (4G, with P5 blocking preflight and DT-4G-004A active teardown):
 
-    # Requires docker restart boring_noether before each formal run (DT-4G-004)
-    docker restart boring_noether && sleep 15
+    # Normal consecutive runs no longer require docker restart for ACTIVE residue.
+    # If DT-4G-004B zombie accumulation becomes operationally noisy, restart remains allowed as lab hygiene.
     cd ~/g1-deterministic-safety-runtime && python3 sim_runtime/4G/launch_pipeline.py
 
 Run analysis (P3/P4 metrics):
@@ -275,7 +279,8 @@ Full build + test (as CI Audit):
 | DT-4G-001 | TX-011 governed escalation SECONDARY/fallen | ✅ Closed |
 | DT-4G-002 | t1→t2 UUID/event_id traceability (paper-grade) | Medium |
 | DT-4G-003 | Governed path orchestrator→recovery | ✅ Closed |
-| **DT-4G-004** | **Teardown active inside container (docker restart required between runs)** | **Medium** |
+| DT-4G-004A | Active teardown + defunct-aware hygiene; no restart required for normal consecutive runs | ✅ Closed |
+| **DT-4G-004B** | **Zombies `<defunct>` by PID1/reaper in `boring_noether`** | **Low** |
 | DT-4F-001 | Thresholds pragmatic, pending calibration | Medium |
 | DT-4F-002 | TX-006b/c without explicit test | Medium |
 | DT-4F-004 | FREEZE IMU potential false positive | Medium |
@@ -286,7 +291,8 @@ Full build + test (as CI Audit):
 
 ## Roadmap
 
-- **4H-P1 — Intelligent recovery:** differentiate recovery action by cause (fall vs STALE vs FREEZE vs NaN). Define `rule_id → action` mapping.
+- **4H-P1 — Intelligent recovery:** ✅ Closed. Recovery action differentiated by cause: fallen, STALE, FREEZE, NANINF, TIMESTAMP.
+- **4H-P2 — Recovery policy hardening:** next bounded microphase. Audit priority, cooldown, escalation, simultaneous faults, and direct fallen fallback semantics. No broad redesign.
 - **4I — Formalization:** recreate SAFETY_MODEL_G1.md, justify thresholds, formal assurance case (claim→evidence→limitation→mitigation).
 - **4J — Paper preparation:** fault injection matrix extended (N≥10 per fault class), runtime verification properties.
 - **5A — Isaac Lab:** blocked on T4 (needs GPU ≥ RTX 4080).
@@ -304,5 +310,5 @@ Full build + test (as CI Audit):
 ---
 
 *G1 Deterministic Safety Runtime — github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime*
-*Status 2026-06-18: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H 🔲 · 4I 🔲 · 4J 🔲 · 5A 🔒*
+*Status 2026-06-19: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H-P1 ✅ · 4H-P2 🔲 · 4I 🔲 · 4J 🔲 · 5A 🔒*
 *Audit-readiness mapped to MIT / NASA / Boston Dynamics rigor — not certified compliance.*
