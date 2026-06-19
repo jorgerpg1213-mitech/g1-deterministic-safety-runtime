@@ -49,6 +49,12 @@ from g1_msgs.msg import RecoveryEvent, SafetyAction, SafetyEvent, SystemState
 
 MAX_AUTO_RETRIES = 3                    # TBD — RECOVERY_MODEL_G1
 RETRY_COOLDOWN_S = 5.0                  # TBD — antes de segundo intento
+
+# 4H-P2 — Causas terminales/manuales: bypass cooldown y retry counter
+# Estas causas requieren intervención del operador desde la primera ocurrencia.
+# No son recuperables automáticamente — no deben consumir attempts ni quedar
+# bloqueadas por cooldown entre notificaciones consecutivas.
+TERMINAL_MANUAL_RULE_IDS = {'4F-P2-FREEZE', '4F-P2-NANINF', '4F-P2-TIMESTAMP'}
 EXTENDED_COOLDOWN_S = 15.0             # Para nodos críticos
 SUBPROCESS_TIMEOUT_S = 10.0            # Timeout para subprocess de recovery
 WAIT_FOR_PRIMARY_POLL_S = 1.0          # Polling interval en wait_for_primary_restore
@@ -337,6 +343,22 @@ class RecoveryG1(Node):
         """Selecciona y ejecuta la RecoveryAction apropiada."""
         self._total_actions += 1
 
+        # 4H-P2 — Bypass para causas terminales/manuales (FREEZE, NANINF, TIMESTAMP)
+        # Estas causas no son recuperables automáticamente: se notifica al operador
+        # inmediatamente, sin consumir retry attempts ni quedar bloqueadas por cooldown.
+        rule_id = self._extract_rule_id(notes)
+        if rule_id in TERMINAL_MANUAL_RULE_IDS:
+            cause = rule_id.split('-')[-1]
+            self.get_logger().warn(
+                f'[4H-P2] cause={cause} target={target} terminal=True '
+                f'action=operator_intervention (bypass cooldown/retry)'
+            )
+            # Terminal manual causes are not auto-retries;
+            # attempt=1 denotes first terminal manual notification.
+            result = self._action_request_operator_intervention(target, 1)
+            self._publish_recovery_event(result, event_type, source, 'REC-MANUAL')
+            return
+
         # Verificar cooldown antes de retry
         with self._retry_lock:
             attempt = self._retry_counters[target]
@@ -363,8 +385,8 @@ class RecoveryG1(Node):
             self._publish_recovery_event(result, event_type, source, 'REC-MANUAL')
             return
 
-        # 4H-P1 — Mapeo causal por source + rule_id (ruta directa)
-        rule_id = self._extract_rule_id(notes)
+        # 4H-P1 — Mapeo causal por source + rule_id (ruta directa — causas recuperables)
+        # FREEZE/NANINF/TIMESTAMP ya fueron manejadas arriba (4H-P2 bypass).
         if source == 'cross_consistency_observer':
             self.get_logger().warn(
                 '[4H-P1] cause=fallen route=direct_fallback action=wait_for_primary_restore'
@@ -377,24 +399,6 @@ class RecoveryG1(Node):
             )
             result = self._action_wait_for_primary_restore(target, attempt + 1)
             recovery_type = 'REC-AUTO'
-        elif rule_id == '4F-P2-FREEZE':
-            self.get_logger().warn(
-                f'[4H-P1] cause=FREEZE target={target} action=operator_intervention'
-            )
-            result = self._action_request_operator_intervention(target, attempt + 1)
-            recovery_type = 'REC-MANUAL'
-        elif rule_id == '4F-P2-NANINF':
-            self.get_logger().warn(
-                f'[4H-P1] cause=NANINF target={target} action=operator_intervention'
-            )
-            result = self._action_request_operator_intervention(target, attempt + 1)
-            recovery_type = 'REC-MANUAL'
-        elif rule_id == '4F-P2-TIMESTAMP':
-            self.get_logger().warn(
-                f'[4H-P1] cause=TIMESTAMP target={target} action=operator_intervention'
-            )
-            result = self._action_request_operator_intervention(target, attempt + 1)
-            recovery_type = 'REC-MANUAL'
         # Mapear event_type a RecoveryAction (rutas previas sin cambio)
         elif event_type in ('NODE_TIMEOUT', 'NONCRITICAL_NODE_DEAD'):
             if target in RESTARTABLE_NONCRITICAL_NODES:
