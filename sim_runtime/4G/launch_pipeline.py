@@ -49,6 +49,16 @@ REQUIRED_PATHS = [
     os.path.join(REPO, "install/g1_msgs"),
 ]
 
+# Patrón canónico de procesos safety — fuente de verdad única.
+# Usado por preflight (detección) y teardown_container (limpieza).
+# Limitación declarada: matchea por nombre de paquete en cmdline; si existiera
+# un proceso auxiliar cuya cmdline contiene estos nombres sin ser nodo runtime,
+# también sería candidato. Bajo el estado actual de boring_noether, riesgo bajo.
+SAFETY_PROC_PATTERN = (
+    "cross_consistency_observer|safety_orchestrator_g1"
+    "|watchdog_g1|recovery_g1"
+)
+
 # ─── LOGGER DUAL (consola + archivo) ─────────────────────────────────────────
 
 _logfile = None
@@ -88,6 +98,77 @@ def teardown_proc(name, proc):
         proc.kill()
         proc.wait()
         log(f"  {name} killed forzado (exit={proc.returncode})")
+
+def teardown_container():
+    """DT-4G-004 — Limpieza activa de procesos safety dentro del contenedor.
+
+    Hipótesis: teardown_proc() mata el cliente docker exec del host, pero los
+    procesos ROS2 se reparentan a PID 1 del contenedor y sobreviven.
+    Variable: kill explícito por PID enumerado dentro del contenedor.
+    Control: usa SAFETY_PROC_PATTERN — misma fuente de verdad que preflight.
+    Riesgo mitigado: no pkill -f genérico; enumera PIDs antes de matar.
+    Limitación: patrón matchea por nombre en cmdline; procesos auxiliares con
+    esos nombres también serían candidatos (riesgo bajo en estado actual).
+    Escalación: TERM → espera 2s → re-verificación → KILL si quedan residuos.
+    """
+    import subprocess as _sp
+
+    def _get_pids():
+        try:
+            out = _sp.check_output(
+                ["docker", "exec", CONTAINER, "bash", "-c",
+                 f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep | awk '{{print $2}}'"],
+                text=True, timeout=10
+            ).strip()
+            return out.split() if out else []
+        except Exception as e:
+            log(f"  [DT-4G-004] ERROR enumerando PIDs: {e}")
+            return []
+
+    log("  [DT-4G-004] Fase 1 — TERM: enumerando PIDs safety...")
+    pids = _get_pids()
+
+    if not pids:
+        log("  [DT-4G-004] 0 PIDs safety — nada que matar")
+        return
+
+    log(f"  [DT-4G-004] PIDs encontrados: {pids} — enviando SIGTERM")
+    try:
+        _sp.run(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             f"kill {' '.join(pids)} 2>/dev/null || true"],
+            timeout=10
+        )
+    except Exception as e:
+        log(f"  [DT-4G-004] ERROR en SIGTERM: {e}")
+
+    time.sleep(2)
+
+    log("  [DT-4G-004] Fase 2 — re-verificación post-TERM...")
+    remaining = _get_pids()
+
+    if not remaining:
+        log("  [DT-4G-004] CLEAN tras SIGTERM — 0 procesos safety residuales")
+        return
+
+    log(f"  [DT-4G-004] Residuos tras TERM: {remaining} — escalando a SIGKILL")
+    try:
+        _sp.run(
+            ["docker", "exec", CONTAINER, "bash", "-c",
+             f"kill -9 {' '.join(remaining)} 2>/dev/null || true"],
+            timeout=10
+        )
+    except Exception as e:
+        log(f"  [DT-4G-004] ERROR en SIGKILL: {e}")
+
+    time.sleep(2)
+
+    final = _get_pids()
+    if final:
+        log(f"  [DT-4G-004] WARN — residuos tras SIGKILL: {final}")
+    else:
+        log("  [DT-4G-004] CLEAN tras SIGKILL — 0 procesos safety residuales")
+
 
 def tail_file_for_signal(filepath, signal, timeout_s):
     deadline = time.time() + timeout_s
@@ -204,7 +285,7 @@ def preflight(allow_dirty):
     try:
         ps_out = _sp.check_output(
             ["docker", "exec", CONTAINER, "bash", "-c",
-             "ps -ef | grep -E 'cross_consistency_observer|safety_orchestrator_g1|watchdog_g1|recovery_g1' | grep -v grep || true"],
+             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep || true"],
             text=True, timeout=10
         ).strip()
         if ps_out:
@@ -412,6 +493,7 @@ def main():
     for name, p in procs.items():
         teardown_proc(name, p)
     teardown_proc("isaac", isaac_proc)
+    teardown_container()  # DT-4G-004: limpieza activa dentro del contenedor
 
     # 4G-P5 — Verificación post-teardown pasiva (observacional, no bloquea)
     log("=== POST-TEARDOWN HYGIENE CHECK ===")
@@ -419,7 +501,7 @@ def main():
     try:
         ps_out = _sp.check_output(
             ["docker", "exec", CONTAINER, "bash", "-c",
-             "ps -ef | grep -E 'cross_consistency_observer|safety_orchestrator_g1|watchdog_g1|recovery_g1' | grep -v grep || true"],
+             f"ps -ef | grep -E '{SAFETY_PROC_PATTERN}' | grep -v grep || true"],
             text=True, timeout=10
         ).strip()
         if ps_out:
