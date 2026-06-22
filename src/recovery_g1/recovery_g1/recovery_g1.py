@@ -239,7 +239,8 @@ class RecoveryG1(Node):
             f'latency_ms={latency_ms:.3f} t1_ns={t1_ns} t2_ns={t2_ns}'
         )
         try:
-            self._dispatch_recovery('CONDITION_DETECTED', 'imu_contact_support', 'orchestrator')
+            result = self._action_stabilization_mode('imu_contact_support', 1)
+            self._publish_recovery_event(result, 'CONDITION_DETECTED', 'orchestrator', 'REC-AUTO')
         finally:
             with self._recovery_lock:
                 self._recovery_active = False
@@ -447,6 +448,29 @@ class RecoveryG1(Node):
     # -----------------------------------------------------------------------
     # RecoveryActions — implementación real x86
     # -----------------------------------------------------------------------
+
+    def _action_stabilization_mode(self, target: str, attempt: int) -> RecoveryResult:
+        """
+        Governed recovery TX-011: physical instability / fallen.
+        Orchestrator ya tomó la decisión de gobernanza.
+        success=True = ejecución de stabilization_mode aceptada y registrada.
+        No se reclama recuperación física — intervención del operador requerida.
+        """
+        t0 = time.monotonic()
+        self.get_logger().warn(
+            f'[4J-P0] stabilization_mode target={target} attempt={attempt} '
+            f'route=governed_TX011 — '
+            f'execution acknowledged, physical recovery not claimed'
+        )
+        elapsed_s = time.monotonic() - t0
+        return RecoveryResult(
+            action_name='stabilization_mode',
+            target=target,
+            success=True,
+            attempt_number=attempt,
+            notes='governed_TX011 execution acknowledged — physical recovery not claimed',
+            elapsed_s=elapsed_s,
+        )
 
     def _action_restart_noncritical_node(self, target: str, attempt: int) -> RecoveryResult:
         """
