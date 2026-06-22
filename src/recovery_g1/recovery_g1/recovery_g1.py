@@ -305,7 +305,7 @@ class RecoveryG1(Node):
                     f't1_ns={t1_ns} t2_ns={t2_ns}'
                 )
             notes = getattr(msg, 'notes', '') or ''
-            self._dispatch_recovery(event_type, target, source, notes=notes)
+            self._dispatch_recovery(event_type, target, source, notes=notes, parent_event_id=getattr(msg, 'event_id', ''))
         finally:
             with self._recovery_lock:
                 self._recovery_active = False
@@ -341,7 +341,7 @@ class RecoveryG1(Node):
     # Dispatcher
     # -----------------------------------------------------------------------
 
-    def _dispatch_recovery(self, event_type: str, target: str, source: str, notes: str = ''):
+    def _dispatch_recovery(self, event_type: str, target: str, source: str, notes: str = '', parent_event_id: str = ''):
         """Selecciona y ejecuta la RecoveryAction apropiada."""
         self._total_actions += 1
 
@@ -358,6 +358,8 @@ class RecoveryG1(Node):
             # Terminal manual causes are not auto-retries;
             # attempt=1 denotes first terminal manual notification.
             result = self._action_request_operator_intervention(target, 1)
+            if parent_event_id and 'parent_event_id=' not in (result.notes or ''):
+                result.notes = f'{result.notes or ""} parent_event_id={parent_event_id}'
             self._publish_recovery_event(result, event_type, source, 'REC-MANUAL')
             return
 
@@ -384,6 +386,8 @@ class RecoveryG1(Node):
             )
             self._total_escalations += 1
             result = self._action_request_operator_intervention(target, attempt)
+            if parent_event_id and 'parent_event_id=' not in (result.notes or ''):
+                result.notes = f'{result.notes or ""} parent_event_id={parent_event_id}'
             self._publish_recovery_event(result, event_type, source, 'REC-MANUAL')
             return
 
@@ -444,6 +448,8 @@ class RecoveryG1(Node):
         else:
             self._total_failures += 1
 
+        if parent_event_id and 'parent_event_id=' not in (result.notes or ''):
+            result.notes = f'{result.notes or ""} parent_event_id={parent_event_id}'
         self._publish_recovery_event(result, event_type, source, recovery_type)
 
     # -----------------------------------------------------------------------
