@@ -516,7 +516,7 @@ These items are not hidden exceptions. They are part of the safety model boundar
 | Active PD control is absent; the simulated G1 does not sustain active standing through validated PD control. | DT-4E-006 | Deferred |
 | Runtime thresholds are pragmatic implementation parameters, not experimentally calibrated safety limits. | DT-4F-001 | Open |
 | TX-006b/c lack explicit named subcase test coverage. | DT-4F-002 | Open |
-| TX-009 POLICY_GATED exact condition remains pending code audit. | DT-4F-003 | Pending 4I-P3 |
+| TX-009 POLICY_GATED exact condition clarified: `restriction_level == R4-halt` AND `event_type == POLICY_GATE_AUTHORIZED_EMERGENCY_SIT`. | DT-4F-003 | Closed by 4I-P3 |
 | Potential FREEZE false positive exists when the robot is physically still, especially for low-motion IMU conditions. | DT-4F-004 | Open |
 | Paper-grade t1→t2 correlation using UUID/event_id is absent. | DT-4G-002 | Deferred to 4J |
 | Zombie `<defunct>` process accumulation occurs at approximately two per run due to missing PID1 reaper behavior in the container. | DT-4G-004B | Open, non-blocking |
@@ -555,7 +555,7 @@ These items are not hidden exceptions. They are part of the safety model boundar
 | DT-4E-006 | Active PD control remains deferred; the simulated G1 does not sustain validated active standing control. | High | Future control/actuation phase |
 | DT-4F-001 | Runtime thresholds are pragmatic and not experimentally calibrated as safety limits. | Medium | 4J / calibration work |
 | DT-4F-002 | TX-006b/c lack explicit named subcase test coverage. | Medium | Open |
-| DT-4F-003 | TX-009 POLICY_GATED exact condition requires explicit code-level clarification. | Low | 4I-P3 candidate for closure |
+| DT-4F-003 | TX-009 POLICY_GATED exact condition clarified: `restriction_level == R4-halt` AND `event_type == POLICY_GATE_AUTHORIZED_EMERGENCY_SIT`. | Low | Closed by 4I-P3 / POLICY_CLARIFICATION_G1.md |
 | DT-4F-004 | Potential FREEZE false positive exists for IMU or low-motion signals when the robot is physically still. | Medium | Open |
 | DT-4G-002 | Paper-grade t1→t2 correlation using UUID/event_id is absent. | Medium | 4J |
 | DT-4G-004B | Zombie `<defunct>` accumulation occurs due to missing PID1/reaper behavior in `boring_noether`. | Low | Deferred; non-blocking |
@@ -588,3 +588,12 @@ These items are not hidden exceptions. They are part of the safety model boundar
 *Closes: DT-4E-001*
 *PM: ChatGPT | Implementor/Auditor: Claude Sonnet 4.6 | Operator: Jorge Padilla*
 *Repository: github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime*
+
+---
+
+## Related Audit Documents
+
+| Document | Location | Closes |
+|---|---|---|
+| Fault Traceability Matrix | `docs/audit/TRACEABILITY_MATRIX_G1.md` | 4I-P2 |
+| Operational Policy Clarification | `docs/audit/POLICY_CLARIFICATION_G1.md` | 4I-P3, DT-4F-003 |
