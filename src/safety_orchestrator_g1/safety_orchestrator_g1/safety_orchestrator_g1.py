@@ -1131,6 +1131,7 @@ class SafetyOrchestratorG1(Node):
         action.action_name = tx['runtime_action']
         action.execution_authority = tx.get('execution_authority', 'AUTONOMOUS')
         action.transition_id = tx['transition_id']
+        action.parent_event_id = getattr(triggering_event, 'event_id', '')
         action.timestamp = self.get_clock().now().to_msg()
         self._pub_safety_actions.publish(action)
 

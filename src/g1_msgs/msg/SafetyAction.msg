@@ -14,6 +14,7 @@ string execution_authority
 
 # ID de la transición que originó esta acción
 string transition_id
+string parent_event_id
 
 # Timestamp
 builtin_interfaces/Time timestamp
