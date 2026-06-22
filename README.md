@@ -7,7 +7,7 @@
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros)
 ![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker)
 ![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-4.5.0-76B900?logo=nvidia)
-![Stage](https://img.shields.io/badge/Stage-4H%20closed%20%C2%B7%204I%20next-green)
+![Stage](https://img.shields.io/badge/Stage-4I%20closed%20%C2%B7%204J%20next-green)
 
 ---
 
@@ -78,7 +78,7 @@ This README is the **master index and initial audit document**. It is intended t
 | **4G-P5** | **Blocking preflight + post-teardown hygiene** | **✅ Closed** |
 | **4H-P1** | **Cause-aware intelligent recovery (rule_id/source → differentiated action)** | **✅ Closed** |
 | **4H-P2** | **Recovery policy hardening — terminal causes bypass cooldown/retry** | **✅ Closed** |
-| 4I | Formalization (semantic models, thresholds, assurance case) | 🔲 Next |
+| 4I | Formalization (semantic models, thresholds, assurance case) | ✅ Closed |
 | 4J | Paper preparation + fault injection matrix | 🔲 Pending |
 | 5A | Isaac Lab Bring-up | 🔒 Blocked (out of T4 critical path) |
 | 5–7 | VLA / Embodied behaviors / Autonomy | ⏳ Future |
@@ -130,7 +130,7 @@ This README is the **master index and initial audit document**. It is intended t
 | 6 | Runtime verification | Formal property monitors | "If FALL_TRIGGER → SafetyEvent"; "If CRITICAL → recovery before deadline D" | 4I/4J | 🔲 Pending |
 | 7 | Intelligent recovery | Recovery differentiated by rule_id/cause | Fallen/STALE/FREEZE/NANINF/TIMESTAMP trigger distinct tested actions | 4H-P1 | ✅ **Closed** |
 | 8 | Formal lifecycle supervisor | configure→activate→monitor→recover→shutdown | Supervisor detects dead node, recovers in order | 4H/4G-P5 | Partial (P5 hygiene) |
-| 9 | Auditable assurance case | Claim→Evidence→Limitations→Mitigation | Document what is proven, what is not | 4I | 🔲 Pending |
+| 9 | Auditable assurance case | Claim→Evidence→Limitations→Mitigation | Document what is proven, what is not | 4I | ✅ Closed |
 | 10 | Expanded fault-injection matrix | Freeze, stale, NaN, contact inconsistency, DDS latency, duplicates | N≥10 per fault class | 4H/4J | 🔲 Pending |
 
 ---
@@ -274,7 +274,7 @@ Full build + test (as CI Audit):
 
 | ID | Description | Priority |
 |----|-------------|----------|
-| DT-4E-001 | SAFETY_MODEL_G1.md absent — to recreate in Stage 4I | High |
+| DT-4E-001 | SAFETY_MODEL_G1.md — `docs/current/SAFETY_MODEL_G1.md` | ✅ Closed by 4I-P1 |
 | DT-4E-006 | Active PD control deferred | High |
 | DT-4G-001 | TX-011 governed escalation SECONDARY/fallen | ✅ Closed |
 | DT-4G-002 | t1→t2 UUID/event_id traceability (paper-grade) | Medium |
@@ -285,7 +285,7 @@ Full build + test (as CI Audit):
 | DT-4F-002 | TX-006b/c without explicit test | Medium |
 | DT-4F-004 | FREEZE IMU potential false positive | Medium |
 | DT-4F-005 | t0→t1 latency | ✅ Closed (4G-P3-C) |
-| DT-4F-003 | TX-009 POLICY_GATED exact condition | Low |
+| DT-4F-003 | TX-009 POLICY_GATED exact condition clarified — `docs/audit/POLICY_CLARIFICATION_G1.md` | ✅ Closed by 4I-P3 |
 
 ---
 
@@ -293,7 +293,7 @@ Full build + test (as CI Audit):
 
 - **4H-P1 — Intelligent recovery:** ✅ Closed. Recovery action differentiated by cause: fallen, STALE, FREEZE, NANINF, TIMESTAMP.
 - **4H-P2 — Recovery policy hardening:** ✅ Closed. Terminal causes (FREEZE/NANINF/TIMESTAMP) bypass cooldown/retry. Validated focally. Policy documented.
-- **4I — Formalization:** next. Recreate SAFETY_MODEL_G1.md, justify thresholds, formal assurance case.
+- **4I — Formalization:** ✅ Closed. SAFETY_MODEL_G1.md, TRACEABILITY_MATRIX_G1.md, POLICY_CLARIFICATION_G1.md — see `docs/audit/` and `docs/current/`.
 - **4J — Paper preparation:** fault injection matrix extended (N≥10 per fault class), runtime verification properties.
 - **5A — Isaac Lab:** blocked on T4 (needs GPU ≥ RTX 4080).
 
@@ -302,6 +302,7 @@ Full build + test (as CI Audit):
 ## Review Notes for External Auditors
 
 - **Start here**, then `docs/current/` for the full thesis (v23) and latest session reports.
+- **Start with the formal safety model:** `docs/current/SAFETY_MODEL_G1.md` (master contract), `docs/audit/TRACEABILITY_MATRIX_G1.md` (fault traceability), `docs/audit/POLICY_CLARIFICATION_G1.md` (operational policies).
 - **Verify claims** against `runs/4G/` (raw logs per corrida) and `docs/audit/TRANSITION_MATRIX_G1.md`.
 - **Reproduce** via the CI Audit recipe above; the safety core is container-clean.
 - **Scope honestly:** this is a simulation-validated safety runtime, not hardware-certified. Boundaries are explicit in "Explicit Non-Validated Boundaries".
@@ -310,5 +311,5 @@ Full build + test (as CI Audit):
 ---
 
 *G1 Deterministic Safety Runtime — github.com/jorgerpg1213-mitech/g1-deterministic-safety-runtime*
-*Status 2026-06-19: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H ✅ · 4I 🔲 · 4J 🔲 · 5A 🔒*
+*Status 2026-06-21: 3C ✅ · 4A–4F ✅ · 4G ✅ · 4H ✅ · 4I ✅ · 4J 🔲 · 5A 🔒*
 *Audit-readiness mapped to MIT / NASA / Boston Dynamics rigor — not certified compliance.*
