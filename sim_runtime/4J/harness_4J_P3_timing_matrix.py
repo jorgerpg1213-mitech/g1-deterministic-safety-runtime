@@ -89,7 +89,7 @@ from g1_msgs.msg import RecoveryEvent, SafetyAction, SafetyEvent
 WARMUP_S         = 5.0
 TIMEOUT_ACTION_S = 8.0
 TIMEOUT_RECOV_S  = 10.0
-INTER_RUN_S      = 3.0
+INTER_RUN_S      = 6.0
 
 RELIABLE_QOS = QoSProfile(
     reliability=ReliabilityPolicy.RELIABLE,
@@ -328,6 +328,22 @@ def _run_single(case, run_idx):
         print('  FAIL — no subscriber en /safety_events tras {}s warmup'.format(WARMUP_S))
         node.destroy_node()
         return _fail_row(case, run_idx, event_id, 'TIMEOUT_WARMUP')
+
+    # Fase 2 warmup: esperar resolucion DDS de node names. Aprobado PM.
+    NAME_SETTLE_S = 3.0
+    t_settle = time.monotonic()
+    while time.monotonic() - t_settle < NAME_SETTLE_S:
+        rclpy.spin_once(node, timeout_sec=0.1)
+        infos = node.get_subscriptions_info_by_topic("/safety_events")
+        names = [i.node_name for i in infos]
+        if infos and all("UNKNOWN" not in n for n in names):
+            break
+    infos = node.get_subscriptions_info_by_topic("/safety_events")
+    names = [i.node_name for i in infos]
+    if any("UNKNOWN" in n for n in names):
+        print("  FAIL -- DDS node names sin resolver tras {}s: {}".format(NAME_SETTLE_S, names))
+        node.destroy_node()
+        return _fail_row(case, run_idx, event_id, "TOPO_UNRESOLVED")
 
     # Topology check por nombre (fix PM #2 y #3)
     if not _check_topology(node, case):
