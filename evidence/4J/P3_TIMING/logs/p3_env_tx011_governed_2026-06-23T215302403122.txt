@@ -1,0 +1,106 @@
+[PRE-RUN]
+case:         tx011_governed
+n:            10
+git_commit:   UNAVAILABLE
+container:    boring_noether
+ros_distro:   humble
+date_time:    2026-06-23T21:53:02.403122
+raw_csv:      /ws/evidence/4J/P3_TIMING/raw/p3_timing_raw_tx011_governed_20260623_215302.csv
+test_command: python3 harness_4J_P3_timing_matrix.py --case tx011_governed --n 10
+
+--- ros2 node list ---
+/recovery_g1
+/safety_orchestrator_g1
+
+--- /safety_events topic info -v ---
+Type: g1_msgs/msg/SafetyEvent
+
+Publisher count: 1
+
+Node name: safety_orchestrator_g1
+Node namespace: /
+Topic type: g1_msgs/msg/SafetyEvent
+Endpoint type: PUBLISHER
+GID: 01.0f.00.8f.22.00.19.b7.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: safety_orchestrator_g1
+Node namespace: /
+Topic type: g1_msgs/msg/SafetyEvent
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.00.8f.22.00.19.b7.00.00.00.00.00.00.15.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+--- /safety_actions topic info -v ---
+Type: g1_msgs/msg/SafetyAction
+
+Publisher count: 1
+
+Node name: safety_orchestrator_g1
+Node namespace: /
+Topic type: g1_msgs/msg/SafetyAction
+Endpoint type: PUBLISHER
+GID: 01.0f.00.8f.22.00.19.b7.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: recovery_g1
+Node namespace: /
+Topic type: g1_msgs/msg/SafetyAction
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.00.8f.40.00.bb.b5.00.00.00.00.00.00.15.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+--- /recovery_events topic info -v ---
+Type: g1_msgs/msg/RecoveryEvent
+
+Publisher count: 1
+
+Node name: recovery_g1
+Node namespace: /
+Topic type: g1_msgs/msg/RecoveryEvent
+Endpoint type: PUBLISHER
+GID: 01.0f.00.8f.40.00.bb.b5.00.00.00.00.00.00.11.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 0
+
+============================================================
