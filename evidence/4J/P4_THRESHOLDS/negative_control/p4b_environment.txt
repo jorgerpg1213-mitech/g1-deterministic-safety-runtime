@@ -1,0 +1,14 @@
+run_id=P4B-20260625_223308-b162f596
+timestamp=2026-06-25T22:33:08.891462Z
+commit=654faff0430d14caebb54503a66bf5160d145566
+harness=harness_4J_P4B_negative_control.py
+startup_grace_s=15.0
+post_grace_settle_s=5.0
+observation_window_s=60.0
+name_settle_s=3.0
+publish_hz=50.0  contact_div=5
+modular_jitter_step=0.001 (IMU w: tick%4, joints: (tick+i)%7, pose_z: tick%5)
+qos_pub=BEST_EFFORT (matches runtime sensor subscriber QoS)
+qos_sub=RELIABLE (matches runtime safety_events/recovery_events publisher QoS)
+limitation=Jittered_sensors — does_NOT_test_frozen_sensor_FREEZE_false_positive (P4-E)
+critical_approx=risk_level_in_{STABILITY_RISK,FAULT_CRITICAL} (no native severity field)
