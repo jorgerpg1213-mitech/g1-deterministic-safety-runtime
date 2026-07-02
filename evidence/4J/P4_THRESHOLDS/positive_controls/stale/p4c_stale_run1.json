@@ -1,0 +1,44 @@
+{
+  "case": "stale",
+  "run_id": 1,
+  "dry_run": false,
+  "expected": {
+    "rule_id": "4F-P2-STALE",
+    "severity": "CRITICAL",
+    "detector": "watchdog_g1",
+    "blocking": true
+  },
+  "detection_window_s": 3.0,
+  "result": "PASS",
+  "fail_reason": null,
+  "invalid_reason": null,
+  "injection_wall_start": 1782947145.6200914,
+  "events": [
+    {
+      "phase": "OBSERVATION",
+      "event_id": "8b2d4cb8-fcee-4d4c-a86b-d69e1e5063be",
+      "risk_level": "STABILITY_RISK",
+      "source": "watchdog_g1",
+      "notes": "rule_id=4F-P2-STALE severity=CRITICAL topic=/g1/imu | STALE /g1/imu sin mensaje 1.17s dur=0.0s | Threshold pragmatico calibrable (DT-4F-001).",
+      "wall": 1782947146.688243
+    },
+    {
+      "phase": "OBSERVATION",
+      "event_id": "",
+      "risk_level": "SAFE",
+      "source": "safety_orchestrator_g1",
+      "notes": "ACK event_id=94c259d5 enqueued",
+      "wall": 1782947146.689564
+    },
+    {
+      "phase": "OBSERVATION",
+      "event_id": "",
+      "risk_level": "STABILITY_RISK",
+      "source": "safety_orchestrator_g1",
+      "notes": "TX-011: escalaci\u00f3n gobernada SECONDARY fallen/no-support SECONDARY authority_eff=EFFECTIVE",
+      "wall": 1782947146.6918454
+    }
+  ],
+  "wall_start": 1782947139.5177257,
+  "wall_end": 1782947148.6422353
+}

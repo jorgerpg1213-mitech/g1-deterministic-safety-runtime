@@ -1,0 +1,44 @@
+{
+  "case": "fallen",
+  "run_id": 2,
+  "dry_run": false,
+  "expected": {
+    "rule_id": "4F-P1",
+    "severity": "CRITICAL",
+    "detector": "cross_consistency_observer",
+    "blocking": true
+  },
+  "detection_window_s": 10.0,
+  "result": "PASS",
+  "fail_reason": null,
+  "invalid_reason": null,
+  "injection_wall_start": 1782951169.2766619,
+  "events": [
+    {
+      "phase": "OBSERVATION",
+      "event_id": "de86781c-4395-4336-80ac-fb4904d57c03",
+      "risk_level": "STABILITY_RISK",
+      "source": "cross_consistency_observer",
+      "notes": "rule_id=4F-P1 severity=CRITICAL abs_w=0.700 (CRITICAL<0.8 WARN<0.85) w_raw=0.700 L=True R=True 3 muestras frescas. CRITICAL puede ser caida/salto/teleport/perdida total soporte. Umbral pragmatico calibrable (DT-4D-016).",
+      "wall": 1782951171.3720763
+    },
+    {
+      "phase": "OBSERVATION",
+      "event_id": "",
+      "risk_level": "SAFE",
+      "source": "safety_orchestrator_g1",
+      "notes": "ACK event_id=912acbba enqueued",
+      "wall": 1782951171.3746555
+    },
+    {
+      "phase": "OBSERVATION",
+      "event_id": "",
+      "risk_level": "STABILITY_RISK",
+      "source": "safety_orchestrator_g1",
+      "notes": "TX-011: escalaci\u00f3n gobernada SECONDARY fallen/no-support SECONDARY authority_eff=EFFECTIVE",
+      "wall": 1782951171.377059
+    }
+  ],
+  "wall_start": 1782951163.165952,
+  "wall_end": 1782951180.3767626
+}
